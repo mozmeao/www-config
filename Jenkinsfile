@@ -17,11 +17,12 @@ def loadBranch(String branch) {
     }
     if ( fileExists("./jenkins/branches/${branch}.yml") ) {
         config = readYaml file: "./jenkins/branches/${branch}.yml"
-        regions = readYaml file: 'jenkins/regions.yml'
-        config_script = config.script ? "./jenkins/${config.script}.groovy" : './jenkins/configure.groovy'
         if ( parallel ) {
             config.parallel = parallel
         }
+        regions = readYaml file: 'jenkins/regions.yml'
+        default_script = parallel ? 'configure-parallel' : 'configure'
+        config_script = config.script ? "./jenkins/${config.script}.groovy" : "./jenkins/${default_script}.groovy"
         println "Loading ${config_script}"
         load config_script
     } else {

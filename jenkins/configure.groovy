@@ -1,21 +1,16 @@
-all_jobs = [:]
 app_regions = config.regions ?: ['usw']
 app_names = config.app_names ?: [env.BRANCH_NAME]
 for (regionId in app_regions) {
     region = regions[regionId]
     for ( app_name in app_names ) {
-        all_jobs["${app_name}-${region.name}".toString()] = utils.getConfigJob(region, app_name)
-    }
-}
-
-if ( config.parallel ) {
-    stage('Configure & Test') {
-        parallel all_jobs
-    }
-} else {
-    for ( job in utils.mapToList(all_jobs) ) {
-        stage("Configure ${job.key}") {
-            job.value()
+        app_url = "https://${app_name}.${region.name}.moz.works".toString()
+        stage_name = "Configure ${app_name}-${region.name}".toString()
+        stage(stage_name) {
+            lock(stage_name) {
+                utils.runConfiguration(region, app_name)
+                utils.runTests(app_url)
+                utils.ircNotification([status: 'success', message: "Configured ${app_url}"])
+            }
         }
     }
 }
