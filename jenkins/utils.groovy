@@ -23,11 +23,10 @@ def integrationTestJob(appURL) {
             withEnv(["BASE_URL=${appURL}"]) {
                 retry(1) {
                     try {
-                        sh 'bin/run-smoke-tests.sh'
+                        sh 'bin/run-tests.sh'
                     }
                     finally {
                         junit 'results/*.xml'
-                        sh 'bin/cleanup-docker.sh'
                     }
                 }
             }
