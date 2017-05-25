@@ -16,21 +16,34 @@ def ircNotification(Map args) {
     sh command
 }
 
-def integrationTestJob(appURL) {
+def getConfigJob(region, app_name) {
     return {
-        node {
-            unstash 'workspace'
-            withEnv(["BASE_URL=${appURL}"]) {
-                retry(1) {
-                    try {
-                        sh 'bin/run-tests.sh'
-                    }
-                    finally {
-                        junit 'results/*.xml'
-                    }
-                }
-            }
+        app_url = "https://${app_name}.${region.name}.moz.works".toString()
+        stage_name = "Configure ${app_name}-${region.name}".toString()
+        lock(stage_name) {
+            runConfiguration(region, app_name)
+            runTests(app_url)
+            ircNotification([status: 'success', message: "Configured ${app_url}"])
         }
+    }
+}
+
+def runTests(appURL) {
+    withEnv(["BASE_URL=${appURL}"]) {
+        try {
+            sh 'bin/run-tests.sh'
+        }
+        finally {
+            junit 'results/*.xml'
+        }
+    }
+}
+
+def runConfiguration(region, app_name) {
+    withEnv(["DEIS_PROFILE=${region.deis_profile}".toString(),
+             "DEIS_BIN=${region.deis_bin}".toString(),
+             "DEIS_APP=${app_name}".toString()]) {
+        sh 'bin/configure.sh'
     }
 }
 

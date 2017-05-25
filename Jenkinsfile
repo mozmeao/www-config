@@ -7,10 +7,21 @@ def loadBranch(String branch) {
     utils = load 'jenkins/utils.groovy'
     // defined in the Library loaded above
     setGitEnvironmentVariables()
+    parts = branch.split('/')
+    if ( parts[0] == 'fast' ) {
+        branch = parts[1]
+        env.BRANCH_NAME = branch
+        parallel = true
+    } else {
+        parallel = false
+    }
     if ( fileExists("./jenkins/branches/${branch}.yml") ) {
         config = readYaml file: "./jenkins/branches/${branch}.yml"
         regions = readYaml file: 'jenkins/regions.yml'
         config_script = config.script ? "./jenkins/${config.script}.groovy" : './jenkins/configure.groovy'
+        if ( parallel ) {
+            config.parallel = parallel
+        }
         println "Loading ${config_script}"
         load config_script
     } else {
@@ -22,8 +33,6 @@ def loadBranch(String branch) {
 node {
     stage ('Prepare') {
         checkout scm
-        // save the files for later
-        stash 'workspace'
     }
     loadBranch(env.BRANCH_NAME)
 }
