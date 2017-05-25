@@ -1,0 +1,30 @@
+#!/bin/bash
+
+FAST_MODE=false
+MOZ_GIT_REMOTE="${MOZ_GIT_REMOTE:-origin}"
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        -f|--fast)
+            FAST_MODE=true
+            ;;
+        *)
+            APP_NAME=$key
+            ;;
+    esac
+    shift # past argument or value
+done
+
+if [[ -z "$APP_NAME" ]]; then
+    echo "Usage: configure [-f] APP_NAME"
+    echo
+    echo "  Options:"
+    echo "    -f|--fast     Configure and test all regions in parallel"
+fi
+
+if [[ "$FAST_MODE" == true ]]; then
+    APP_NAME="fast/${APP_NAME}"
+fi
+
+git push -f "$MOZ_GIT_REMOTE" "HEAD:${APP_NAME}"
