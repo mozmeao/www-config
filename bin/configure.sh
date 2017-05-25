@@ -14,4 +14,4 @@ ENV_FILES=(
 ENV_VALUES=( $(bin/envcat "${ENV_FILES[@]}") )
 
 # send output to bit bucket since it will potentially expose secrets
-$DEIS_BIN config:set -a "$DEIS_APP" "${ENV_VALUES[@]}" > /dev/null 2>&1 || true
+$DEIS_BIN config:set -a "$DEIS_APP" "${ENV_VALUES[@]}" > /dev/null 2>&1
