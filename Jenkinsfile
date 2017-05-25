@@ -33,6 +33,7 @@ def loadBranch(String branch) {
 node {
     stage ('Prepare') {
         checkout scm
+        stash 'workspace'
     }
     loadBranch(env.BRANCH_NAME)
 }

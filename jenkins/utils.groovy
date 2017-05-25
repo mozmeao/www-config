@@ -1,3 +1,4 @@
+import com.cloudbees.groovy.cps.NonCPS
 /**
  * Define utility functions.
  */
@@ -18,12 +19,15 @@ def ircNotification(Map args) {
 
 def getConfigJob(region, app_name) {
     return {
-        app_url = "https://${app_name}.${region.name}.moz.works".toString()
-        stage_name = "Configure ${app_name}-${region.name}".toString()
-        lock(stage_name) {
-            runConfiguration(region, app_name)
-            runTests(app_url)
-            ircNotification([status: 'success', message: "Configured ${app_url}"])
+        node {
+            unstash 'workspace'
+            app_url = "https://${app_name}.${region.name}.moz.works".toString()
+            stage_name = "Configure ${app_name}-${region.name}".toString()
+            lock(stage_name) {
+                runConfiguration(region, app_name)
+                runTests(app_url)
+                ircNotification([status: 'success', message: "Configured ${app_url}"])
+            }
         }
     }
 }
@@ -45,6 +49,15 @@ def runConfiguration(region, app_name) {
              "DEIS_APP=${app_name}".toString()]) {
         sh 'bin/configure.sh'
     }
+}
+
+@NonCPS
+def mapToList(depmap) {
+    def dlist = []
+    for (def entry2 in depmap) {
+        dlist.add(new java.util.AbstractMap.SimpleImmutableEntry(entry2.key, entry2.value))
+    }
+    return dlist
 }
 
 return this;

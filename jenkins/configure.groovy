@@ -13,7 +13,7 @@ if ( config.parallel ) {
         parallel all_jobs
     }
 } else {
-    for ( job in all_jobs ) {
+    for ( job in utils.mapToList(all_jobs) ) {
         stage("Configure ${job.key}") {
             job.value()
         }
