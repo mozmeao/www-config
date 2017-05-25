@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+# Bedrock Configurator
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+This is the documentation for the configuration system for [Bedrock][] instances.
 
-## Commands
+There will be more here soon. Promise.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+[Bedrock]: https://github.com/mozilla/bedrock
