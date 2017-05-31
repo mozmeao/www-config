@@ -1,0 +1,17 @@
+dt {
+    float: left;
+    padding: 4px 2px;
+}
+dd {
+    text-align: right;
+    padding: 4px 2px;
+}
+dd:nth-of-type(odd) {
+    background-color: #eee;
+}
+dd.bool-true {
+    background-color: #dff0d8;
+}
+dd.bool-false {
+    background-color: #f2dede;
+}

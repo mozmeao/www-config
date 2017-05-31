@@ -1,0 +1,329 @@
+# Current Configurations
+
+## bedrock-dev
+
+FUNNELCAKE_101_LOCALES
+: en-US
+
+FUNNELCAKE_101_PLATFORMS
+: win
+
+FUNNELCAKE_102_LOCALES
+: en-US
+
+FUNNELCAKE_102_PLATFORMS
+: win
+
+FUNNELCAKE_103_LOCALES
+: de
+
+FUNNELCAKE_103_PLATFORMS
+: win
+
+FUNNELCAKE_104_LOCALES
+: de
+
+FUNNELCAKE_104_PLATFORMS
+: win
+
+MOFO_SECURITY_ADVISORIES_BRANCH
+: testing
+
+
+## bedrock-stage
+
+FUNNELCAKE_101_LOCALES
+: en-US
+
+FUNNELCAKE_101_PLATFORMS
+: win
+
+FUNNELCAKE_102_LOCALES
+: en-US
+
+FUNNELCAKE_102_PLATFORMS
+: win
+
+FUNNELCAKE_103_LOCALES
+: de
+
+FUNNELCAKE_103_PLATFORMS
+: win
+
+FUNNELCAKE_104_LOCALES
+: de
+
+FUNNELCAKE_104_PLATFORMS
+: win
+
+SWITCH_DATA_PRIVACY_DAY_2017
+: on
+{: .bool-true}
+
+SWITCH_DOUBLE_CLICK
+: on
+{: .bool-true}
+
+SWITCH_EXPERIMENT_FIREFOX_NEW_UP_TO_DATE_USERS
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_HOME_FUNDRAISING_2016
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_TECHNOLOGY_PAGE
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_TECHNOLOGY_RUST_VIDEO
+: off
+{: .bool-false}
+
+SWITCH_FIREFOX_DEV_FALL
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_FIRSTRUN_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_HELLO_2016
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_HELLO_EOL_NOTIFICATION
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_IOS_GLOBAL
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_MAU2ACCOUNT
+: on
+{: .bool-true}
+
+SWITCH_FLASHTALKING
+: on
+{: .bool-true}
+
+SWITCH_FX40_FIRSTRUN
+: on
+{: .bool-true}
+
+SWITCH_INTERNET_HEALTH_REPORT_LIVE
+: on
+{: .bool-true}
+
+SWITCH_LEADERSHIP_BOYD_ANNOUNCE
+: on
+{: .bool-true}
+
+SWITCH_LEADERSHIP_TURVEY_ANNOUNCE
+: on
+{: .bool-true}
+
+SWITCH_MOZORG_HOME_BRAND_ANNOUNCE
+: off
+{: .bool-false}
+
+SWITCH_MOZORG_HOME_BRAND_POPUP
+: off
+{: .bool-false}
+
+SWITCH_MOZORG_HOME_FUNDRAISING_2016
+: on
+{: .bool-true}
+
+SWITCH_NEWSLETTER_MAINTENANCE_MODE
+: off
+{: .bool-false}
+
+SWITCH_SOM_2015
+: on
+{: .bool-true}
+
+SWITCH_TASK_COMPLETION_RATE_SURVEY
+: off
+{: .bool-false}
+
+SWITCH_TRACKING_PIXEL
+: on
+{: .bool-true}
+
+SWITCH_TRACKING_PROTECTION
+: on
+{: .bool-true}
+
+SWITCH_TRACKING_PROTECTION_REDIRECT
+: on
+{: .bool-true}
+
+
+## bedrock-prod
+
+FUNNELCAKE_101_LOCALES
+: en-US
+
+FUNNELCAKE_101_PLATFORMS
+: win
+
+FUNNELCAKE_102_LOCALES
+: en-US
+
+FUNNELCAKE_102_PLATFORMS
+: win
+
+FUNNELCAKE_103_LOCALES
+: de
+
+FUNNELCAKE_103_PLATFORMS
+: win
+
+FUNNELCAKE_104_LOCALES
+: de
+
+FUNNELCAKE_104_PLATFORMS
+: win
+
+SWITCH_DATA_PRIVACY_DAY_2017
+: on
+{: .bool-true}
+
+SWITCH_DEVELOPER_NEWSLETTER_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_DISABLE_SHA1_DOWNLOADS
+: off
+{: .bool-false}
+
+SWITCH_DOUBLE_CLICK
+: on
+{: .bool-true}
+
+SWITCH_EXPERIMENT_FIREFOX_FAMILY
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_FIREFOX_NEW_ALL_LINKS_PT2
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_FIREFOX_NEW_UP_TO_DATE_USERS
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_PAGE
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_RUST_VIDEO
+: off
+{: .bool-false}
+
+SWITCH_EXPERIMENT_TECHNOLOGY_RUST_VIDEO
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_DEV_FALL
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_FEATURES_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_FIRSTRUN_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_HOME_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_IOS_GLOBAL
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_MAU2ACCOUNT
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_NEWSLETTER_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_NEW_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_NEW_SCENE2_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_PRODUCTS_DESKTOP_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_FIREFOX_WHATSNEW_50_ZHTW
+: on
+{: .bool-true}
+
+SWITCH_FLASHTALKING
+: on
+{: .bool-true}
+
+SWITCH_FX40_FIRSTRUN
+: on
+{: .bool-true}
+
+SWITCH_INTERNET_HEALTH_REPORT_LIVE
+: on
+{: .bool-true}
+
+SWITCH_MOZILLA_NEWSLETTER_OPTIMIZELY
+: on
+{: .bool-true}
+
+SWITCH_MOZORG_HOME_BRAND_ANNOUNCE
+: off
+{: .bool-false}
+
+SWITCH_MOZORG_HOME_BRAND_POPUP
+: off
+{: .bool-false}
+
+SWITCH_MOZORG_HOME_OPTIMIZELY
+: off
+{: .bool-false}
+
+SWITCH_NEWSLETTER_MAINTENANCE_MODE
+: off
+{: .bool-false}
+
+SWITCH_SOM_2015
+: on
+{: .bool-true}
+
+SWITCH_STATCOUNTER_EXPERIMENT
+: on
+{: .bool-true}
+
+SWITCH_TASK_COMPLETION_RATE_SURVEY
+: off
+{: .bool-false}
+
+SWITCH_TRACKING_PIXEL
+: on
+{: .bool-true}
+
+SWITCH_TRACKING_PROTECTION
+: on
+{: .bool-true}
+
+SWITCH_TRACKING_PROTECTION_REDIRECT
+: on
+{: .bool-true}
+

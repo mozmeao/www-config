@@ -1,1 +1,10 @@
 site_name: Bedrock Configurator
+pages:
+  - Home: index.md
+  - Current Configs: configs.md
+markdown_extensions:
+  - abbr
+  - attr_list
+  - def_list
+extra_css:
+  - css/extra.css
