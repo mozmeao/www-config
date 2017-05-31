@@ -6,6 +6,14 @@ from subprocess import check_output
 from envcat import get_unique_vars, parse_env_file
 
 
+CLUSTERS = {
+    'usw': 'deis',
+    'euw': 'deis',
+    'virginia': 'deis2',
+    'tokyo': 'deis2',
+}
+
+
 def get_local_config(app_name):
     return get_unique_vars([
         'configs/global.env',
@@ -30,8 +38,10 @@ def main(app_name):
                 var_name=key,
                 old_val=remote_vars.get(key) or '(none)',
                 new_val=value))
-    if not diff:
-        print('configs are identical')
+    if diff:
+        return 0
+    else:
+        return 'configs are identical'
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    sys.exit(main(sys.argv[1]))
