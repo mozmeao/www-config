@@ -25,8 +25,12 @@ def get_local_config(app_name):
 
 def get_current_config(app_name, region):
     deis_bin = CLUSTERS[region]
-    output = check_output('DEIS_PROFILE={} {} config:list --oneline -a {}'.format(region, deis_bin, app_name),
-                          shell=True)
+    try:
+        output = check_output('DEIS_PROFILE={} {} config:list --oneline -a {}'.format(region, deis_bin, app_name),
+                              shell=True)
+    except Exception:
+        raise RuntimeError('Error communicating with Deis in {}'.format(region))
+
     return parse_env_file(output.decode('utf-8').split())
 
 
@@ -47,9 +51,15 @@ def main(app_name):
     parser.add_argument('-r', '--region', default='usw', choices=CLUSTERS.keys(),
                         help='Deis cluster with which to diff (default: usw)')
     args = parser.parse_args()
-    diff = get_diff(args.app, args.region)
+    try:
+        diff = get_diff(args.app, args.region)
+    except RuntimeError as e:
+        print(str(e))
+        return 2
+
     if not diff:
-        return 'configs are identical'
+        print('configs are identical')
+        return 1
 
     for key, old_val, new_val in diff:
         print('{var_name}:\n  current value: {old_val}\n      new value: {new_val}\n'.format(
