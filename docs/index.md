@@ -11,7 +11,7 @@ Let's say you want to flip a switch in prod. Follow the following procedure:
 3. Edit the `configs/bedrock-prod.env` file to add the name and value you need. You'd add a line like `SWITCH_DO_PHRASING=on` to set that key and value in the environment for prod. Or you can find the line that already has the variable you need and change the value if it already exists.
 4. Commit the change.
 5. Push the change to a branch on your fork.
-6. Submit a pull-request against the `www-config` repo.
+6. Submit a pull-request against the `mozmar/www-config` repo.
 7. Ask for a review in the `#www` IRC channel or in the PR itself.
 8. Once the PR is reviewed and merged it can be applied: `git pull origin master && ./set-config bedrock-prod` (assuming `origin` is your remote name for the `mozmar` repo)
 
