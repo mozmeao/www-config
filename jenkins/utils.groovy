@@ -23,8 +23,10 @@ def configAndTest(region, app_name) {
             runConfiguration(region, app_name)
             runTests(app_url)
             ircNotification([status: 'success', message: "Configured ${app_url}"])
-        } else {
+        } else if ( status == 1 ) {
             ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
+        } else {
+            throw new Exception('Error communicating with Deis')
         }
     } catch(err) {
         ircNotification([stage: stage_name, status: 'failure'])
