@@ -7,8 +7,14 @@ for (regionId in app_regions) {
         stage_name = "Configure ${app_name}-${region.name}".toString()
         stage(stage_name) {
             lock(stage_name) {
-                utils.runConfiguration(region, app_name)
-                utils.runTests(app_url)
+                try {
+                    utils.runConfiguration(region, app_name)
+                    utils.runTests(app_url)
+                }
+                } catch(err) {
+                    utils.ircNotification([stage: stage_name, status: 'failure'])
+                    throw err
+                }
                 utils.ircNotification([status: 'success', message: "Configured ${app_url}"])
             }
         }

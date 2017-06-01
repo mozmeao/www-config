@@ -23,8 +23,14 @@ def getConfigJob(region, app_name) {
         node {
             unstash 'workspace'
             lock(stage_name) {
-                runConfiguration(region, app_name)
-                runTests(app_url)
+                try {
+                    runConfiguration(region, app_name)
+                    runTests(app_url)
+                }
+                } catch(err) {
+                    ircNotification([stage: stage_name, status: 'failure'])
+                    throw err
+                }
                 ircNotification([status: 'success', message: "Configured ${app_url}"])
             }
         }
