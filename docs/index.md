@@ -11,15 +11,15 @@ Let's say you want to flip a switch in prod. Follow the following procedure:
 3. Edit the `configs/bedrock-prod.env` file to add the name and value you need. You'd add a line like `SWITCH_DO_PHRASING=on` to set that key and value in the environment for prod. Or you can find the line that already has the variable you need and change the value if it already exists.
 4. Commit the change.
 5. Push the change to a branch on your fork.
-6. Submit a pull-request against the `mozmar` repo.
+6. Submit a pull-request against the `mozmar/www-config` repo.
 7. Ask for a review in the `#www` IRC channel or in the PR itself.
 8. Once the PR is reviewed and merged it can be applied: `git pull origin master && ./set-config bedrock-prod` (assuming `origin` is your remote name for the `mozmar` repo)
 
 ## How it Works
 
-This repo is designed to hold the [non-secret environment variable configuration options](configs.md) for the various instances of [Bedrock][]. The idea is that you edit the `*.env` file associated with the bedrock deis app you'd like to update (e.g. `bedrock-prod.env`). This would be submitted as a pull-request to the `www-config` repo, the PR would then be reviewd and merged to `master`. Once the config in the `master` branch was ready to apply, that revision of `master` would be pushed to a branch named after the deis app name that needed updating (e.g. `bedrock-prod`). This would start the process of applying the configuration to our deis clusters in sequence, and running our `headless` tests against them in turn.
+This repo is designed to hold the [non-secret environment variable configuration options](configs.md) for the various instances of [Bedrock][]. The idea is that you edit the `*.env` file associated with the bedrock Deis app you'd like to update (e.g. `bedrock-prod.env`). This would be submitted as a pull-request to the `www-config` repo, the PR would then be reviewed and merged to `master`. Once the config in the `master` branch was ready to apply, that revision of `master` would be pushed to a branch named after the Deis app name that needed updating (e.g. `bedrock-prod`). This would start the process of applying the configuration to our Deis clusters in sequence, and running our `headless` tests against them in turn.
 
-If the changed to be applied needed to be done as quickly as possible, for example if something is broken, you can alternately push `master` to a similar branch as above but prefixed with `fast/` (e.g. `fast/bedrock-prod`). This will do the same thing as above but every deis cluster will be pushed and tested simultaneously (or in parallel, instead of in series).
+If the change to be applied needed to be done as quickly as possible, for example if something is broken, you can alternately push `master` to a similar branch as above but prefixed with `fast/` (e.g. `fast/bedrock-prod`). This will do the same thing as above but every Deis cluster will be pushed and tested simultaneously (or in parallel, instead of in series).
 
 There is a script in the repo to help with this called `./set-config`. It allows you to do the following:
 
