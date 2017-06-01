@@ -41,7 +41,21 @@ def getConfigJob(region, app_name) {
         node {
             unstash 'workspace'
             lock(stage_name) {
-                configAndTest(region, app_name)
+                try {
+                    status = sh([script: "bin/config-diff.py -r ${region.deis_profile} ${app_name}", returnStatus: true])
+                    if ( status == 0 ) {
+                        runConfiguration(region, app_name)
+                        runTests(app_url)
+                        ircNotification([status: 'success', message: "Configured ${app_url}"])
+                    } else if ( status == 1 ) {
+                        ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
+                    } else {
+                        throw new Exception('Error communicating with Deis')
+                    }
+                } catch(err) {
+                    ircNotification([stage: stage_name, status: 'failure'])
+                    throw err
+                }
             }
         }
     }
