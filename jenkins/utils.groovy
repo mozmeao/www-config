@@ -16,6 +16,22 @@ def ircNotification(Map args) {
     sh command
 }
 
+def configAndTest(region, app_name) {
+    try {
+        status = sh([script: "bin/config-diff.py -r ${region.deis_profile} ${app_name}", returnStatus: true])
+        if ( status == 0 ) {
+            runConfiguration(region, app_name)
+            runTests(app_url)
+            ircNotification([status: 'success', message: "Configured ${app_url}"])
+        } else {
+            ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
+        }
+    } catch(err) {
+        ircNotification([stage: stage_name, status: 'failure'])
+        throw err
+    }
+}
+
 def getConfigJob(region, app_name) {
     def app_url = "https://${app_name}.${region.name}.moz.works".toString()
     def stage_name = "Configure ${app_name}-${region.name}".toString()
@@ -23,15 +39,7 @@ def getConfigJob(region, app_name) {
         node {
             unstash 'workspace'
             lock(stage_name) {
-                try {
-                    runConfiguration(region, app_name)
-                    runTests(app_url)
-                }
-                } catch(err) {
-                    ircNotification([stage: stage_name, status: 'failure'])
-                    throw err
-                }
-                ircNotification([status: 'success', message: "Configured ${app_url}"])
+                configAndTest(region, app_name)
             }
         }
     }
