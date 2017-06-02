@@ -45,7 +45,7 @@ def get_diff(app_name, region):
     return diff
 
 
-def main(app_name):
+def main():
     parser = argparse.ArgumentParser(description='Show differences between repo and app configs')
     parser.add_argument('app', metavar='APP_NAME', help='Deis app name')
     parser.add_argument('-r', '--region', default='usw', choices=CLUSTERS.keys(),
@@ -71,4 +71,4 @@ def main(app_name):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1]))
+    sys.exit(main())
