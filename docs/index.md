@@ -43,4 +43,17 @@ The configurations are in the `configs` directory in the repo. They are simple e
 
 You'll almost always only need to edit the file for a particular app, but the others are available should you need them.
 
+You can also delete an environment variable from an app. Simply set the value of the variable to nothing or whitespace:
+
+```bash
+# configs to set
+DUDE=Abides
+
+# configs to delete
+WALTER=
+```
+
+In the above example, if the app had `WALTER=bowling` set, then this would remove the `WALTER` environment variable from the app
+via the `deis config:unset` command. It is recommended to keep deleted variables grouped together at the bottom of the env files.
+
 [Bedrock]: https://github.com/mozilla/bedrock

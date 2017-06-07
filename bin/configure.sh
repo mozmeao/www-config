@@ -1,17 +1,31 @@
 #!/bin/bash
 
-set -ex
+set -eo pipefail
+
+RET_VAL=1
 
 echo "Configuring ${DEIS_APP} in ${DEIS_PROFILE}"
 
-ENV_FILES=(
-  "configs/global.env"
-  "configs/${DEIS_PROFILE}.env"
-  "configs/${DEIS_APP}.env"
-)
+# collect the variables that need to change
+ENV_VALUES=( $( bin/config-diff.sh "${DEIS_APP}" "${DEIS_PROFILE}" || true ) )
 
-# reads which ever of the above files exist in order and combines values
-ENV_VALUES=( $(bin/envcat "${ENV_FILES[@]}") )
+if [[ "${#ENV_VALUES[@]}" == 0 ]]; then
+    echo "No changes required"
+else
+    # send output to bit bucket since it will potentially expose secrets
+    $DEIS_BIN config:set -a "$DEIS_APP" "${ENV_VALUES[@]}" > /dev/null 2>&1
+    RET_VAL=0
+fi
 
-# send output to bit bucket since it will potentially expose secrets
-$DEIS_BIN config:set -a "$DEIS_APP" "${ENV_VALUES[@]}" > /dev/null 2>&1
+# collect the variables that need to be deleted
+DEL_VALUES=( $( bin/config-diff.sh "${DEIS_APP}" "${DEIS_PROFILE}" --delete || true ) )
+
+if [[ "${#DEL_VALUES[@]}" == 0 ]]; then
+    echo "No deletions required"
+else
+    # send output to bit bucket since it will potentially expose secrets
+    $DEIS_BIN config:unset -a "$DEIS_APP" "${DEL_VALUES[@]}" > /dev/null 2>&1
+    RET_VAL=0
+fi
+
+exit $RET_VAL

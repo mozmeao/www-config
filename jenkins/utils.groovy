@@ -18,15 +18,12 @@ def ircNotification(Map args) {
 
 def configAndTest(region, app_name) {
     try {
-        status = sh([script: "bin/config-diff.py -r ${region.deis_profile} ${app_name}", returnStatus: true])
-        if ( status == 0 ) {
-            runConfiguration(region, app_name)
+        did_config = runConfiguration(region, app_name)
+        if ( did_config ) {
             runTests(app_url)
             ircNotification([status: 'success', message: "Configured ${app_url}"])
-        } else if ( status == 1 ) {
-            ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
         } else {
-            throw new Exception('Error communicating with Deis')
+            ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
         }
     } catch(err) {
         ircNotification([stage: stage_name, status: 'failure'])
@@ -42,15 +39,12 @@ def getConfigJob(region, app_name) {
             unstash 'workspace'
             lock(stage_name) {
                 try {
-                    status = sh([script: "bin/config-diff.py -r ${region.deis_profile} ${app_name}", returnStatus: true])
-                    if ( status == 0 ) {
-                        runConfiguration(region, app_name)
+                    did_config = runConfiguration(region, app_name)
+                    if ( did_config ) {
                         runTests(app_url)
                         ircNotification([status: 'success', message: "Configured ${app_url}"])
-                    } else if ( status == 1 ) {
-                        ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
                     } else {
-                        throw new Exception('Error communicating with Deis')
+                        ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
                     }
                 } catch(err) {
                     ircNotification([stage: stage_name, status: 'failure'])
@@ -76,7 +70,9 @@ def runConfiguration(region, app_name) {
     withEnv(["DEIS_PROFILE=${region.deis_profile}".toString(),
              "DEIS_BIN=${region.deis_bin}".toString(),
              "DEIS_APP=${app_name}".toString()]) {
-        sh 'bin/configure.sh'
+        status = sh([script: 'bin/configure.sh', returnStatus: true])
+        // true means it did something
+        return status == 0
     }
 }
 

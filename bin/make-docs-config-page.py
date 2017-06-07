@@ -30,17 +30,25 @@ def get_vars_for_app(app_name):
 def vars_to_md(app_name):
     envvars = get_vars_for_app(app_name)
     lines = []
+    del_lines = []
     for key, value in sorted(envvars.items()):
-        output = '{key}\n: {value}\n'.format(key=key, value=value)
-        try:
-            if cast_boolean(value):
-                output += '{: .bool-true}\n'
-            else:
-                output += '{: .bool-false}\n'
-        except ValueError:
-            pass
-        lines.append(output)
-    return '\n'.join(lines)
+        if value:
+            output = '{key}\n: {value}\n'.format(key=key, value=value)
+            try:
+                if cast_boolean(value):
+                    output += '{: .bool-true}\n'
+                else:
+                    output += '{: .bool-false}\n'
+            except ValueError:
+                pass
+            lines.append(output)
+        else:
+            del_lines.append('* {0}'.format(key))
+
+    final = '\n'.join(lines)
+    if del_lines:
+        final += '#### Deleted\n\n' + '\n'.join(del_lines)
+    return final
 
 
 def app_section(app_name):
