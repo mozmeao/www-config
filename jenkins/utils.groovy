@@ -16,12 +16,16 @@ def ircNotification(Map args) {
     sh command
 }
 
-def configAndTest(region, app_name) {
+def configAndTest(region, app_name, run_tests) {
+    def app_url = "https://${app_name}.${region.name}.moz.works".toString()
+    def stage_name = "Configure ${app_name}-${region.name}".toString()
     try {
         did_config = runConfiguration(region, app_name)
         if ( did_config ) {
-            runTests(app_url)
             ircNotification([status: 'success', message: "Configured ${app_url}"])
+            if ( run_tests ) {
+                runTests(app_url)
+            }
         } else {
             ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
         }
@@ -31,7 +35,7 @@ def configAndTest(region, app_name) {
     }
 }
 
-def getConfigJob(region, app_name) {
+def getConfigJob(region, app_name, run_tests) {
     def app_url = "https://${app_name}.${region.name}.moz.works".toString()
     def stage_name = "Configure ${app_name}-${region.name}".toString()
     return {
@@ -41,8 +45,10 @@ def getConfigJob(region, app_name) {
                 try {
                     did_config = runConfiguration(region, app_name)
                     if ( did_config ) {
-                        runTests(app_url)
                         ircNotification([status: 'success', message: "Configured ${app_url}"])
+                        if ( run_tests ) {
+                            runTests(app_url)
+                        }
                     } else {
                         ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
                     }

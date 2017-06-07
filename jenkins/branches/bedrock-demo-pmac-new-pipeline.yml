@@ -1,3 +1,4 @@
+run_tests: false
 regions :
   - usw
   - virginia
