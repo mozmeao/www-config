@@ -20,6 +20,9 @@ case "$REGION" in
     tokyo)
         DEIS_BIN="deis2"
         ;;
+    frankfurt)
+        DEIS_BIN="deis2"
+        ;;
     *)
         echo "Invalid region: $REGION"
         exit 1
