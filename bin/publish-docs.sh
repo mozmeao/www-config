@@ -11,9 +11,9 @@ git add .
 git commit -m "Update docs to ${REV}"
 
 if [[ -n "$GH_TOKEN" ]]; then
-    git remote add mozilla "https://MozmarRobot:${GH_TOKEN}@github.com/mozmar/www-config.git"
+    git remote add mozilla "https://MozmarRobot:${GH_TOKEN}@github.com/mozmeao/www-config.git"
 else
-    git remote add mozilla "git@github.com:mozmar/www-config.git"
+    git remote add mozilla "git@github.com:mozmeao/www-config.git"
 fi
 
 git push -q -f mozilla master:gh-pages
