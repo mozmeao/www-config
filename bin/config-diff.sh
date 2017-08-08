@@ -11,12 +11,6 @@ case "$REGION" in
     usw)
         DEIS_BIN="deis"
         ;;
-    euw)
-        DEIS_BIN="deis"
-        ;;
-    virginia)
-        DEIS_BIN="deis2"
-        ;;
     tokyo)
         DEIS_BIN="deis2"
         ;;
