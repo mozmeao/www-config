@@ -6,9 +6,9 @@ set -eo pipefail
 
 # defaults and constants
 NICK="hms-flintstone"
-CHANNEL="#www"
+CHANNEL="#www-notify"
 SERVER="irc.mozilla.org:6697"
-BLUE_BUILD_URL="https://ci.us-west.moz.works/blue/organizations/jenkins/bedrock_multibranch_pipeline"
+BLUE_BUILD_URL="https://ci.us-west.moz.works/blue/organizations/jenkins/www_config_multibranch_pipeline"
 BLUE_BUILD_URL="${BLUE_BUILD_URL}/detail/${BRANCH_NAME/\//%2f}/${BUILD_NUMBER}/pipeline"
 # colors and styles: values from the following links
 # http://www.mirc.com/colors.html
