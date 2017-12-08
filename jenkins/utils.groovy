@@ -47,7 +47,9 @@ def getConfigJob(region, app_name, run_tests) {
                     if ( did_config ) {
                         ircNotification([status: 'success', message: "Configured ${app_url}"])
                         if ( run_tests ) {
-                            runTests(app_url)
+                            retry(3) {
+                                runTests(app_url)
+                            }
                         }
                     } else {
                         ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
