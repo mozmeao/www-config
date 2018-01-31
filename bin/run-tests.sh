@@ -9,7 +9,8 @@ mkdir -p "$RESULTS_DIR"
 docker run --rm -v "${RESULTS_DIR}:${DOCKER_RESULTS_DIR}" -u $(stat -c "%u:%g" "$RESULTS_DIR") \
   -e "BASE_URL=${BASE_URL}" \
   -e "RESULTS_PATH=${DOCKER_RESULTS_DIR}" \
-  -e "MARK_EXPRESSION=headless" \
+  -e "MARK_EXPRESSION=smoke" \
   -e "PYTEST_PROCESSES=5" \
   -e "PRIVACY=public restricted" \
+  -e "DRIVER=SauceLabs" \
   mozorg/bedrock_test:latest bin/run-integration-tests.sh
