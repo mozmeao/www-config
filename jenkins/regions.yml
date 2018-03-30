@@ -1,16 +1,9 @@
-usw:
-  deis_profile: usw
-  name: us-west
-  deis_bin: deis
 tokyo:
-  deis_profile: tokyo
   name: tokyo
   deis_bin: deis2
 frankfurt:
-  deis_profile: frankfurt
   name: frankfurt
   deis_bin: deis2
 oregon-b:
-  deis_profile: oregon-b
   name: oregon-b
   deis_bin: deis2

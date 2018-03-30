@@ -38,7 +38,7 @@ $ ./set-config -f bedrock-prod
 The configurations are in the `configs` directory in the repo. They are simple environment files in the [format usable by Foreman](https://ddollar.github.io/foreman/#ENVIRONMENT). The final list of variables to apply will be the mix of 3 possible files.
 
 1. `configs/global.env`: applied to every app.
-2. `configs/{cluster-name}.env`: applied to every app in `{cluster-name}` (e.g. `usw` or `frankfurt`). See `jenkins/regions.yml` for more on the clusters.
+2. `configs/{cluster-name}.env`: applied to every app in `{cluster-name}` (e.g. `tokyo` or `frankfurt`). See `jenkins/regions.yml` for more on the clusters.
 3. `configs/{app-name}.env`: applied to the app named for the file in every cluster.
 
 You'll almost always only need to edit the file for a particular app, but the others are available should you need them.

@@ -3,6 +3,7 @@
 set -eo pipefail
 
 RET_VAL=1
+DEIS_BIN="${DEIS_BIN:-deis2}"
 
 echo "Configuring ${DEIS_APP} in ${DEIS_PROFILE}"
 
