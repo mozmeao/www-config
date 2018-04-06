@@ -75,7 +75,7 @@ def runTests(appURL) {
 }
 
 def runConfiguration(region, app_name) {
-    withEnv(["DEIS_PROFILE=${region.deis_profile}".toString(),
+    withEnv(["DEIS_PROFILE=${region.name}".toString(),
              "DEIS_BIN=${region.deis_bin}".toString(),
              "DEIS_APP=${app_name}".toString()]) {
         status = sh([script: 'bin/configure.sh', returnStatus: true])
