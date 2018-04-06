@@ -2,26 +2,12 @@
 
 set -eo pipefail
 
+DEIS_BIN=deis2
 APP_NAME="$1"
 shift
 REGION="$1"
 shift
 
-case "$REGION" in
-    usw)
-        DEIS_BIN="deis"
-        ;;
-    tokyo)
-        DEIS_BIN="deis2"
-        ;;
-    frankfurt)
-        DEIS_BIN="deis2"
-        ;;
-    *)
-        echo "Invalid region: $REGION"
-        exit 1
-        ;;
-esac
 
 if [[ ! -f "configs/${APP_NAME}.env" ]]; then
     echo "A config for ${APP_NAME} does not exist"
