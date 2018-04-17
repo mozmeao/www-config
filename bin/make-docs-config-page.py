@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from envcat import get_env_vars
+from envcat import get_unique_vars
 
 
 APPS = [
@@ -24,7 +24,10 @@ def cast_boolean(value):
 
 
 def get_vars_for_app(app_name):
-    return get_env_vars('configs/{}.env'.format(app_name))
+    return get_unique_vars([
+        'configs/{}.env'.format(app_name),
+        'waffle_configs/{}.env'.format(app_name),
+    ])
 
 
 def vars_to_md(app_name):
