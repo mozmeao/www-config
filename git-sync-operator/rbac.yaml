@@ -1,0 +1,65 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: git-sync-operator
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bedrock-git-sync-operator
+  namespace: git-sync-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: git-sync-operator
+rules:
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list"]
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "hpas", "configmaps", "ingress"]
+  verbs: ["get", "list", "create", "update", "patch"]
+---
+# https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grant-git-sync-operator-access
+  namespace: bedrock-dev
+subjects:
+- kind: ServiceAccount
+  name: bedrock-git-sync-operator
+  namespace: git-sync-operator
+roleRef:
+  kind: Role
+  name: git-sync-operator
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grant-git-sync-operator-access
+  namespace: bedrock-stage
+subjects:
+- kind: ServiceAccount
+  name: bedrock-git-sync-operator
+  namespace: git-sync-operator
+roleRef:
+  kind: Role
+  name: git-sync-operator
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grant-git-sync-operator-access
+  namespace: bedrock-prod
+subjects:
+- kind: ServiceAccount
+  name: bedrock-git-sync-operator
+  namespace: git-sync-operator
+roleRef:
+  kind: Role
+  name: git-sync-operator
+  apiGroup: rbac.authorization.k8s.io

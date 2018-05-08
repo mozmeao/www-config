@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bedrock-git-sync-operator
+  namespace: git-sync-operator
+  labels:
+    app: git-sync-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-sync-operator
+  template:
+    metadata:
+      labels:
+        app: git-sync-operator
+    spec:
+      serviceAccountName: bedrock-git-sync-operator
+      containers:
+      - image: mozmeao/git-sync-operator
+        imagePullPolicy: Always
+        name: git-sync-operator
+        env:
+          - name: CONFIG_REPO
+            value: https://github.com/mozmeao/www-config
+          - name: CONFIG_BRANCH
+            value: git-sync-operator
+          - name: MANAGED_NAMESPACES
+            value: bedrock-dev,bedrock-stage,bedrock-prod,bedrock-demo-git-sync-operator
