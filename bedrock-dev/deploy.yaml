@@ -12,7 +12,6 @@ spec:
   selector:
     matchLabels:
       app: bedrock-dev
-      heritage: deis
       type: web
   strategy:
     rollingUpdate:
@@ -42,17 +41,17 @@ spec:
         - name: BASKET_URL
           value: https://basket.allizom.org
         - name: CSP_REPORT_ENABLE
-          value: True
+          value: "True"
         - name: DEBUG
-          value: False
+          value: "False"
         - name: DEV
-          value: True
+          value: "True"
         - name: DISABLE_SSL
-          value: False
+          value: "False"
         - name: ENABLE_CSP_MIDDLEWARE
-          value: True
+          value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
-          value: True
+          value: "True"
         - name: FUNNELCAKE_101_LOCALES
           value: en-US
         - name: FUNNELCAKE_101_PLATFORMS
@@ -70,9 +69,9 @@ spec:
         - name: FUNNELCAKE_104_PLATFORMS
           value: win
         - name: HTTPS
-          value: on
+          value: "on"
         - name: L10N_CRON
-          value: True
+          value: "True"
         - name: LOGLEVEL
           value: info
         - name: MOFO_SECURITY_ADVISORIES_BRANCH
@@ -80,15 +79,15 @@ spec:
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
         - name: PROD
-          value: True
+          value: "True"
         - name: RUN_SUPERVISOR
-          value: True
+          value: "True"
         - name: SECURE_BROWSER_XSS_FILTER
-          value: True
+          value: "True"
         - name: SECURE_SSL_REDIRECT
-          value: True
+          value: "True"
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: False
+          value: "False"
 #TODO
 #        - name: BASKET_API_KEY
 #          valueFrom:
