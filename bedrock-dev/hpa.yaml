@@ -6,11 +6,14 @@ metadata:
     type: web
   name: bedrock-dev-web
   namespace: bedrock-dev
-  selfLink: /apis/autoscaling/v1/namespaces/bedrock-dev/horizontalpodautoscalers/bedrock-dev-web
 spec:
   maxReplicas: 6
   minReplicas: 3
   scaleTargetRef:
     kind: Deployment
     name: bedrock-dev-web
-  targetCPUUtilizationPercentage: 80
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
