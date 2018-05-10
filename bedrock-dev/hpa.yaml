@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v1
+apiVersion: extensions/v1beta1
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
