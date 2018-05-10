@@ -1,28 +1,91 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: git-sync-operator
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: bedrock-git-sync-operator
-  namespace: git-sync-operator
----
+# https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: git-sync-operator
 rules:
-- apiGroups: [""]
-  resources: ["namespaces"]
-  verbs: ["get", "list"]
-- apiGroups: ["", "extensions", "apps", "apiextensions.k8s.io"]
-  resources: ["deployments", "hpas", "configmaps", "ingress", "customresourcedefinitions"]
-  verbs: ["get", "list", "create", "update", "patch"]
-
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - ingresses
+  - replicasets
+  - replicasets/scale
+  - replicationcontrollers/scale
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - mozilla.org
+  resources:
+  - versions
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
 ---
-# https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bedrock-dev-git-sync-operator
+  namespace: bedrock-dev
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -30,12 +93,18 @@ metadata:
   namespace: bedrock-dev
 subjects:
 - kind: ServiceAccount
-  name: bedrock-git-sync-operator
-  namespace: git-sync-operator
+  name: bedrock-dev-git-sync-operator
+  namespace: bedrock-dev
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: git-sync-operator
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bedrock-stage-git-sync-operator
+  namespace: bedrock-stage
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -44,12 +113,18 @@ metadata:
   namespace: bedrock-stage
 subjects:
 - kind: ServiceAccount
-  name: bedrock-git-sync-operator
-  namespace: git-sync-operator
+  name: bedrock-stage-git-sync-operator
+  namespace: bedrock-stage
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: git-sync-operator
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bedrock-prod-git-sync-operator
+  namespace: bedrock-prod
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -58,9 +133,9 @@ metadata:
   namespace: bedrock-prod
 subjects:
 - kind: ServiceAccount
-  name: bedrock-git-sync-operator
-  namespace: git-sync-operator
+  name: bedrock-prod-git-sync-operator
+  namespace: bedrock-prod
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: git-sync-operator
   apiGroup: rbac.authorization.k8s.io

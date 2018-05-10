@@ -9,7 +9,7 @@ metadata:
   selfLink: /apis/autoscaling/v1/namespaces/bedrock-dev/horizontalpodautoscalers/bedrock-dev-web
 spec:
   maxReplicas: 6
-  minReplicas: 5
+  minReplicas: 3
   scaleTargetRef:
     kind: Deployment
     name: bedrock-dev-web
