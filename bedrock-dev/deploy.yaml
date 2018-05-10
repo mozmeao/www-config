@@ -191,7 +191,7 @@ spec:
           httpGet:
             path: /readiness/
             scheme: HTTP
-            port: 80
+            port: 8000
         resources:
           limits:
             cpu: 500m
