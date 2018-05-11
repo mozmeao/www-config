@@ -182,6 +182,8 @@ spec:
         image: mozorg/bedrock:master-592da1516af5a625d51a322d534005e866b8e89a
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-web
+        ports:
+          containerPort: 8000
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5
