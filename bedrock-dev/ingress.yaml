@@ -11,9 +11,3 @@ spec:
           - backend:
               serviceName: bedrock-dev-nodeport
               servicePort: 80
-    - host: bedrock-demo-1.gcp.moz.works
-      http:
-        paths:
-          - backend:
-              serviceName: bedrock-demo-1-nodeport
-              servicePort: 80
