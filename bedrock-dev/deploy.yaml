@@ -183,7 +183,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-web
         ports:
-          containerPort: 8000
+          - containerPort: 8000
         readinessProbe:
           failureThreshold: 1
           initialDelaySeconds: 5
