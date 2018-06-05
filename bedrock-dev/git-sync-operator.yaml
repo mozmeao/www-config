@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: bedrock-dev-git-sync-operator
       containers:
-      - image: mozmeao/git-sync-operator:a034e4f
+      - image: mozmeao/git-sync-operator:12053e4
         name: git-sync-operator
         env:
           - name: CONFIG_REPO
