@@ -28,6 +28,8 @@ spec:
             value: bedrock-dev
           - name: CLUSTER_NAME
             value: iowa-a
+          - name: S3_BUCKET
+            value: mozmeao-deployments
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
