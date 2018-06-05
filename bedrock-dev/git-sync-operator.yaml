@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: bedrock-dev-git-sync-operator
       containers:
-      - image: mozmeao/git-sync-operator:2da4ec0
+      - image: mozmeao/git-sync-operator:a034e4f
         name: git-sync-operator
         env:
           - name: CONFIG_REPO
@@ -26,3 +26,15 @@ spec:
             value: git-sync-operator
           - name: MANAGED_NAMESPACES
             value: bedrock-dev
+          - name: CLUSTER_NAME
+            value: iowa-a
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: s3-credentials
+                key: access-key-id
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: s3-credentials
+                key: secret-access-key
