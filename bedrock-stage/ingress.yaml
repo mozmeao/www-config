@@ -1,9 +1,0 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: bedrock-stage-ingress
-  namespace: bedrock-stage
-spec:
-  backend:
-    serviceName: bedrock-stage-nodeport
-    servicePort: 80
