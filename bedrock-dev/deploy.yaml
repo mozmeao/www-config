@@ -52,22 +52,6 @@ spec:
           value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
           value: "True"
-        - name: FUNNELCAKE_101_LOCALES
-          value: en-US
-        - name: FUNNELCAKE_101_PLATFORMS
-          value: win
-        - name: FUNNELCAKE_102_LOCALES
-          value: en-US
-        - name: FUNNELCAKE_102_PLATFORMS
-          value: win
-        - name: FUNNELCAKE_103_LOCALES
-          value: de
-        - name: FUNNELCAKE_103_PLATFORMS
-          value: win
-        - name: FUNNELCAKE_104_LOCALES
-          value: de
-        - name: FUNNELCAKE_104_PLATFORMS
-          value: win
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -118,8 +102,6 @@ spec:
             secretKeyRef:
               key: email-use-tls
               name: bedrock-dev-secrets
-        - name: NEWRELIC_APP_ID
-          value: '9723357'
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
@@ -128,11 +110,6 @@ spec:
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: bedrock-dev-secrets
-        - name: OPTIMIZELY_PROJECT_ID
-          valueFrom:
-            secretKeyRef:
-              key: optimizely-project-id
               name: bedrock-dev-secrets
         - name: SECRET_KEY
           valueFrom:
