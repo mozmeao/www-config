@@ -88,97 +88,90 @@ spec:
           value: "True"
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
-#TODO
-#        - name: BASKET_API_KEY
-#          valueFrom:
-#            secretKeyRef:
-#              key: basket-api-key
-#              name: bedrock-dev-v198-env
-#        - name: EMAIL_HOST
-#          valueFrom:
-#            secretKeyRef:
-#              key: email-host
-#              name: bedrock-dev-v198-env
-#        - name: EMAIL_HOST_PASSWORD
-#          valueFrom:
-#            secretKeyRef:
-#              key: email-host-password
-#              name: bedrock-dev-v198-env
-#        - name: EMAIL_HOST_USER
-#          valueFrom:
-#            secretKeyRef:
-#              key: email-host-user
-#              name: bedrock-dev-v198-env
-#        - name: EMAIL_PORT
-#          valueFrom:
-#            secretKeyRef:
-#              key: email-port
-#              name: bedrock-dev-v198-env
-#        - name: EMAIL_USE_TLS
-#          valueFrom:
-#            secretKeyRef:
-#              key: email-use-tls
-#              name: bedrock-dev-v198-env
-#        - name: NEWRELIC_APP_ID
-#          valueFrom:
-#            secretKeyRef:
-#              key: newrelic-app-id
-#              name: bedrock-dev-v198-env
-#        - name: NEWRELIC_BROWSER_LICENSE_KEY
-#          valueFrom:
-#            secretKeyRef:
-#              key: newrelic-browser-license-key
-#              name: bedrock-dev-v198-env
-#        - name: NEWRELIC_PYTHON_INI_FILE
-#          valueFrom:
-#            secretKeyRef:
-#              key: newrelic-python-ini-file
-#              name: bedrock-dev-v198-env
-#        - name: NEW_RELIC_APP_NAME
-#          valueFrom:
-#            secretKeyRef:
-#              key: new-relic-app-name
-#              name: bedrock-dev-v198-env
-#        - name: NEW_RELIC_LICENSE_KEY
-#          valueFrom:
-#            secretKeyRef:
-#              key: new-relic-license-key
-#              name: bedrock-dev-v198-env
-#        - name: OPTIMIZELY_PROJECT_ID
-#          valueFrom:
-#            secretKeyRef:
-#              key: optimizely-project-id
-#              name: bedrock-dev-v198-env
-#        - name: SECRET_KEY
-#          valueFrom:
-#            secretKeyRef:
-#              key: secret-key
-#              name: bedrock-dev-v198-env
-#        - name: SENTRY_DSN
-#          valueFrom:
-#            secretKeyRef:
-#              key: sentry-dsn
-#              name: bedrock-dev-v198-env
-#        - name: TWITTER_ACCESS_TOKEN
-#          valueFrom:
-#            secretKeyRef:
-#              key: twitter-access-token
-#              name: bedrock-dev-v198-env
-#        - name: TWITTER_ACCESS_TOKEN_SECRET
-#          valueFrom:
-#            secretKeyRef:
-#              key: twitter-access-token-secret
-#              name: bedrock-dev-v198-env
-#        - name: TWITTER_CONSUMER_KEY
-#          valueFrom:
-#            secretKeyRef:
-#              key: twitter-consumer-key
-#              name: bedrock-dev-v198-env
-#        - name: TWITTER_CONSUMER_SECRET
-#          valueFrom:
-#            secretKeyRef:
-#              key: twitter-consumer-secret
-#              name: bedrock-dev-v198-env
+        - name: BASKET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: basket-api-key
+              name: bedrock-dev-secrets
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: bedrock-dev-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: bedrock-dev-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: bedrock-dev-secrets
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: bedrock-dev-secrets
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: bedrock-dev-secrets
+        - name: NEWRELIC_APP_ID
+          valueFrom:
+            secretKeyRef:
+              key: newrelic-app-id
+              name: bedrock-dev-secrets
+        - name: NEWRELIC_BROWSER_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: newrelic-browser-license-key
+              name: bedrock-dev-secrets
+        - name: NEWRELIC_PYTHON_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          value: bedrock-dev-iowa-a; bedrock-dev
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: bedrock-dev-secrets
+        - name: OPTIMIZELY_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              key: optimizely-project-id
+              name: bedrock-dev-secrets
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-dev-secrets
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: bedrock-dev-secrets
+        - name: TWITTER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token
+              name: bedrock-dev-secrets
+        - name: TWITTER_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token-secret
+              name: bedrock-dev-secrets
+        - name: TWITTER_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-key
+              name: bedrock-dev-secrets
+        - name: TWITTER_CONSUMER_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-secret
+              name: bedrock-dev-secrets
         image: mozorg/bedrock:iowa-a-346eedbe684a76f1b912b59abe515ac9f779479e
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-web
