@@ -119,15 +119,7 @@ spec:
               key: email-use-tls
               name: bedrock-dev-secrets
         - name: NEWRELIC_APP_ID
-          valueFrom:
-            secretKeyRef:
-              key: newrelic-app-id
-              name: bedrock-dev-secrets
-        - name: NEWRELIC_BROWSER_LICENSE_KEY
-          valueFrom:
-            secretKeyRef:
-              key: newrelic-browser-license-key
-              name: bedrock-dev-secrets
+          value: '9723357'
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
