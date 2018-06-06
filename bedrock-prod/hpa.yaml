@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: bedrock-prod
+    type: web
+  name: bedrock-prod-web
+  namespace: bedrock-prod
+spec:
+  maxReplicas: 6
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: bedrock-prod-web
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50

@@ -2,15 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: bedrock-stage
+    app: bedrock-prod
     type: web
-  name: bedrock-stage-web
-  namespace: bedrock-stage
+  name: bedrock-prod-web
+  namespace: bedrock-prod
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: bedrock-stage
+      app: bedrock-prod
       type: web
   strategy:
     rollingUpdate:
@@ -21,10 +21,10 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: bedrock-stage
+        app: bedrock-prod
         type: web
-      name: bedrock-stage-web
-      namespace: bedrock-stage
+      name: bedrock-prod-web
+      namespace: bedrock-prod
     spec:
       containers:
       - args:
@@ -36,9 +36,9 @@ spec:
         - name: ALLOWED_HOSTS
           value: "*"
         - name: AWS_DB_S3_BUCKET
-          value: bedrock-db-stage
+          value: bedrock-db-prod
         - name: BASKET_URL
-          value: https://basket.allizom.org
+          value: https://basket.mozilla.org
         - name: CSP_REPORT_ENABLE
           value: "True"
         - name: DEBUG
@@ -73,81 +73,81 @@ spec:
           valueFrom:
             secretKeyRef:
               key: basket-api-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
               key: email-host
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: EMAIL_HOST_PASSWORD
           valueFrom:
             secretKeyRef:
               key: email-host-password
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: EMAIL_HOST_USER
           valueFrom:
             secretKeyRef:
               key: email-host-user
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: EMAIL_PORT
           valueFrom:
             secretKeyRef:
               key: email-port
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: EMAIL_USE_TLS
           valueFrom:
             secretKeyRef:
               key: email-use-tls
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: bedrock-stage-iowa-a; bedrock-stage
+          value: bedrock-prod-iowa-a; bedrock-prod
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
               key: new-relic-license-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
               key: sentry-dsn
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: STUB_ATTRIBUTION_HMAC_KEY
           valueFrom:
             secretKeyRef:
               key: stub-attribution-hmac-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: STUB_ATTRIBUTION_RATE
           value: '1'
         - name: TWITTER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: twitter-access-token
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: TWITTER_ACCESS_TOKEN_SECRET
           valueFrom:
             secretKeyRef:
               key: twitter-access-token-secret
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: TWITTER_CONSUMER_KEY
           valueFrom:
             secretKeyRef:
               key: twitter-consumer-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: TWITTER_CONSUMER_SECRET
           valueFrom:
             secretKeyRef:
               key: twitter-consumer-secret
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         image: mozorg/bedrock:iowa-a-346eedbe684a76f1b912b59abe515ac9f779479e
         imagePullPolicy: IfNotPresent
-        name: bedrock-stage-web
+        name: bedrock-prod-web
         ports:
           - containerPort: 8000
         readinessProbe:
