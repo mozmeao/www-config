@@ -40,7 +40,7 @@ spec:
         - name: BASKET_URL
           value: https://basket.mozilla.org
         - name: CSP_REPORT_ENABLE
-          value: "True"
+          value: "False"
         - name: DEBUG
           value: "False"
         - name: DEV
