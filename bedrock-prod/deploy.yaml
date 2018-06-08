@@ -145,6 +145,8 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-prod-secrets
+        - name: WEB_CONCURRENCY
+          value: "4"
         image: mozorg/bedrock:prod-75fa4f5dcc9fbeae7630adb470c3166e8cc197e7
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
