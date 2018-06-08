@@ -97,6 +97,26 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: bedrock-demo-git-sync-operator
+  namespace: bedrock-demo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grant-git-sync-operator-access
+  namespace: bedrock-demo
+subjects:
+- kind: ServiceAccount
+  name: bedrock-demo-git-sync-operator
+  namespace: bedrock-demo
+roleRef:
+  kind: ClusterRole
+  name: git-sync-operator
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: bedrock-dev-git-sync-operator
   namespace: bedrock-dev
 ---
