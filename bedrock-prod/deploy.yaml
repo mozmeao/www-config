@@ -99,6 +99,8 @@ spec:
             secretKeyRef:
               key: email-use-tls
               name: bedrock-prod-secrets
+        - name: GTM_CONTAINER_ID
+          value: GTM-MW3R8V
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
