@@ -127,6 +127,8 @@ spec:
               name: bedrock-prod-secrets
         - name: STUB_ATTRIBUTION_RATE
           value: '1'
+        - name: SWITCH_TRACKING_PIXEL
+          value: 'on'
         - name: TWITTER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
