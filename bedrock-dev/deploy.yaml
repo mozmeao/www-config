@@ -105,7 +105,10 @@ spec:
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
-          value: bedrock-dev-iowa-a; bedrock-dev
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-dev-configmap
+              key: NEW_RELIC_APP_NAME
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
