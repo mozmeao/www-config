@@ -125,6 +125,8 @@ spec:
           value: US,DE,FR
         - name: STD_SMS_COUNTRIES_WHATSNEW50
           value: US,DE,FR
+        - name: STD_SMS_COUNTRIES_WHATSNEW61
+          value: US,DE
         - name: STUB_ATTRIBUTION_HMAC_KEY
           valueFrom:
             secretKeyRef:
