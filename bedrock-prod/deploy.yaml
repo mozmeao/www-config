@@ -123,6 +123,10 @@ spec:
             secretKeyRef:
               key: sentry-dsn
               name: bedrock-prod-secrets
+        - name: STD_SMS_COUNTRIES_DESKTOP
+          value: US,DE,FR
+        - name: STD_SMS_COUNTRIES_WHATSNEW50
+          value: US,DE,FR
         - name: STUB_ATTRIBUTION_HMAC_KEY
           valueFrom:
             secretKeyRef:
