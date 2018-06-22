@@ -4,7 +4,7 @@ metadata:
     name: bedrock-dev-configmap
     namespace: bedrock-dev
 data:
-    NEW_RELIC_APP_NAME: bedrock-dev-iowa-a;bedrock-dev
+    NEW_RELIC_APP_NAME: bedrock-dev-tokyo;bedrock-dev
     # TODO: DEPRECATE DEIS_DOMAIN IN FAVOR OF CLUSTER_NAME
-    DEIS_DOMAIN: gcp.moz.works
-    CLUSTER_NAME: iowa-a
+    DEIS_DOMAIN: tokyo.moz.works
+    CLUSTER_NAME: tokyo
