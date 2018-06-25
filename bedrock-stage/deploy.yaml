@@ -37,6 +37,11 @@ spec:
           value: "*"
         - name: AWS_DB_S3_BUCKET
           value: bedrock-db-stage
+        - name: BASKET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: basket-api-key
+              name: bedrock-stage-secrets
         - name: BASKET_URL
           value: https://basket.allizom.org
         - name: CSP_REPORT_ENABLE
@@ -47,33 +52,6 @@ spec:
           value: "False"
         - name: DISABLE_SSL
           value: "False"
-        - name: ENABLE_CSP_MIDDLEWARE
-          value: "True"
-        - name: ENABLE_HOSTNAME_MIDDLEWARE
-          value: "True"
-        - name: HTTPS
-          value: "on"
-        - name: L10N_CRON
-          value: "True"
-        - name: LOGLEVEL
-          value: info
-        - name: MOFO_SECURITY_ADVISORIES_PATH
-          value: /tmp/mofo_security_advisories
-        - name: PROD
-          value: "True"
-        - name: RUN_SUPERVISOR
-          value: "True"
-        - name: SECURE_BROWSER_XSS_FILTER
-          value: "True"
-        - name: SECURE_SSL_REDIRECT
-          value: "True"
-        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: "False"
-        - name: BASKET_API_KEY
-          valueFrom:
-            secretKeyRef:
-              key: basket-api-key
-              name: bedrock-stage-secrets
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
@@ -99,6 +77,28 @@ spec:
             secretKeyRef:
               key: email-use-tls
               name: bedrock-stage-secrets
+        - name: ENABLE_CSP_MIDDLEWARE
+          value: "True"
+        - name: ENABLE_HOSTNAME_MIDDLEWARE
+          value: "True"
+        - name: HTTPS
+          value: "on"
+        - name: L10N_CRON
+          value: "True"
+        - name: LOGLEVEL
+          value: info
+        - name: MOFO_SECURITY_ADVISORIES_PATH
+          value: /tmp/mofo_security_advisories
+        - name: PROD
+          value: "True"
+        - name: RUN_SUPERVISOR
+          value: "True"
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
