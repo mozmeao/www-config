@@ -5,3 +5,6 @@ metadata:
     namespace: bedrock-stage
 data:
     NEW_RELIC_APP_NAME: bedrock-stage-iowa-a;bedrock-stage
+    # TODO: DEPRECATE DEIS_DOMAIN IN FAVOR OF CLUSTER_NAME
+    DEIS_DOMAIN: iowa-a
+    CLUSTER_NAME: iowa-a

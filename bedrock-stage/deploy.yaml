@@ -44,10 +44,20 @@ spec:
               name: bedrock-stage-secrets
         - name: BASKET_URL
           value: https://basket.allizom.org
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-stage-configmap
+              key: CLUSTER_NAME
         - name: CSP_REPORT_ENABLE
           value: "True"
         - name: DEBUG
           value: "False"
+        - name: DEIS_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-stage-configmap
+              key: DEIS_DOMAIN
         - name: DEV
           value: "False"
         - name: DISABLE_SSL
