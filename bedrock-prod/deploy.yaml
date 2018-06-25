@@ -35,45 +35,43 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: "*"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-access-key-id
+              name: bedrock-prod-secrets
         - name: AWS_DB_S3_BUCKET
           value: bedrock-db-prod
-        - name: BASKET_URL
-          value: https://basket.mozilla.org
-        - name: CSP_REPORT_ENABLE
-          value: "False"
-        - name: DEBUG
-          value: "False"
-        - name: DEV
-          value: "False"
-        - name: DISABLE_SSL
-          value: "False"
-        - name: ENABLE_CSP_MIDDLEWARE
-          value: "True"
-        - name: ENABLE_HOSTNAME_MIDDLEWARE
-          value: "True"
-        - name: HTTPS
-          value: "on"
-        - name: L10N_CRON
-          value: "True"
-        - name: LOGLEVEL
-          value: info
-        - name: MOFO_SECURITY_ADVISORIES_PATH
-          value: /tmp/mofo_security_advisories
-        - name: PROD
-          value: "True"
-        - name: RUN_SUPERVISOR
-          value: "True"
-        - name: SECURE_BROWSER_XSS_FILTER
-          value: "True"
-        - name: SECURE_SSL_REDIRECT
-          value: "True"
-        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: "False"
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-secret-access-key
+              name: bedrock-prod-secrets
         - name: BASKET_API_KEY
           valueFrom:
             secretKeyRef:
               key: basket-api-key
               name: bedrock-prod-secrets
+        - name: BASKET_URL
+          value: https://basket.mozilla.org
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-prod-configmap
+              key: CLUSTER_NAME
+        - name: CSP_REPORT_ENABLE
+          value: "False"
+        - name: DEBUG
+          value: "False"
+        - name: DEIS_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-prod-configmap
+              key: DEIS_DOMAIN
+        - name: DEV
+          value: "False"
+        - name: DISABLE_SSL
+          value: "False"
         - name: EMAIL_HOST
           valueFrom:
             secretKeyRef:
@@ -99,8 +97,20 @@ spec:
             secretKeyRef:
               key: email-use-tls
               name: bedrock-prod-secrets
+        - name: ENABLE_CSP_MIDDLEWARE
+          value: "True"
+        - name: ENABLE_HOSTNAME_MIDDLEWARE
+          value: "True"
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
+        - name: HTTPS
+          value: "on"
+        - name: L10N_CRON
+          value: "True"
+        - name: LOGLEVEL
+          value: info
+        - name: MOFO_SECURITY_ADVISORIES_PATH
+          value: /tmp/mofo_security_advisories
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
@@ -113,6 +123,16 @@ spec:
             secretKeyRef:
               key: new-relic-license-key
               name: bedrock-prod-secrets
+        - name: PROD
+          value: "True"
+        - name: RUN_SUPERVISOR
+          value: "True"
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
