@@ -12,6 +12,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 8000
+    nodePort: 31328
   selector:
     app: bedrock-stage
     type: web
