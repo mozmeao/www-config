@@ -6,7 +6,6 @@ metadata:
     type: web
   name: bedrock-dev-web
   namespace: bedrock-dev
-  selfLink: /apis/extensions/v1beta1/namespaces/bedrock-dev/deployments/bedrock-dev-web
 spec:
   replicas: 5
   selector:
@@ -41,13 +40,13 @@ spec:
             secretKeyRef:
               key: aws-access-key-id
               name: bedrock-dev-secrets
+        - name: AWS_DB_S3_BUCKET
+          value: bedrock-db-dev
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: aws-secret-access-key
               name: bedrock-dev-secrets
-        - name: AWS_DB_S3_BUCKET
-          value: bedrock-db-dev
         - name: BASKET_API_KEY
           valueFrom:
             secretKeyRef:
