@@ -35,8 +35,18 @@ spec:
         env:
         - name: ALLOWED_HOSTS
           value: "*"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-access-key-id
+              name: bedrock-stage-secrets
         - name: AWS_DB_S3_BUCKET
           value: bedrock-db-stage
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-secret-access-key
+              name: bedrock-stage-secrets
         - name: BASKET_API_KEY
           valueFrom:
             secretKeyRef:
@@ -91,6 +101,8 @@ spec:
           value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
           value: "True"
+        - name: GTM_CONTAINER_ID
+          value: GTM-MW3R8V
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -99,16 +111,6 @@ spec:
           value: info
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
-        - name: PROD
-          value: "True"
-        - name: RUN_SUPERVISOR
-          value: "True"
-        - name: SECURE_BROWSER_XSS_FILTER
-          value: "True"
-        - name: SECURE_SSL_REDIRECT
-          value: "True"
-        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: "False"
         - name: NEWRELIC_PYTHON_INI_FILE
           value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
@@ -121,11 +123,19 @@ spec:
             secretKeyRef:
               key: new-relic-license-key
               name: bedrock-stage-secrets
+        - name: PROD
+          value: "True"
+        - name: RUN_SUPERVISOR
+          value: "True"
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
               key: secret-key
               name: bedrock-stage-secrets
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
@@ -144,6 +154,8 @@ spec:
               name: bedrock-stage-secrets
         - name: STUB_ATTRIBUTION_RATE
           value: '1'
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
         - name: SWITCH_TRACKING_PIXEL
           value: 'on'
         - name: TWITTER_ACCESS_TOKEN
