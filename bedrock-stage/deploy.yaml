@@ -60,7 +60,7 @@ spec:
               name: bedrock-stage-configmap
               key: CLUSTER_NAME
         - name: CSP_REPORT_ENABLE
-          value: "True"
+          value: "False"
         - name: DEBUG
           value: "False"
         - name: DEIS_DOMAIN
