@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: bedrock-stage-configmap
+    namespace: bedrock-stage
+data:
+    NEW_RELIC_APP_NAME: bedrock-stage-frankfurt;bedrock-stage
+    # TODO: DEPRECATE DEIS_DOMAIN IN FAVOR OF CLUSTER_NAME
+    DEIS_DOMAIN: frankfurt.moz.works
+    CLUSTER_NAME: frankfurt

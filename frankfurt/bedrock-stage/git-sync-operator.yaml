@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bedrock-stage-git-sync-operator
+  namespace: bedrock-stage
+  labels:
+    app: bedrock-stage-git-sync-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bedrock-stage-git-sync-operator
+  template:
+    metadata:
+      labels:
+        app: bedrock-stage-git-sync-operator
+    spec:
+      serviceAccountName: bedrock-stage-git-sync-operator
+      containers:
+      - image: mozmeao/git-sync-operator:f609a0c
+        name: git-sync-operator
+        env:
+          - name: CONFIG_REPO
+            value: https://github.com/mozmeao/www-config
+          - name: CONFIG_BRANCH
+            value: git-sync-operator
+          - name: MANAGED_NAMESPACES
+            value: bedrock-stage
+          - name: CLUSTER_NAME
+            value: frankfurt
+          - name: S3_BUCKET
+            value: mozmeao-deployments
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: s3-credentials
+                key: access-key-id
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: s3-credentials
+                key: secret-access-key
