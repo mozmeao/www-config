@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: bedrock-demo-4
+    namespace: bedrock-demo
+spec:
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app: bedrock-demo-4
+      type: web
+    type: ClusterIP
