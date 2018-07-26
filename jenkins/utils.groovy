@@ -8,8 +8,8 @@
  * @param stage step of build/deploy
  * @param result outcome of build (will be uppercased)
 */
-def ircNotification(Map args) {
-    def command = "bin/irc-notify.sh"
+def slackNotification(Map args) {
+    def command = "bin/slack-notify.sh"
     for (arg in args) {
         command += " --${arg.key} '${arg.value}'"
     }
@@ -22,15 +22,15 @@ def configAndTest(region, app_name, run_tests) {
     try {
         did_config = runConfiguration(region, app_name)
         if ( did_config ) {
-            ircNotification([status: 'success', message: "Configured ${app_url}"])
+            slackNotification([status: 'success', message: "Configured ${app_url}"])
             if ( run_tests ) {
                 runTests(app_url)
             }
         } else {
-            ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
+            slackNotification([status: 'info', message: "No Config Necessary ${app_url}"])
         }
     } catch(err) {
-        ircNotification([stage: stage_name, status: 'failure'])
+        slackNotification([stage: stage_name, status: 'failure'])
         throw err
     }
 }
@@ -45,17 +45,17 @@ def getConfigJob(region, app_name, run_tests) {
                 try {
                     did_config = runConfiguration(region, app_name)
                     if ( did_config ) {
-                        ircNotification([status: 'success', message: "Configured ${app_url}"])
+                        slackNotification([status: 'success', message: "Configured ${app_url}"])
                         if ( run_tests ) {
                             retry(3) {
                                 runTests(app_url)
                             }
                         }
                     } else {
-                        ircNotification([status: 'info', message: "No Config Necessary ${app_url}"])
+                        slackNotification([status: 'info', message: "No Config Necessary ${app_url}"])
                     }
                 } catch(err) {
-                    ircNotification([stage: stage_name, status: 'failure'])
+                    slackNotification([stage: stage_name, status: 'failure'])
                     throw err
                 }
             }
