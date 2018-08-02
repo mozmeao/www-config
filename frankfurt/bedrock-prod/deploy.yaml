@@ -129,6 +129,8 @@ spec:
           value: "True"
         - name: SECURE_BROWSER_XSS_FILTER
           value: "True"
+        - name: SECURE_HSTS_SECONDS
+          value: "31536000"
         - name: SECURE_SSL_REDIRECT
           value: "True"
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
