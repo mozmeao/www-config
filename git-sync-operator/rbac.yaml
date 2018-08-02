@@ -93,6 +93,17 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - voyager.appscode.com
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
 ---
 apiVersion: v1
 kind: ServiceAccount
