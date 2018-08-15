@@ -180,7 +180,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-stage-secrets
-        image: mozorg/bedrock:prod-d2fb35a65ce35a66c08842cbf2864751a05054b2
+        image: mozorg/bedrock:prod-5ddd4f4597dfb66286f9d24d80727a14c81987ed
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-web
         ports:
