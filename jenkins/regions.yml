@@ -1,6 +1,3 @@
-tokyo:
-  name: tokyo
-  deis_bin: deis2
 frankfurt:
   name: frankfurt
   deis_bin: deis2
