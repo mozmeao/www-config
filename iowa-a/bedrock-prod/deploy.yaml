@@ -7,7 +7,6 @@ metadata:
   name: bedrock-prod-web
   namespace: bedrock-prod
 spec:
-  replicas: 5
   selector:
     matchLabels:
       app: bedrock-prod
