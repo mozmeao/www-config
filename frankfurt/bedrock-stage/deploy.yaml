@@ -180,6 +180,8 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-stage-secrets
+        - name: WEB_CONCURRENCY
+          value: "6"
         image: mozorg/bedrock:prod-9fe67ad459fd6d28987c9930108e15abb53475a4
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-web
@@ -197,11 +199,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 500m
-            memory: 300Mi
+            cpu: 1500m
+            memory: 1000Mi
           requests:
-            cpu: 250m
-            memory: 120Mi
+            cpu: 750m
+            memory: 600Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
