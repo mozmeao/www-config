@@ -101,6 +101,8 @@ spec:
           value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
           value: "True"
+        - name: FXA_ENDPOINT
+          value: "https://accounts.stage.mozaws.net/"
         - name: FXA_OAUTH_API_ENDPOINT
           value: "https://oauth.stage.mozaws.net/v1"
         - name: FXA_OAUTH_SERVER_ENV
