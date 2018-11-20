@@ -101,6 +101,17 @@ spec:
           value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
           value: "True"
+        - name: FXA_OAUTH_API_ENDPOINT
+          value: "https://oauth.stage.mozaws.net/v1"
+        - name: FXA_OAUTH_SERVER_ENV
+          value: "stage"
+        - name: FXA_OAUTH_CLIENT_ID
+          value: "beb553d3ac7ad963"
+        - name: FXA_OAUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: fxa-oauth-client-secret
+              name: bedrock-stage-secrets
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
         - name: HTTPS
