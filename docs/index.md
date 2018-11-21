@@ -41,7 +41,7 @@ Let's say you want to change a static config value in prod. Follow the following
 5. Push the change to a branch on your fork.
 6. Submit a pull-request against the `mozmeao/www-config` repo.
 7. Ask for a review in the `#www` IRC channel or in the PR itself.
-8. Once the PR is reviewed and merged it can be applied: `git pull origin master && ./set-config bedrock-prod` (assuming `origin` is your remote name for the `mozmeao` repo)
+8. Once the PR is reviewed and merged it can be applied: `git pull origin master && ./set-config bedrock-prod`. (This assumes `origin` is your remote name for the `mozmeao` repo. If not, set an environmental variable with that name. For example, if you have named your `mozmeao` remote `upstream`, you'd run `MOZ_GIT_REMOTE=upstream ./set-config bedrock-prod`.)
 
 ## How it Works
 
