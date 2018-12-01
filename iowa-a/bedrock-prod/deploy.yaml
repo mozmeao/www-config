@@ -101,6 +101,13 @@ spec:
           value: "True"
         - name: ENABLE_HOSTNAME_MIDDLEWARE
           value: "True"
+        - name: FXA_OAUTH_CLIENT_ID
+          value: "40dd9c0253db092c"
+        - name: FXA_OAUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: fxa-oauth-client-secret
+              name: bedrock-prod-secrets
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
         - name: HTTPS
