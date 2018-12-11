@@ -152,6 +152,8 @@ spec:
             secretKeyRef:
               key: sentry-dsn
               name: bedrock-prod-secrets
+        - name: STATIC_URL
+          value: "https://www.mozilla.org/media/"
         - name: STD_SMS_COUNTRIES_DESKTOP
           value: US,DE,FR
         - name: STD_SMS_COUNTRIES_WHATSNEW50
