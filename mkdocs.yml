@@ -1,10 +1,16 @@
 site_name: Bedrock Configurator
-pages:
+
+nav:
   - Home: index.md
   - Current Configs: configs.md
+
 markdown_extensions:
   - abbr
   - attr_list
   - def_list
+
 extra_css:
   - css/extra.css
+
+repo_url: https://github.com/mozmeao/www-config
+edit_uri: ""
