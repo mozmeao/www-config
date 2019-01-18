@@ -125,6 +125,16 @@ spec:
             secretKeyRef:
               key: new-relic-license-key
               name: bedrock-dev-secrets
+        - name: POCKET_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: pocket-access-token
+              name: bedrock-dev-secrets
+        - name: POCKET_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: pocket-consumer-key
+              name: bedrock-dev-secrets
         - name: PROD
           value: "True"
         - name: RUN_SUPERVISOR
