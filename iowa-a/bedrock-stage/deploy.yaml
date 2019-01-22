@@ -59,8 +59,10 @@ spec:
             configMapKeyRef:
               name: bedrock-stage-configmap
               key: CLUSTER_NAME
+        - name: CONTENT_CARDS_BRANCH
+          value: stage-processed
         - name: CSP_DEFAULT_SRC
-          value: "'self',*.mozilla.net,*.mozilla.org,*.mozilla.com,*.allizom.org"
+          value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
           value: "False"
         - name: DEBUG
