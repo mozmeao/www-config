@@ -136,12 +136,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: pocket-access-token
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: POCKET_CONSUMER_KEY
           valueFrom:
             secretKeyRef:
               key: pocket-consumer-key
-              name: bedrock-stage-secrets
+              name: bedrock-prod-secrets
         - name: PROD
           value: "True"
         - name: RUN_SUPERVISOR
