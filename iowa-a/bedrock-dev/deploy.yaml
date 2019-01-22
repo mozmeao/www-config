@@ -59,6 +59,8 @@ spec:
             configMapKeyRef:
               name: bedrock-dev-configmap
               key: CLUSTER_NAME
+        - name: CSP_DEFAULT_SRC
+          value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
           value: "True"
         - name: DEBUG
