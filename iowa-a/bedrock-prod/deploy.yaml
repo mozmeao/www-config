@@ -59,6 +59,8 @@ spec:
             configMapKeyRef:
               name: bedrock-prod-configmap
               key: CLUSTER_NAME
+        - name: CONTENT_CARDS_BRANCH
+          value: prod-processed
         - name: CSP_REPORT_ENABLE
           value: "False"
         - name: DEBUG
