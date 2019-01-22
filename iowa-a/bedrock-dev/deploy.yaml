@@ -145,6 +145,8 @@ spec:
             secretKeyRef:
               key: sentry-dsn
               name: bedrock-dev-secrets
+        - name: STATIC_URL
+          value: "https://www-dev.allizom.org/media/"
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
         - name: TWITTER_ACCESS_TOKEN
