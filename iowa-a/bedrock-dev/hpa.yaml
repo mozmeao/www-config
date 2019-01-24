@@ -7,8 +7,8 @@ metadata:
   name: bedrock-dev-web
   namespace: bedrock-dev
 spec:
-  maxReplicas: 6
-  minReplicas: 3
+  maxReplicas: 7
+  minReplicas: 5
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
