@@ -60,7 +60,7 @@ spec:
               name: bedrock-stage-configmap
               key: CLUSTER_NAME
         - name: CONTENT_CARDS_BRANCH
-          value: stage-processed
+          value: master-processed
         - name: CSP_DEFAULT_SRC
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
