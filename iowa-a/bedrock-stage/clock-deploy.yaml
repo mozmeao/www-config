@@ -128,8 +128,6 @@ spec:
           value: info
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
-        - name: NEWRELIC_PYTHON_INI_FILE
-          value: newrelic.ini
         - name: NEW_RELIC_APP_NAME
           valueFrom:
             configMapKeyRef:
