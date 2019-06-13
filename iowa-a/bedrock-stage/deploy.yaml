@@ -201,7 +201,7 @@ spec:
               name: bedrock-stage-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozorg/bedrock:stage-582af60fa12dd2ad69b0cc3399341e5a9f02370a
+        image: mozorg/bedrock:stage-570109ad740fb4165deca90f370f77a039099a34
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-web
         ports:
