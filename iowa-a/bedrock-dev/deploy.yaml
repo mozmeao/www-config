@@ -147,6 +147,8 @@ spec:
               name: bedrock-dev-secrets
         - name: STATIC_URL
           value: "https://www-dev.allizom.org/media/"
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
         - name: TWITTER_ACCESS_TOKEN

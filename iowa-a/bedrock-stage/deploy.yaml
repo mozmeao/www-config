@@ -162,6 +162,8 @@ spec:
               name: bedrock-stage-secrets
         - name: STATIC_URL
           value: "https://www.allizom.org/media/"
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
         - name: STD_SMS_COUNTRIES_DESKTOP
           value: US,DE,FR
         - name: STD_SMS_COUNTRIES_WHATSNEW50
