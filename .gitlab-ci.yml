@@ -1,0 +1,35 @@
+stages:
+  - deploy
+  - test
+
+.deploy:
+  stage: deploy
+  retry:
+    max: 1  # Add one retry, especially for acceptance-tests
+    when: always
+  tags:
+    - meao
+  script:
+    - kubectl apply -f ${DEPLOYMENT}
+    - ./rollout-status.sh ${DEPLOYMENT}
+
+.test:
+  stage: test
+  tags:
+    - meao
+  retry:
+    max: 1
+    when: always
+  script:
+    - bin/acceptance-tests.sh ${URL}
+
+test-demo1:
+  extends: test
+  stage: test
+  tags:
+    - aws
+  only:
+    refs:
+      - gitlab-demo1
+  variables:
+    URL: http://www-demo1.allizom.org
