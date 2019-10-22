@@ -21,7 +21,7 @@ stages:
     - bin/acceptance-tests.sh ${URL}
 
 test-demo1:
-  extends: test
+  extends: .test
   stage: test
   tags:
     - aws
