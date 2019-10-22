@@ -4,9 +4,6 @@ stages:
 
 .deploy:
   stage: deploy
-  retry:
-    max: 1  # Add one retry, especially for acceptance-tests
-    when: always
   tags:
     - meao
   script:
@@ -28,6 +25,7 @@ test-demo1:
   stage: test
   tags:
     - aws
+    - meao
   only:
     refs:
       - gitlab-demo1
