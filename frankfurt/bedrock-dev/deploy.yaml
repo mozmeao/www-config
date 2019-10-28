@@ -1,0 +1,200 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrock-dev
+    type: web
+  name: bedrock-dev-web
+  namespace: bedrock-dev
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: bedrock-dev
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bedrock-dev
+        type: web
+      name: bedrock-dev-web
+      namespace: bedrock-dev
+    spec:
+      containers:
+      - args:
+        - ./bin/run.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-access-key-id
+              name: bedrock-dev-secrets
+        - name: AWS_DB_S3_BUCKET
+          value: bedrock-db-dev
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-secret-access-key
+              name: bedrock-dev-secrets
+        - name: BASKET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: basket-api-key
+              name: bedrock-dev-secrets
+        - name: BASKET_URL
+          value: https://basket.allizom.org
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-dev-configmap
+              key: CLUSTER_NAME
+        - name: CSP_REPORT_ENABLE
+          value: "True"
+        - name: DEBUG
+          value: "False"
+        - name: DEIS_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-dev-configmap
+              key: DEIS_DOMAIN
+        - name: DEV
+          value: "True"
+        - name: DISABLE_SSL
+          value: "False"
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: bedrock-dev-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: bedrock-dev-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: bedrock-dev-secrets
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: bedrock-dev-secrets
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: bedrock-dev-secrets
+        - name: ENABLE_CSP_MIDDLEWARE
+          value: "True"
+        - name: ENABLE_HOSTNAME_MIDDLEWARE
+          value: "True"
+        - name: GTM_CONTAINER_ID
+          value: GTM-MW3R8V
+        - name: HTTPS
+          value: "on"
+        - name: L10N_CRON
+          value: "True"
+        - name: LOGLEVEL
+          value: info
+        - name: MOFO_SECURITY_ADVISORIES_BRANCH
+          value: testing
+        - name: MOFO_SECURITY_ADVISORIES_PATH
+          value: /tmp/mofo_security_advisories
+        - name: NEWRELIC_PYTHON_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-dev-configmap
+              key: NEW_RELIC_APP_NAME
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: bedrock-dev-secrets
+        - name: PROD
+          value: "True"
+        - name: RUN_SUPERVISOR
+          value: "True"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-dev-secrets
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_HSTS_SECONDS
+          value: "31536000"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: bedrock-dev-secrets
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
+        - name: TWITTER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token
+              name: bedrock-dev-secrets
+        - name: TWITTER_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token-secret
+              name: bedrock-dev-secrets
+        - name: TWITTER_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-key
+              name: bedrock-dev-secrets
+        - name: TWITTER_CONSUMER_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-secret
+              name: bedrock-dev-secrets
+        image: mozorg/bedrock:master-43ce9542b1c92bc47009fa6227fcd3a275648eb1
+        imagePullPolicy: IfNotPresent
+        name: bedrock-dev-web
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /readiness/
+            scheme: HTTP
+            port: 8000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 300Mi
+          requests:
+            cpu: 250m
+            memory: 120Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
