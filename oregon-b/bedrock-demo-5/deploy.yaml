@@ -1,20 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "59"
-    kubernetes.io/change-cause: jenkins deployed mozorg/bedrock:demo-5-8d9d8fd2a7164dd5adb54e2ee28e0b01cd84ad43
-  creationTimestamp: 2018-04-07T20:49:10Z
-  generation: 59
+  creationTimestamp: null
   labels:
     app: bedrock-demo-5
     heritage: deis
     type: cmd
   name: bedrock-demo-5-cmd
   namespace: bedrock-demo-5
-  resourceVersion: "45206"
-  selfLink: /apis/extensions/v1beta1/namespaces/bedrock-demo-5/deployments/bedrock-demo-5-cmd
-  uid: 1f3a79f2-3aa5-11e8-8eeb-0656fabf84c0
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -281,22 +274,3 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: 2019-04-08T18:41:04Z
-    lastUpdateTime: 2019-08-15T09:00:48Z
-    message: ReplicaSet "bedrock-demo-5-cmd-66f6cd758c" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: 2019-10-01T20:32:11Z
-    lastUpdateTime: 2019-10-01T20:32:11Z
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  observedGeneration: 59
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1

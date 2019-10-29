@@ -67,6 +67,7 @@ deploy-demo-5:
       - "oregon-b/bedrock-demo-5/*"
     refs:
       - master
+      - gitlab-ci
   variables:
     DEPLOYMENT: oregon-b/bedrock-demo-5
 
