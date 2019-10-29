@@ -205,7 +205,37 @@ test-dev-headless:
     BASE_URL: https://bedrock-dev.gcp.moz.works
     TEST_SUITE: headless
 
-test-stage-headless:
+test-dev-download:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-dev/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    TEST_SUITE: download
+
+test-dev-firefox:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-dev/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    TEST_SUITE: firefox
+
+test-stage-gcp-headless:
   extends: .test
   stage: test
   tags:
@@ -219,6 +249,81 @@ test-stage-headless:
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     TEST_SUITE: headless
+
+test-stage-gcp-chrome:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: chrome
+
+test-stage-gcp-firefox:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: firefox
+
+test-stage-gcp-ie:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: ie
+
+test-stage-gcp-ie9:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: ie9
+
+test-stage-gcp-download:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: download
 
 test-prod-frankfurt-headless:
   extends: .test
