@@ -18,7 +18,7 @@ stages:
     max: 1
     when: always
   script:
-    - bin/acceptance-tests.sh ${URL}
+    - bin/acceptance-tests.sh ${TEST_SUITE}
 
 deploy-iowa-a-dev:
   extends: .deploy
@@ -60,7 +60,7 @@ deploy-iowa-b-stage:
   variables:
     DEPLOYMENT: iowa-b/bedrock-stage
 
-test-demo1:
+test-demo1-headless:
   extends: .test
   stage: test
   tags:
@@ -70,9 +70,10 @@ test-demo1:
     refs:
       - test-demo1
   variables:
-    URL: http://www-demo1.allizom.org
+    BASE_URL: http://www-demo1.allizom.org
+    TEST_SUITE: headless
 
-test-demo2:
+test-demo2-headless:
   extends: .test
   stage: test
   tags:
@@ -82,9 +83,10 @@ test-demo2:
     refs:
       - test-demo2
   variables:
-    URL: http://www-demo2.allizom.org
+    BASE_URL: http://www-demo2.allizom.org
+    TEST_SUITE: headless
 
-test-demo3:
+test-demo3-headless:
   extends: .test
   stage: test
   tags:
@@ -94,9 +96,10 @@ test-demo3:
     refs:
       - test-demo3
   variables:
-    URL: http://www-demo3.allizom.org
+    BASE_URL: http://www-demo3.allizom.org
+    TEST_SUITE: headless
 
-test-demo4:
+test-demo4-headless:
   extends: .test
   stage: test
   tags:
@@ -106,9 +109,10 @@ test-demo4:
     refs:
       - test-demo4
   variables:
-    URL: http://www-demo4.allizom.org
+    BASE_URL: http://www-demo4.allizom.org
+    TEST_SUITE: headless
 
-test-demo5:
+test-demo5-headless:
   extends: .test
   stage: test
   tags:
@@ -118,9 +122,88 @@ test-demo5:
     refs:
       - test-demo5
   variables:
-    URL: http://www-demo5.allizom.org
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: headless
 
-test-dev:
+test-demo5-chrome:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: chrome
+
+test-demo5-firefox:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: firefox
+
+test-demo5-firefox:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: firefox
+
+test-demo5-ie:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: ie
+
+test-demo5-ie9:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: ie9
+
+test-demo5-download:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    BASE_URL: http://www-demo5.allizom.org
+    TEST_SUITE: download
+
+test-dev-headless:
   extends: .test
   stage: test
   tags:
@@ -132,9 +215,10 @@ test-dev:
     refs:
       - master
   variables:
-    URL: https://bedrock-dev.gcp.moz.works
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    TEST_SUITE: headless
 
-test-stage:
+test-stage-headless:
   extends: .test
   stage: test
   tags:
@@ -146,9 +230,10 @@ test-stage:
     refs:
       - master
   variables:
-    URL: https://bedrock-stage.gcp.moz.works
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: headless
 
-test-prod-frankfurt:
+test-prod-frankfurt-headless:
   extends: .test
   stage: test
   tags:
@@ -160,9 +245,10 @@ test-prod-frankfurt:
     refs:
       - master
   variables:
-    URL: https://bedrock-prod.frankfurt.moz.works
+    BASE_URL: https://bedrock-prod.frankfurt.moz.works
+    TEST_SUITE: headless
 
-test-prod-gcp:
+test-prod-gcp-headless:
   extends: .test
   stage: test
   tags:
@@ -174,4 +260,5 @@ test-prod-gcp:
     refs:
       - master
   variables:
-    URL: https://bedrock-stage.gcp.moz.works
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: headless
