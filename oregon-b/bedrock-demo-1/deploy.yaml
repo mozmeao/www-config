@@ -1,0 +1,261 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "96"
+    kubernetes.io/change-cause: jenkins deployed mozorg/bedrock:demo-1-b5de3184c51c2244ed8f2a5f02473da6a0e48d1d
+  creationTimestamp: 2018-04-07T21:03:35Z
+  generation: 96
+  labels:
+    app: bedrock-demo-1
+    heritage: deis
+    type: cmd
+  name: bedrock-demo-1-cmd
+  namespace: bedrock-demo-1
+  resourceVersion: "7038682"
+  selfLink: /apis/extensions/v1beta1/namespaces/bedrock-demo-1/deployments/bedrock-demo-1-cmd
+  uid: 231de4e5-3aa7-11e8-8eeb-0656fabf84c0
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      app: bedrock-demo-1
+      heritage: deis
+      type: cmd
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bedrock-demo-1
+        heritage: deis
+        type: cmd
+        version: v100
+      name: bedrock-demo-1-cmd
+      namespace: bedrock-demo-1
+    spec:
+      containers:
+      - env:
+        - name: ALLOWED_HOSTS
+          valueFrom:
+            secretKeyRef:
+              key: allowed-hosts
+              name: bedrock-demo-1-v100-env
+        - name: CONTENT_CARDS_URL
+          valueFrom:
+            secretKeyRef:
+              key: content-cards-url
+              name: bedrock-demo-1-v100-env
+        - name: CSP_DEFAULT_SRC
+          valueFrom:
+            secretKeyRef:
+              key: csp-default-src
+              name: bedrock-demo-1-v100-env
+        - name: CSP_EXTRA_FRAME_SRC
+          valueFrom:
+            secretKeyRef:
+              key: csp-extra-frame-src
+              name: bedrock-demo-1-v100-env
+        - name: CSP_REPORT_ENABLE
+          valueFrom:
+            secretKeyRef:
+              key: csp-report-enable
+              name: bedrock-demo-1-v100-env
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: bedrock-demo-1-v100-env
+        - name: DB_CRON
+          valueFrom:
+            secretKeyRef:
+              key: db-cron
+              name: bedrock-demo-1-v100-env
+        - name: DB_DOWNLOAD_IGNORE_GIT
+          valueFrom:
+            secretKeyRef:
+              key: db-download-ignore-git
+              name: bedrock-demo-1-v100-env
+        - name: DEBUG
+          valueFrom:
+            secretKeyRef:
+              key: debug
+              name: bedrock-demo-1-v100-env
+        - name: DEIS_APP
+          valueFrom:
+            secretKeyRef:
+              key: deis-app
+              name: bedrock-demo-1-v100-env
+        - name: DEV
+          valueFrom:
+            secretKeyRef:
+              key: dev
+              name: bedrock-demo-1-v100-env
+        - name: DISABLE_SSL
+          valueFrom:
+            secretKeyRef:
+              key: disable-ssl
+              name: bedrock-demo-1-v100-env
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: bedrock-demo-1-v100-env
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: bedrock-demo-1-v100-env
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: bedrock-demo-1-v100-env
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: bedrock-demo-1-v100-env
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: bedrock-demo-1-v100-env
+        - name: ENABLE_CSP_MIDDLEWARE
+          valueFrom:
+            secretKeyRef:
+              key: enable-csp-middleware
+              name: bedrock-demo-1-v100-env
+        - name: FXA_IFRAME_SRC
+          valueFrom:
+            secretKeyRef:
+              key: fxa-iframe-src
+              name: bedrock-demo-1-v100-env
+        - name: GTM_CONTAINER_ID
+          valueFrom:
+            secretKeyRef:
+              key: gtm-container-id
+              name: bedrock-demo-1-v100-env
+        - name: HTTPS
+          valueFrom:
+            secretKeyRef:
+              key: https
+              name: bedrock-demo-1-v100-env
+        - name: L10N_CRON
+          valueFrom:
+            secretKeyRef:
+              key: l10n-cron
+              name: bedrock-demo-1-v100-env
+        - name: LOGLEVEL
+          valueFrom:
+            secretKeyRef:
+              key: loglevel
+              name: bedrock-demo-1-v100-env
+        - name: LOG_LEVEL
+          valueFrom:
+            secretKeyRef:
+              key: log-level
+              name: bedrock-demo-1-v100-env
+        - name: OPTIMIZELY_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              key: optimizely-project-id
+              name: bedrock-demo-1-v100-env
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: bedrock-demo-1-v100-env
+        - name: PROD_DETAILS_STORAGE
+          valueFrom:
+            secretKeyRef:
+              key: prod-details-storage
+              name: bedrock-demo-1-v100-env
+        - name: PROD_DETAILS_URL
+          valueFrom:
+            secretKeyRef:
+              key: prod-details-url
+              name: bedrock-demo-1-v100-env
+        - name: RUN_SUPERVISOR
+          valueFrom:
+            secretKeyRef:
+              key: run-supervisor
+              name: bedrock-demo-1-v100-env
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-demo-1-v100-env
+        - name: SECURE_SSL_REDIRECT
+          valueFrom:
+            secretKeyRef:
+              key: secure-ssl-redirect
+              name: bedrock-demo-1-v100-env
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              key: sentry-dsn
+              name: bedrock-demo-1-v100-env
+        - name: SWITCH_DISABLE_SHA1_DOWNLOADS
+          valueFrom:
+            secretKeyRef:
+              key: switch-disable-sha1-downloads
+              name: bedrock-demo-1-v100-env
+        - name: USE_SECURE_PROXY_HEADER
+          valueFrom:
+            secretKeyRef:
+              key: use-secure-proxy-header
+              name: bedrock-demo-1-v100-env
+        - name: WORKFLOW_RELEASE
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release
+              name: bedrock-demo-1-v100-env
+        - name: WORKFLOW_RELEASE_CREATED_AT
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release-created-at
+              name: bedrock-demo-1-v100-env
+        - name: WORKFLOW_RELEASE_SUMMARY
+          valueFrom:
+            secretKeyRef:
+              key: workflow-release-summary
+              name: bedrock-demo-1-v100-env
+        image: 127.0.0.1:5555/bedrock-demo-1:v100
+        imagePullPolicy: IfNotPresent
+        name: bedrock-demo-1-cmd
+        readinessProbe:
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 8000
+          timeoutSeconds: 5
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2019-10-01T20:26:20Z
+    lastUpdateTime: 2019-10-01T20:26:20Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 96
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
