@@ -151,19 +151,6 @@ test-demo5-firefox:
     BASE_URL: http://www-demo5.allizom.org
     TEST_SUITE: firefox
 
-test-demo5-firefox:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: firefox
-
 test-demo5-ie:
   extends: .test
   stage: test
