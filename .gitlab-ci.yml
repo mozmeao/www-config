@@ -20,55 +20,55 @@ stages:
   script:
     - bin/acceptance-tests.sh ${TEST_SUITE}
 
-deploy-demo1:
+deploy-demo-1:
   extends: .deploy
   only:
     changes:
-      - "oregon-b/bedrock-demo1/*"
+      - "oregon-b/bedrock-demo-1/*"
     refs:
       - master
   variables:
-    DEPLOYMENT: oregon-b/bedrock-demo1
+    DEPLOYMENT: oregon-b/bedrock-demo-1
 
-deploy-demo2:
+deploy-demo-2:
   extends: .deploy
   only:
     changes:
-      - "oregon-b/bedrock-demo2/*"
+      - "oregon-b/bedrock-demo-2/*"
     refs:
       - master
   variables:
-    DEPLOYMENT: oregon-b/bedrock-demo2
+    DEPLOYMENT: oregon-b/bedrock-demo-2
 
-deploy-demo3:
+deploy-demo-3:
   extends: .deploy
   only:
     changes:
-      - "oregon-b/bedrock-demo3/*"
+      - "oregon-b/bedrock-demo-3/*"
     refs:
       - master
   variables:
-    DEPLOYMENT: oregon-b/bedrock-demo3
+    DEPLOYMENT: oregon-b/bedrock-demo-3
 
-deploy-demo4:
+deploy-demo-4:
   extends: .deploy
   only:
     changes:
-      - "oregon-b/bedrock-demo4/*"
+      - "oregon-b/bedrock-demo-4/*"
     refs:
       - master
   variables:
-    DEPLOYMENT: oregon-b/bedrock-demo4
+    DEPLOYMENT: oregon-b/bedrock-demo-4
 
-deploy-demo5:
+deploy-demo-5:
   extends: .deploy
   only:
     changes:
-      - "oregon-b/bedrock-demo5/*"
+      - "oregon-b/bedrock-demo-5/*"
     refs:
       - master
   variables:
-    DEPLOYMENT: oregon-b/bedrock-demo5
+    DEPLOYMENT: oregon-b/bedrock-demo-5
 
 deploy-iowa-a-dev:
   extends: .deploy
