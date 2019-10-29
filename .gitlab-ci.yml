@@ -20,6 +20,56 @@ stages:
   script:
     - bin/acceptance-tests.sh ${TEST_SUITE}
 
+deploy-demo1:
+  extends: .deploy
+  only:
+    changes:
+      - "oregon-b/bedrock-demo1/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: oregon-b/bedrock-demo1
+
+deploy-demo2:
+  extends: .deploy
+  only:
+    changes:
+      - "oregon-b/bedrock-demo2/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: oregon-b/bedrock-demo2
+
+deploy-demo3:
+  extends: .deploy
+  only:
+    changes:
+      - "oregon-b/bedrock-demo3/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: oregon-b/bedrock-demo3
+
+deploy-demo4:
+  extends: .deploy
+  only:
+    changes:
+      - "oregon-b/bedrock-demo4/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: oregon-b/bedrock-demo4
+
+deploy-demo5:
+  extends: .deploy
+  only:
+    changes:
+      - "oregon-b/bedrock-demo5/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: oregon-b/bedrock-demo5
+
 deploy-iowa-a-dev:
   extends: .deploy
   only:
