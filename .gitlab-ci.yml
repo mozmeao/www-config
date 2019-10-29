@@ -243,9 +243,84 @@ test-prod-gcp-headless:
     - meao
   only:
     changes:
-      - "iowa-*/bedrock-stage/*"
+      - "iowa-*/bedrock-prod/*"
     refs:
       - master
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     TEST_SUITE: headless
+
+test-prod-gcp-chrome:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: chrome
+
+test-prod-gcp-firefox:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: firefox
+
+test-prod-gcp-ie:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: ie
+
+test-prod-gcp-ie9:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: ie9
+
+test-prod-gcp-download:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    TEST_SUITE: download
