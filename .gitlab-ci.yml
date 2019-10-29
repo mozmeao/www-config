@@ -8,7 +8,7 @@ stages:
     - meao
   script:
     - kubectl apply -f ${DEPLOYMENT}
-    - ./rollout-status.sh ${DEPLOYMENT}
+    - bin/rollout-status.sh ${DEPLOYMENT}
 
 .test:
   stage: test
@@ -20,6 +20,46 @@ stages:
   script:
     - bin/acceptance-tests.sh ${URL}
 
+deploy-iowa-a-dev:
+  extends: .deploy
+  only:
+    changes:
+      - "iowa-a/bedrock-dev/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: iowa-a/bedrock-dev
+
+deploy-iowa-b-dev:
+  extends: .deploy
+  only:
+    changes:
+      - "iowa-b/bedrock-dev/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: iowa-b/bedrock-dev
+
+deploy-iowa-a-stage:
+  extends: .deploy
+  only:
+    changes:
+      - "iowa-a/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: iowa-a/bedrock-stage
+
+deploy-iowa-b-stage:
+  extends: .deploy
+  only:
+    changes:
+      - "iowa-b/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    DEPLOYMENT: iowa-b/bedrock-stage
+
 test-demo1:
   extends: .test
   stage: test
@@ -28,6 +68,110 @@ test-demo1:
     - meao
   only:
     refs:
-      - gitlab-demo1
+      - test-demo1
   variables:
     URL: http://www-demo1.allizom.org
+
+test-demo2:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo2
+  variables:
+    URL: http://www-demo2.allizom.org
+
+test-demo3:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo3
+  variables:
+    URL: http://www-demo3.allizom.org
+
+test-demo4:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo4
+  variables:
+    URL: http://www-demo4.allizom.org
+
+test-demo5:
+  extends: .test
+  stage: test
+  tags:
+    - aws
+    - meao
+  only:
+    refs:
+      - test-demo5
+  variables:
+    URL: http://www-demo5.allizom.org
+
+test-dev:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-dev/*"
+    refs:
+      - master
+  variables:
+    URL: https://bedrock-dev.gcp.moz.works
+
+test-stage:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    URL: https://bedrock-stage.gcp.moz.works
+
+test-prod-frankfurt:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "frankfurt/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    URL: https://bedrock-prod.frankfurt.moz.works
+
+test-prod-gcp:
+  extends: .test
+  stage: test
+  tags:
+    - gcp
+    - meao
+  only:
+    changes:
+      - "iowa-*/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    URL: https://bedrock-stage.gcp.moz.works
