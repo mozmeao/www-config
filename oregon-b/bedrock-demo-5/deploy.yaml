@@ -255,7 +255,7 @@ spec:
             secretKeyRef:
               key: workflow-release-summary
               name: bedrock-demo-5-v67-env
-        image: 127.0.0.1:5555/bedrock-demo-5:v67
+        image: mozorg/bedrock:master-b514cd2952cbfaeeb3c7f77b7534e37126cf7eb1
         imagePullPolicy: IfNotPresent
         name: bedrock-demo-5-cmd
         readinessProbe:
