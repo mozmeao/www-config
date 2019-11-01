@@ -489,3 +489,17 @@ test-prod-gcp-download:
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     TEST_SUITE: download
+
+test-prod-iowa-b-headless:
+  stage: test
+  tags:
+    - iowa-b
+  image: mozorg/bedrock_test
+  variables:
+    MARK_EXPRESSION: headless
+    BASE_URL: https://www.mozilla.org
+  only:
+    refs:
+      - gitlab-ci-iowa-b
+  script:
+    - bin/run-integration-tests.sh
