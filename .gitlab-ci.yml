@@ -490,16 +490,46 @@ test-prod-gcp-download:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     TEST_SUITE: download
 
-test-prod-iowa-b-headless:
+.test-prod-iowa-b:
   stage: test
   tags:
     - iowa-b
   image: mozorg/bedrock_test
   variables:
-    MARK_EXPRESSION: headless
+    DRIVER: Saucelabs
+    MARK_EXPRESSION: not headless and not download
     BASE_URL: https://www.mozilla.org
   only:
     refs:
       - gitlab-ci-iowa-b
   script:
-    - cd /app && bin/run-integration-tests.sh
+    - cd /app
+    - bin/run-integration-tests.sh
+
+test-prod-iowa-b-headless:
+  extends: .test-prod-iowa-b
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: headless
+
+test-prod-iowa-b-firefox:
+  extends: .test-prod-iowa-b
+  variables:
+    BROWSER_NAME: firefox
+    BROWSER_VERSION: "57.0"
+    PLATFORM: Windows 10
+
+test-prod-iowa-b-chrome:
+  extends: .test-prod-iowa-b
+  variables:
+    DRIVER: Saucelabs
+    BROWSER_NAME: chrome
+    PLATFORM: Windows 10
+
+test-prod-iowa-b-ie:
+  extends: .test-prod-iowa-b
+  variables:
+    DRIVER: Saucelabs
+    MARK_EXPRESSION:
+    BROWSER_NAME: internet explorer
+    PLATFORM: Windows 10
