@@ -530,6 +530,5 @@ test-prod-iowa-b-ie:
   extends: .test-prod-iowa-b
   variables:
     DRIVER: Saucelabs
-    MARK_EXPRESSION:
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
