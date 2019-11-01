@@ -475,21 +475,6 @@ test-prod-gcp-ie9:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     TEST_SUITE: ie9
 
-test-prod-gcp-download:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: download
-
 .test-prod-iowa-b:
   stage: test
   tags:
@@ -530,3 +515,45 @@ test-prod-iowa-b-ie:
   variables:
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
+
+test-prod-iowa-b-download:
+  extends: .test-prod-iowa-b
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: download
+
+.test-prod-oregon-a:
+  extends: .test-prod-iowa-b
+  tags:
+    - oregon-a
+
+test-prod-oregon-a-headless:
+  extends: .test-prod-oregon-a
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: headless
+
+test-prod-oregon-a-firefox:
+  extends: .test-prod-oregon-a
+  variables:
+    BROWSER_NAME: firefox
+    BROWSER_VERSION: "57.0"
+    PLATFORM: Windows 10
+
+test-prod-oregon-a-chrome:
+  extends: .test-prod-oregon-a
+  variables:
+    BROWSER_NAME: chrome
+    PLATFORM: Windows 10
+
+test-prod-oregon-a-ie:
+  extends: .test-prod-oregon-a
+  variables:
+    BROWSER_NAME: internet explorer
+    PLATFORM: Windows 10
+
+test-prod-oregon-a-download:
+  extends: .test-prod-oregon-a
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: download
