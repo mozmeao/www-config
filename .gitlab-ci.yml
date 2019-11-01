@@ -502,4 +502,4 @@ test-prod-iowa-b-headless:
     refs:
       - gitlab-ci-iowa-b
   script:
-    - bin/run-integration-tests.sh
+    - /app/bin/run-integration-tests.sh
