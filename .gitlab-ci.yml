@@ -496,7 +496,7 @@ test-prod-gcp-download:
     - iowa-b
   image: mozorg/bedrock_test
   variables:
-    DRIVER: Saucelabs
+    DRIVER: SauceLabs
     MARK_EXPRESSION: not headless and not download
     BASE_URL: https://www.mozilla.org
   only:
@@ -522,13 +522,11 @@ test-prod-iowa-b-firefox:
 test-prod-iowa-b-chrome:
   extends: .test-prod-iowa-b
   variables:
-    DRIVER: Saucelabs
     BROWSER_NAME: chrome
     PLATFORM: Windows 10
 
 test-prod-iowa-b-ie:
   extends: .test-prod-iowa-b
   variables:
-    DRIVER: Saucelabs
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
