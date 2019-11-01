@@ -526,6 +526,9 @@ test-prod-iowa-b-download:
   extends: .test-prod-iowa-b
   tags:
     - oregon-a
+  only:
+    refs:
+      - gitlab-ci-oregon-a
 
 test-prod-oregon-a-headless:
   extends: .test-prod-oregon-a
