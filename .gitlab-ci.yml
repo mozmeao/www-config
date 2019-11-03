@@ -10,7 +10,7 @@ stages:
     - kubectl apply -f ${DEPLOYMENT}
     - bin/rollout-status.sh ${DEPLOYMENT}
 
-.test:
+.test-docker:
   stage: test
   tags:
     - meao
@@ -120,7 +120,7 @@ deploy-iowa-b-stage:
     DEPLOYMENT: iowa-b/bedrock-stage
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-b.kubeconfig
 
-test-demo1-headless:
+test-demo1-oregon-a-eadless:
   extends: .test
   stage: test
   tags:
@@ -522,41 +522,91 @@ test-prod-iowa-b-download:
     DRIVER: ""
     MARK_EXPRESSION: download
 
-.test-prod-oregon-a:
-  extends: .test-prod-iowa-b
+
+.test-oregon-a:
+  stage: test
   tags:
     - oregon-a
   only:
     refs:
       - gitlab-ci-oregon-a
+  image: mozorg/bedrock_test
+  script:
+    - cd /app
+    - bin/run-integration-tests.sh
 
-test-prod-oregon-a-headless:
-  extends: .test-prod-oregon-a
+.test-oregon-a-headless:
+  extends: .test-oregon-a
   variables:
     DRIVER: ""
     MARK_EXPRESSION: headless
 
-test-prod-oregon-a-firefox:
-  extends: .test-prod-oregon-a
+.test-oregon-a-firefox:
+  extends: .test-oregon-a
   variables:
     BROWSER_NAME: firefox
     BROWSER_VERSION: "57.0"
     PLATFORM: Windows 10
 
-test-prod-oregon-a-chrome:
-  extends: .test-prod-oregon-a
+.test-oregon-a-chrome:
+  extends: .test-oregon-a
   variables:
     BROWSER_NAME: chrome
     PLATFORM: Windows 10
 
-test-prod-oregon-a-ie:
-  extends: .test-prod-oregon-a
+.test-oregon-a-ie:
+  extends: .test-oregon-a
   variables:
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
 
-test-prod-oregon-a-download:
-  extends: .test-prod-oregon-a
+.test-oregon-a-download:
+  extends: .test-oregon-a
   variables:
     DRIVER: ""
     MARK_EXPRESSION: download
+
+test-oregon-a-headless-gcp-dev:
+  extends: .test-oregon-a-headless
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+
+test-oregon-a-headless-gcp-dev:
+  extends: .test-oregon-a-headless
+  only:
+    changes:
+      - "iowa*/bedrock-dev/*"
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+
+test-oregon-a-download-gcp-dev:
+  extends: .test-oregon-a-download
+  only:
+    changes:
+      - "iowa*/bedrock-dev/*"
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+
+test-oregon-a-ie-gcp-dev:
+  extends: .test-oregon-a-ie
+  only:
+    changes:
+      - "iowa*/bedrock-dev/*"
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+
+test-oregon-a-firefox-gcp-dev:
+  extends: .test-oregon-a-firefox
+  only:
+    changes:
+      - "iowa*/bedrock-dev/*"
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+
+test-oregon-a-chrome-gcp-dev:
+  extends: .test-chrome-a-firefox
+  only:
+    changes:
+      - "iowa*/bedrock-dev/*"
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
