@@ -82,8 +82,6 @@ stages:
   only:
     changes:
       - "iowa-a/bedrock-dev/*"
-    refs:
-      - master
   variables:
     BASE_URL: http://www-dev.allizom.org
     DEPLOYMENT: iowa-a/bedrock-dev
@@ -101,11 +99,11 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
 
 .prod-iowa-a:
-  only:
-    changes:
-      - "iowa-a/bedrock-prod/*"
-    refs:
-      - master
+#  only:
+#    changes:
+#      - "iowa-a/bedrock-prod/*"
+#    refs:
+#      - master
   variables:
     BASE_URL: https://bedrock-prod.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-prod
@@ -128,10 +126,6 @@ stages:
   script:
     - cd /app
     - bin/run-integration-tests.sh
-  only:
-    refs:
-      - master
-      - gitlab-ci
 
 .test-headless:
   extends: .test-oregon-a
@@ -144,14 +138,10 @@ stages:
   extends: .test
   tags:
     - iowa-b
-  only:
-    refs:
-      - master
 
 # test from runner in oregon-a
 .test-oregon-a:
   extends: .test
-  stage: test
   tags:
     - oregon-a
 
