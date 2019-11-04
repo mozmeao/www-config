@@ -126,6 +126,9 @@ stages:
   script:
     - cd /app
     - bin/run-integration-tests.sh
+  variables:
+    DRIVER: SauceLabs
+    MARK_EXPRESSION: not headless and not download
 
 .test-headless:
   extends: .test-oregon-a
@@ -301,29 +304,36 @@ prod-iowa-a-test-ie9:
     - .test-ie9
 
 #stage-deploy:
-#  extends: .stage
-#  extends: .deploy
-#
-#stage-test-chrome:
-#  extends: .stage
-#  extends: .test-chrome
-#
-#stage-test-download:
-#  extends: .stage
-#  extends: .test-download
-#
-#stage-test-firefox:
-#  extends: .stage
-#  extends: .test-firefox
-#
-#stage-test-headless:
-#  extends: .stage
-#  extends: .test-headless
-#
-#stage-test-ie:
-#  extends: .stage
-#  extends: .test-ie
-#
-#stage-test-ie9:
-#  extends: .stage
-#  extends: .test-ie9
+#  extends:
+#    - .stage
+#    - .deploy
+
+stage-test-chrome:
+  extends:
+    - .stage
+    - .test-chrome
+
+stage-test-download:
+  extends:
+    - .stage
+    - .test-download
+
+stage-test-firefox:
+  extends:
+    - .stage
+    - .test-firefox
+
+stage-test-headless:
+  extends:
+    - .stage
+    - .test-headless
+
+stage-test-ie:
+  extends:
+    - .stage
+    - .test-ie
+
+stage-test-ie9:
+  extends:
+    - .stage
+    - .test-ie9
