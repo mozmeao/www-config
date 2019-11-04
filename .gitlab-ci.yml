@@ -188,93 +188,93 @@ stages:
     DRIVER: ""
     MARK_EXPRESSION: download
 
-demo1-deploy:
-  extends: .demo1
-  extends: .deploy
-
-demo1-test-headless:
-  extends: .demo1
-  extends: .test-headless
-
-demo2-deploy:
-  extends: .demo2
-  extends: .deploy
-
-demo2-test-headless:
-  extends: .demo2
-  extends: .test-headless
-
-demo3-deploy:
-  extends: .demo3
-  extends: .deploy
-
-demo3-test-headless:
-  extends: .demo3
-  extends: .test-headless
-
-demo4-deploy:
-  extends: .demo4
-  extends: .deploy
-
-demo4-test-headless:
-  extends: .demo4
-  extends: .test-headless
-
-demo5-deploy:
-  extends: .demo5
-  extends: .deploy
-
-demo5-test-chrome:
-  extends: .demo5
-  extends: .test-chrome
-
-demo5-test-download:
-  extends: .demo5
-  extends: .test-download
-
-demo5-test-firefox:
-  extends: .demo5
-  extends: .test-firefox
-
-demo5-test-headless:
-  extends: .demo5
-  extends: .test-headless
-
-demo5-test-ie:
-  extends: .demo5
-  extends: .test-ie
-
-demo5-test-ie9:
-  extends: .demo5
-  extends: .test-ie9
-
-dev-deploy:
-  extends: .dev
-  extends: .deploy
-
-dev-test-chrome:
-  extends: .dev
-  extends: .test-chrome
-
-dev-test-download:
-  extends: .dev
-  extends: .test-download
-
-dev-test-firefox:
-  extends: .dev
-  extends: .test-firefox
-
-dev-test-headless:
-  extends: .dev
-  extends: .test-headless
-
-dev-test-ie:
-  extends: .dev
-  extends: .test-ie
-
-prod-frankfurt-deploy:
-  extends: .prod-frankfurt
-  extends: .deploy
+#demo1-deploy:
+#  extends: .demo1
+#  extends: .deploy
+#
+#demo1-test-headless:
+#  extends: .demo1
+#  extends: .test-headless
+#
+#demo2-deploy:
+#  extends: .demo2
+#  extends: .deploy
+#
+#demo2-test-headless:
+#  extends: .demo2
+#  extends: .test-headless
+#
+#demo3-deploy:
+#  extends: .demo3
+#  extends: .deploy
+#
+#demo3-test-headless:
+#  extends: .demo3
+#  extends: .test-headless
+#
+#demo4-deploy:
+#  extends: .demo4
+#  extends: .deploy
+#
+#demo4-test-headless:
+#  extends: .demo4
+#  extends: .test-headless
+#
+#demo5-deploy:
+#  extends: .demo5
+#  extends: .deploy
+#
+#demo5-test-chrome:
+#  extends: .demo5
+#  extends: .test-chrome
+#
+#demo5-test-download:
+#  extends: .demo5
+#  extends: .test-download
+#
+#demo5-test-firefox:
+#  extends: .demo5
+#  extends: .test-firefox
+#
+#demo5-test-headless:
+#  extends: .demo5
+#  extends: .test-headless
+#
+#demo5-test-ie:
+#  extends: .demo5
+#  extends: .test-ie
+#
+#demo5-test-ie9:
+#  extends: .demo5
+#  extends: .test-ie9
+#
+#dev-deploy:
+#  extends: .dev
+#  extends: .deploy
+#
+#dev-test-chrome:
+#  extends: .dev
+#  extends: .test-chrome
+#
+#dev-test-download:
+#  extends: .dev
+#  extends: .test-download
+#
+#dev-test-firefox:
+#  extends: .dev
+#  extends: .test-firefox
+#
+#dev-test-headless:
+#  extends: .dev
+#  extends: .test-headless
+#
+#dev-test-ie:
+#  extends: .dev
+#  extends: .test-ie
+#
+#prod-frankfurt-deploy:
+#  extends: .prod-frankfurt
+#  extends: .deploy
 
 prod-frankfurt-test-headless:
   extends: .prod-frankfurt
@@ -300,30 +300,30 @@ prod-iowa-a-test-ie9:
   extends: .prod-iowa-a
   extends: .test-ie9
 
-stage-deploy:
-  extends: .stage
-  extends: .deploy
-
-stage-test-chrome:
-  extends: .stage
-  extends: .test-chrome
-
-stage-test-download:
-  extends: .stage
-  extends: .test-download
-
-stage-test-firefox:
-  extends: .stage
-  extends: .test-firefox
-
-stage-test-headless:
-  extends: .stage
-  extends: .test-headless
-
-stage-test-ie:
-  extends: .stage
-  extends: .test-ie
-
-stage-test-ie9:
-  extends: .stage
-  extends: .test-ie9
+#stage-deploy:
+#  extends: .stage
+#  extends: .deploy
+#
+#stage-test-chrome:
+#  extends: .stage
+#  extends: .test-chrome
+#
+#stage-test-download:
+#  extends: .stage
+#  extends: .test-download
+#
+#stage-test-firefox:
+#  extends: .stage
+#  extends: .test-firefox
+#
+#stage-test-headless:
+#  extends: .stage
+#  extends: .test-headless
+#
+#stage-test-ie:
+#  extends: .stage
+#  extends: .test-ie
+#
+#stage-test-ie9:
+#  extends: .stage
+#  extends: .test-ie9
