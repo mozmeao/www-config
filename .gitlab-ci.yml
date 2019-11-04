@@ -1,16 +1,4 @@
-stages:
-  - deploy
-  - test
-
-.deploy:
-  stage: deploy
-  tags:
-    - meao
-  script:
-    - kubectl apply -f ${DEPLOYMENT}
-    - bin/rollout-status.sh ${DEPLOYMENT}
-
-.test-docker:
+.acceptance-tests:
   stage: test
   tags:
     - meao
@@ -20,593 +8,327 @@ stages:
   script:
     - bin/acceptance-tests.sh ${TEST_SUITE}
 
-deploy-demo-1:
-  extends: .deploy
+.demo1:
   only:
     changes:
       - "oregon-b/bedrock-demo-1/*"
     refs:
       - master
+      - gitlab-ci
   variables:
+    BASE_URL: http://www-demo1.allizom.org
     DEPLOYMENT: oregon-b/bedrock-demo-1
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
-deploy-demo-2:
-  extends: .deploy
+.demo2:
   only:
     changes:
       - "oregon-b/bedrock-demo-2/*"
     refs:
       - master
+      - gitlab-ci
   variables:
+    BASE_URL: http://www-demo2.allizom.org
     DEPLOYMENT: oregon-b/bedrock-demo-2
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
-deploy-demo-3:
-  extends: .deploy
+.demo3:
   only:
     changes:
       - "oregon-b/bedrock-demo-3/*"
     refs:
       - master
+      - gitlab-ci
   variables:
+    BASE_URL: http://www-demo3.allizom.org
     DEPLOYMENT: oregon-b/bedrock-demo-3
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
-deploy-demo-4:
-  extends: .deploy
+.demo4:
   only:
     changes:
       - "oregon-b/bedrock-demo-4/*"
     refs:
       - master
+      - gitlab-ci
   variables:
+    BASE_URL: http://www-demo4.allizom.org
     DEPLOYMENT: oregon-b/bedrock-demo-4
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
-deploy-demo-5:
-  extends: .deploy
-  only:
+.demo5:
     changes:
       - "oregon-b/bedrock-demo-5/*"
     refs:
       - master
       - gitlab-ci
   variables:
+    BASE_URL: http://www-demo5.allizom.org
     DEPLOYMENT: oregon-b/bedrock-demo-5
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
-deploy-iowa-a-dev:
+.deploy:
+  stage: deploy
+  tags:
+    - meao
+  script:
+    - kubectl apply -f ${DEPLOYMENT}
   extends: .deploy
-  only:
+    - bin/rollout-status.sh ${DEPLOYMENT}
+
+.dev:
     changes:
       - "iowa-a/bedrock-dev/*"
     refs:
+      - gitlab-ci
       - master
   variables:
+    BASE_URL: http://www-dev.allizom.org
     DEPLOYMENT: iowa-a/bedrock-dev
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
-deploy-iowa-a-stage:
-  extends: .deploy
+.prod-frankfurt:
+  only:
+    changes:
+      - "frankfurt/bedrock-prod/*"
+    refs:
+      - gitlab-ci
+      - master
+  variables:
+    BASE_URL: https://bedrock-prod.frankfurt.moz.works
+    DEPLOYMENT: frankfurt/bedrock-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+
+.prod-iowa-a:
+  only:
+    changes:
+      - "iowa-a/bedrock-prod/*"
+    refs:
+      - gitlab-ci
+      - master
+  variables:
+    BASE_URL: https://bedrock-prod.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
+.stage:
   only:
     changes:
       - "iowa-a/bedrock-stage/*"
     refs:
       - master
+      - gitlab-ci
   variables:
-    DEPLOYMENT: iowa-a/bedrock-stage
+    BASE_URL: https://www.allizom.org
+    DEPLOYMENT: iowa-a/bedrock-dev
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
-deploy-iowa-b-dev:
-  extends: .deploy
+.test:
+  stage: test
   only:
-    changes:
-      - "iowa-b/bedrock-dev/*"
     refs:
+      - gitlab-ci
       - master
-  variables:
-    DEPLOYMENT: iowa-b/bedrock-dev
-    KUBECONFIG: /home/gitlab-runner/.kube/iowa-b.kubeconfig
-
-deploy-iowa-b-stage:
-  extends: .deploy
-  only:
-    changes:
-      - "iowa-b/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    DEPLOYMENT: iowa-b/bedrock-stage
-    KUBECONFIG: /home/gitlab-runner/.kube/iowa-b.kubeconfig
-
-test-demo1-oregon-a-eadless:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo1
-  variables:
-    BASE_URL: http://www-demo1.allizom.org
-    TEST_SUITE: headless
-
-test-demo2-headless:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo2
-  variables:
-    BASE_URL: http://www-demo2.allizom.org
-    TEST_SUITE: headless
-
-test-demo3-headless:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo3
-  variables:
-    BASE_URL: http://www-demo3.allizom.org
-    TEST_SUITE: headless
-
-test-demo4-headless:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo4
-  variables:
-    BASE_URL: http://www-demo4.allizom.org
-    TEST_SUITE: headless
-
-test-demo5-headless:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: headless
-
-test-demo5-chrome:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: chrome
-
-test-demo5-firefox:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: firefox
-
-test-demo5-ie:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: ie
-
-test-demo5-ie9:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: ie9
-
-test-demo5-download:
-  extends: .test
-  stage: test
-  tags:
-    - aws
-    - meao
-  only:
-    refs:
-      - test-demo5
-  variables:
-    BASE_URL: http://www-demo5.allizom.org
-    TEST_SUITE: download
-
-test-dev-headless:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-dev/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
-    TEST_SUITE: headless
-
-test-dev-download:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-dev/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
-    TEST_SUITE: download
-
-test-dev-firefox:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-dev/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
-    TEST_SUITE: firefox
-
-test-stage-gcp-headless:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: headless
-
-test-stage-gcp-chrome:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: chrome
-
-test-stage-gcp-firefox:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: firefox
-
-test-stage-gcp-ie:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: ie
-
-test-stage-gcp-ie9:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: ie9
-
-test-stage-gcp-download:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-stage/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: download
-
-test-prod-frankfurt-headless:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "frankfurt/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-prod.frankfurt.moz.works
-    TEST_SUITE: headless
-
-test-prod-gcp-headless:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: headless
-
-test-prod-gcp-chrome:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: chrome
-
-test-prod-gcp-firefox:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: firefox
-
-test-prod-gcp-ie:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: ie
-
-test-prod-gcp-ie9:
-  extends: .test
-  stage: test
-  tags:
-    - gcp
-    - meao
-  only:
-    changes:
-      - "iowa-*/bedrock-prod/*"
-    refs:
-      - master
-  variables:
-    BASE_URL: https://bedrock-stage.gcp.moz.works
-    TEST_SUITE: ie9
-
-.test-prod-iowa-b:
-  stage: test
-  tags:
-    - iowa-b
   image: mozorg/bedrock_test
-  variables:
-    DRIVER: SauceLabs
-    MARK_EXPRESSION: not headless and not download
-    BASE_URL: https://www.mozilla.org
-  only:
-    refs:
-      - gitlab-ci-iowa-b
   script:
     - cd /app
     - bin/run-integration-tests.sh
 
-test-prod-iowa-b-headless:
-  extends: .test-prod-iowa-b
+.test-headless:
+  extends: .test-oregon-a
   variables:
     DRIVER: ""
     MARK_EXPRESSION: headless
 
-test-prod-iowa-b-firefox:
-  extends: .test-prod-iowa-b
-  variables:
-    BROWSER_NAME: firefox
-    BROWSER_VERSION: "57.0"
-    PLATFORM: Windows 10
+# test from runner in iowa-b
+.test-iowa-b:
+  extends: .test
+  tags:
+    - iowa-b
+  only:
+    refs:
+      - gitlab-ci-oregon-a
 
-test-prod-iowa-b-chrome:
-  extends: .test-prod-iowa-b
-  variables:
-    BROWSER_NAME: chrome
-    PLATFORM: Windows 10
-
-test-prod-iowa-b-ie:
-  extends: .test-prod-iowa-b
-  variables:
-    BROWSER_NAME: internet explorer
-    PLATFORM: Windows 10
-
-test-prod-iowa-b-download:
-  extends: .test-prod-iowa-b
-  variables:
-    DRIVER: ""
-    MARK_EXPRESSION: download
-
-
+# test from runner in oregon-a
 .test-oregon-a:
+  extends: .test
   stage: test
   tags:
     - oregon-a
   only:
     refs:
+      - gitlab-ci
       - gitlab-ci-oregon-a
-  image: mozorg/bedrock_test
-  script:
-    - cd /app
-    - bin/run-integration-tests.sh
 
-.test-oregon-a-headless:
+.test-headless-oregon-a:
+  extends: .test-headless
   extends: .test-oregon-a
-  variables:
-    DRIVER: ""
-    MARK_EXPRESSION: headless
 
-.test-oregon-a-firefox:
+.test-firefox:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: firefox
     BROWSER_VERSION: "57.0"
     PLATFORM: Windows 10
 
-.test-oregon-a-chrome:
+.test-chrome:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: chrome
     PLATFORM: Windows 10
 
-.test-oregon-a-ie:
+.test-ie:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
 
-.test-oregon-a-download:
+.test-download:
   extends: .test-oregon-a
   variables:
     DRIVER: ""
     MARK_EXPRESSION: download
 
-test-oregon-a-headless-gcp-dev:
-  extends: .test-oregon-a-headless
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo1-deploy:
+  extends: .demo1
+  extends: .deploy
 
-test-oregon-a-headless-gcp-dev:
-  extends: .test-oregon-a-headless
-  only:
-    changes:
-      - "iowa*/bedrock-dev/*"
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo1-test-headless:
+  extends: .demo1
+  extends: .test-headless
 
-test-oregon-a-download-gcp-dev:
-  extends: .test-oregon-a-download
-  only:
-    changes:
-      - "iowa*/bedrock-dev/*"
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo2-deploy:
+  extends: .demo2
+  extends: .deploy
 
-test-oregon-a-ie-gcp-dev:
-  extends: .test-oregon-a-ie
-  only:
-    changes:
-      - "iowa*/bedrock-dev/*"
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo2-test-headless:
+  extends: .demo2
+  extends: .test-headless
 
-test-oregon-a-firefox-gcp-dev:
-  extends: .test-oregon-a-firefox
-  only:
-    changes:
-      - "iowa*/bedrock-dev/*"
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo3-deploy:
+  extends: .demo3
+  extends: .deploy
 
-test-oregon-a-chrome-gcp-dev:
-  extends: .test-chrome-a-firefox
-  only:
-    changes:
-      - "iowa*/bedrock-dev/*"
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
+demo3-test-headless:
+  extends: .demo3
+  extends: .test-headless
+
+demo4-deploy:
+  extends: .demo4
+  extends: .deploy
+
+demo4-test-headless:
+  extends: .demo4
+  extends: .test-headless
+
+demo5-deploy:
+  extends: .demo5
+  extends: .deploy
+
+demo5-test-chrome:
+  extends: .demo5
+  extends: .test-chrome
+
+demo5-test-download:
+  extends: .demo5
+  extends: .test-download
+
+demo5-test-firefox:
+  extends: .demo5
+  extends: .test-firefox
+
+demo5-test-headless:
+  extends: .demo5
+  extends: .test-headless
+
+demo5-test-ie:
+  extends: .demo5
+  extends: .test-ie
+
+demo5-test-ie9:
+  extends: .demo5
+  extends: .test-ie9
+
+dev-deploy:
+  extends: .dev
+  extends: .deploy
+
+dev-test-chrome:
+  extends: .dev
+  extends: .test-chrome
+
+dev-test-download:
+  extends: .dev
+  extends: .test-download
+
+dev-test-firefox:
+  extends: .dev
+  extends: .test-firefox
+
+dev-test-headless:
+  extends: .dev
+  extends: .test-headless
+
+dev-test-ie:
+  extends: .dev
+  extends: .test-ie
+
+prod-frankfurt-deploy:
+  extends: .prod-frankfurt
+  extends: .deploy
+
+prod-frankfurt-test-headless:
+  extends: .prod-frankfurt
+  extends: .test-headless
+
+prod-iowa-a-test-chrome:
+  extends: .prod-iowa-a
+  extends: .test-chrome
+
+prod-iowa-a-test-firefox:
+  extends: .prod-iowa-a
+  extends: .test-firefox
+
+prod-iowa-a-test-headless:
+  extends: .prod-iowa-a
+  extends: .test-headless
+
+prod-iowa-a-test-ie:
+  extends: .prod-iowa-a
+  extends: .test-ie
+
+prod-iowa-a-test-ie9:
+  extends: .prod-iowa-a
+  extends: .test-ie9
+
+stage-deploy:
+  extends: .stage
+  extends: .deploy
+
+stage-test-chrome:
+  extends: .stage
+  extends: .test-chrome
+
+stage-test-download:
+  extends: .stage
+  extends: .test-download
+
+stage-test-firefox:
+  extends: .stage
+  extends: .test-firefox
+
+stage-test-headless:
+  extends: .stage
+  extends: .test-headless
+
+stage-test-ie:
+  extends: .stage
+  extends: .test-ie
+
+stage-test-ie9:
+  extends: .stage
+  extends: .test-ie9
+
+stages:
+  - deploy
+  - test
