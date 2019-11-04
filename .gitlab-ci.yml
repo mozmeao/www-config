@@ -78,7 +78,6 @@ stages:
     - meao
   script:
     - kubectl apply -f ${DEPLOYMENT}
-  extends: .deploy
     - bin/rollout-status.sh ${DEPLOYMENT}
 
 .dev:
@@ -187,6 +186,13 @@ stages:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: internet explorer
+    PLATFORM: Windows 10
+
+.test-ie9:
+  extends: .test-oregon-a
+  variables:
+    BROWSER_NAME: internet explorer
+    BROWSER_VERSION: "9.0"
     PLATFORM: Windows 10
 
 .test-download:
