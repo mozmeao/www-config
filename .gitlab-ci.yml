@@ -1,3 +1,7 @@
+stages:
+  - deploy
+  - test
+
 .acceptance-tests:
   stage: test
   tags:
@@ -328,7 +332,3 @@ stage-test-ie:
 stage-test-ie9:
   extends: .stage
   extends: .test-ie9
-
-stages:
-  - deploy
-  - test
