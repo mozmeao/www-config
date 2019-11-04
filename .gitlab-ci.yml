@@ -61,6 +61,7 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
 
 .demo5:
+  only:
     changes:
       - "oregon-b/bedrock-demo-5/*"
     refs:
@@ -81,6 +82,7 @@ stages:
     - bin/rollout-status.sh ${DEPLOYMENT}
 
 .dev:
+  only:
     changes:
       - "iowa-a/bedrock-dev/*"
     refs:
