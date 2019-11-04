@@ -124,10 +124,6 @@ stages:
 
 .test:
   stage: test
-  only:
-    refs:
-      - gitlab-ci
-      - master
   image: mozorg/bedrock_test
   script:
     - cd /app
@@ -163,13 +159,14 @@ stages:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: firefox
-    BROWSER_VERSION: "57.0"
+    BROWSER_VERSION: latest
     PLATFORM: Windows 10
 
 .test-chrome:
   extends: .test-oregon-a
   variables:
     BROWSER_NAME: chrome
+    BROWSER_VERSION: latest
     PLATFORM: Windows 10
 
 .test-ie:
