@@ -277,28 +277,34 @@ stages:
 #  extends: .deploy
 
 prod-frankfurt-test-headless:
-  extends: .prod-frankfurt
-  extends: .test-headless
+  extends:
+    - .prod-frankfurt
+    - .test-headless
 
 prod-iowa-a-test-chrome:
-  extends: .prod-iowa-a
-  extends: .test-chrome
+  extends:
+    - .prod-iowa-a
+    - .test-chrome
 
 prod-iowa-a-test-firefox:
-  extends: .prod-iowa-a
-  extends: .test-firefox
+  extends:
+    - .prod-iowa-a
+    - .test-firefox
 
 prod-iowa-a-test-headless:
-  extends: .prod-iowa-a
-  extends: .test-headless
+  extends:
+    - .prod-iowa-a
+    - .test-headless
 
 prod-iowa-a-test-ie:
-  extends: .prod-iowa-a
-  extends: .test-ie
+  extends:
+    - .prod-iowa-a
+    - .test-ie
 
 prod-iowa-a-test-ie9:
-  extends: .prod-iowa-a
-  extends: .test-ie9
+  extends:
+    - .prod-iowa-a
+    - .test-ie9
 
 #stage-deploy:
 #  extends: .stage
