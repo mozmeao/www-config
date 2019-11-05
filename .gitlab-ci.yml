@@ -177,6 +177,7 @@ stages:
     BROWSER_NAME: internet explorer
     BROWSER_VERSION: "9.0"
     PLATFORM: Windows 7
+    MARK_EXPRESSION: sanity
 
 .test-download:
   extends: .test-oregon-a
