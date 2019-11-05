@@ -287,7 +287,7 @@ dev-test-headless:
 dev-test-ie:
   extends:
     - .dev
-    -.test-ie
+    - .test-ie
 
 #prod-frankfurt-deploy:
 #  extends: .prod-frankfurt
