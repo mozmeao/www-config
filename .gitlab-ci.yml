@@ -171,50 +171,50 @@ stages:
     DRIVER: ""
     MARK_EXPRESSION: download
 
-demo1-deploy:
-  extends:
-    - .demo1
-    - .deploy
+#demo1-deploy:
+#  extends:
+#    - .demo1
+#    - .deploy
 
 demo1-test-headless:
   extends:
     - .demo1
     - .test-headless
 
-demo2-deploy:
-  extends:
-    - .demo2
-    - .deploy
+#demo2-deploy:
+#  extends:
+#    - .demo2
+#    - .deploy
 
 demo2-test-headless:
   extends:
     - .demo2
     - .test-headless
 
-demo3-deploy:
-  extends:
-    - .demo3
-    - .deploy
+#demo3-deploy:
+#  extends:
+#    - .demo3
+#    - .deploy
 
 demo3-test-headless:
   extends:
     - .demo3
     - .test-headless
 
-demo4-deploy:
-  extends:
-    - .demo4
-    - .deploy
+#demo4-deploy:
+#  extends:
+#    - .demo4
+#    - .deploy
 
 demo4-test-headless:
   extends:
     - .demo4
     - .test-headless
 
-demo5-deploy:
-  extends:
-    - .demo5
-    - .deploy
+#demo5-deploy:
+#  extends:
+#    - .demo5
+#    - .deploy
 
 demo5-test-chrome:
   extends:
@@ -246,10 +246,10 @@ demo5-test-ie9:
     - .demo5
     - .test-ie9
 
-dev-deploy:
-  extends:
-    - .dev
-    - .deploy
+#dev-deploy:
+#  extends:
+#    - .dev
+#    - .deploy
 
 dev-test-chrome:
   extends:
@@ -276,10 +276,10 @@ dev-test-ie:
     - .dev
     - .test-ie
 
-prod-frankfurt-deploy:
-  extends:
-    - .prod-frankfurt
-    - .deploy
+#prod-frankfurt-deploy:
+#  extends:
+#    - .prod-frankfurt
+#    - .deploy
 
 prod-frankfurt-test-headless:
   extends:
@@ -311,10 +311,10 @@ prod-iowa-a-test-ie9:
     - .prod-iowa-a
     - .test-ie9
 
-stage-deploy:
-  extends:
-    - .stage
-    - .deploy
+#stage-deploy:
+#  extends:
+#    - .stage
+#    - .deploy
 
 stage-test-chrome:
   extends:
