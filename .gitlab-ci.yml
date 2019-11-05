@@ -2,16 +2,6 @@ stages:
   - deploy
   - test
 
-.acceptance-tests:
-  stage: test
-  tags:
-    - meao
-  retry:
-    max: 1
-    when: always
-  script:
-    - bin/acceptance-tests.sh ${TEST_SUITE}
-
 .demo1:
   only:
     changes:
@@ -98,11 +88,11 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
 
 .prod-iowa-a:
-#  only:
-#    changes:
-#      - "iowa-a/bedrock-prod/*"
-#    refs:
-#      - master
+  only:
+    changes:
+      - "iowa-a/bedrock-prod/*"
+    refs:
+      - master
   variables:
     BASE_URL: https://bedrock-prod.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-prod
@@ -146,10 +136,6 @@ stages:
   extends: .test
   tags:
     - oregon-a
-
-.test-headless-oregon-a:
-  extends: .test-headless
-  extends: .test-oregon-a
 
 .test-firefox:
   extends: .test-oregon-a
@@ -290,9 +276,10 @@ dev-test-ie:
     - .dev
     - .test-ie
 
-#prod-frankfurt-deploy:
-#  extends: .prod-frankfurt
-#  extends: .deploy
+prod-frankfurt-deploy:
+  extends:
+    - .prod-frankfurt
+    - .deploy
 
 prod-frankfurt-test-headless:
   extends:
