@@ -32,6 +32,7 @@ case $1 in
         ;;
 esac
 
+docker pull mozorg/bedrock_test
 docker run --rm \
     -e "DRIVER=${DRIVER}" \
     -e "SAUCELABS_USERNAME=${SAUCELABS_USERNAME}" \
