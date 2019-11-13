@@ -8,7 +8,7 @@ case $1 in
         ;;
     firefox)
         BROWSER_NAME=firefox
-        BROWSER_VERSION="57.0"
+        BROWSER_VERSION=latest
         PLATFORM="Windows 10"
         ;;
     ie)
