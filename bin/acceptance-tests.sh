@@ -4,6 +4,7 @@
 case $1 in
     chrome)
         BROWSER_NAME=chrome
+        BROWSER_VERSION=latest
         PLATFORM="Windows 10"
         ;;
     firefox)
