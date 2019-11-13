@@ -1,0 +1,117 @@
+stages:
+  - deploy
+  - test
+
+.default-test-variables:
+  variables:
+    DRIVER: SauceLabs
+    MARK_EXPRESSION: not headless and not download
+
+.deploy:
+  script:
+    - kubectl apply -f ${DEPLOYMENT}
+    - bin/rollout-status.sh ${DEPLOYMENT}
+  stage: deploy
+  tags:
+    - iowa-c # shell runner with iowa-a.kubeconfig via IAM role
+  variables:
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
+.dev:
+  only:
+    changes:
+      - "iowa-a/bedrock-dev/*"
+    refs:
+      - master
+      - gitlab-ci-dev
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
+.test-k8s:
+  image: mozorg/bedrock_test
+  script:
+    - cd /app
+    - bin/run-integration-tests.sh
+
+.test-shell:
+  script: bin/acceptance-tests.sh
+
+.test:
+  stage: test
+  extends:
+    - .default-test-variables
+    - .test-shell
+  tags:
+    - oregon-b-shell
+
+.test-chrome:
+  extends: .test
+  variables:
+    BROWSER_NAME: chrome
+    BROWSER_VERSION: latest
+    PLATFORM: Windows 10
+
+.test-download:
+  extends: .test
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: download
+
+.test-firefox:
+  extends: .test
+  variables:
+    BROWSER_NAME: firefox
+    BROWSER_VERSION: latest
+    PLATFORM: Windows 10
+
+.test-headless:
+  extends: .test
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: headless
+
+.test-ie:
+  extends: .test
+  variables:
+    BROWSER_NAME: internet explorer
+    PLATFORM: Windows 10
+
+.test-ie9:
+  extends: .test
+  variables:
+    BROWSER_NAME: internet explorer
+    BROWSER_VERSION: "9.0"
+    PLATFORM: Windows 7
+    MARK_EXPRESSION: sanity
+
+dev-deploy:
+  extends:
+    - .dev
+    - .deploy
+
+dev-test-chrome:
+  extends:
+    - .dev
+    - .test-chrome
+
+dev-test-download:
+  extends:
+    - .dev
+    - .test-download
+
+dev-test-firefox:
+  extends:
+    - .dev
+    - .test-firefox
+
+dev-test-headless:
+  extends:
+    - .dev
+    - .test-headless
+
+dev-test-ie:
+  extends:
+    - .dev
+    - .test-ie
