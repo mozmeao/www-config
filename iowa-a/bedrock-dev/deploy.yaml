@@ -171,7 +171,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-dev-secrets
-        image: mozorg/bedrock:HEAD-87e708ff7df46ccea4f3e0abc44e351ebaa98836
+        image: mozorg/bedrock:HEAD-f4472bfb1460a1cbb21d7451ac96de8ddaad3335
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-web
         ports:
