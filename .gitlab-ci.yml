@@ -18,6 +18,7 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 .demo:
+  when: manual
   only:
     variables:
       - $DEMO
