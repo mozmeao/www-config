@@ -17,6 +17,11 @@ stages:
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
+.demo:
+  only:
+    variables:
+      - $DEMO
+
 .dev:
   only:
     changes:
@@ -114,4 +119,29 @@ dev-test-headless:
 dev-test-ie:
   extends:
     - .dev
+    - .test-ie
+
+demo-test-chrome:
+  extends:
+    - .demo
+    - .test-chrome
+
+demo-test-download:
+  extends:
+    - .demo
+    - .test-download
+
+demo-test-firefox:
+  extends:
+    - .demo
+    - .test-firefox
+
+demo-test-headless:
+  extends:
+    - .demo
+    - .test-headless
+
+demo-test-ie:
+  extends:
+    - .demo
     - .test-ie
