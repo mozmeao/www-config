@@ -20,7 +20,7 @@ stages:
 .demo:
   only:
     variables:
-      - $DEMO
+      - $BASE_URL
 
 .dev:
   only:
