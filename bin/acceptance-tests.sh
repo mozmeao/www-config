@@ -42,4 +42,4 @@ docker run --rm \
     -e "PLATFORM=${PLATFORM}" \
     -e "MARK_EXPRESSION=${MARK_EXPRESSION}" \
     -e "BASE_URL=${BASE_URL}" \
-    mozorg/bedrock_test:${TEST_IMAGE_TAG:=latest} bin/run-integration-tests.sh
+    ${TEST_IMAGE:=mozorg/bedrock_test} bin/run-integration-tests.sh
