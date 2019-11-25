@@ -2,6 +2,10 @@ stages:
   - deploy
   - test
 
+.base-url:
+  rules:
+    if: $BASE_URL
+
 .default-test-variables:
   variables:
     DRIVER: SauceLabs
@@ -18,11 +22,6 @@ stages:
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
-.demo:
-  only:
-    variables:
-      - $BASE_URL
-
 .dev:
   only:
     changes:
@@ -36,7 +35,7 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 .test-k8s:
-  image: $TEST_IMAGE
+  image: mozorg/bedrock_test
   script:
     - cd /app
     - bin/run-integration-tests.sh
@@ -92,6 +91,31 @@ stages:
     PLATFORM: Windows 7
     MARK_EXPRESSION: sanity
 
+base-url-test-chrome:
+  extends:
+    - .base-url
+    - .test-chrome
+
+base-url-test-download:
+  extends:
+    - .base-url
+    - .test-download
+
+base-url-test-firefox:
+  extends:
+    - .base-url
+    - .test-firefox
+
+base-url-test-headless:
+  extends:
+    - .base-url
+    - .test-headless
+
+base-url-test-ie:
+  extends:
+    - .base-url
+    - .test-ie
+
 dev-deploy:
   extends:
     - .dev
@@ -120,39 +144,4 @@ dev-test-headless:
 dev-test-ie:
   extends:
     - .dev
-    - .test-ie
-
-demo-test-chrome:
-  extends:
-    - .demo
-    - .test-chrome
-
-demo-test-download:
-  extends:
-    - .demo
-    - .test-download
-
-demo-test-firefox:
-  extends:
-    - .demo
-    - .test-firefox
-
-demo-test-headless:
-  extends:
-    - .demo
-    - .test-headless
-
-demo-test-headless-oregon-a:
-  extends:
-    - .demo
-    - .test-k8s
-  variables:
-    DRIVER: ""
-    MARK_EXPRESSION: headless
-  tags:
-    - oregon-a
-
-demo-test-ie:
-  extends:
-    - .demo
     - .test-ie

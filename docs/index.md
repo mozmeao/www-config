@@ -11,7 +11,8 @@ these is waffle switches and funnelcake configuration. These can be loaded from 
 settings, but we can distribute said settings to our running instances via the database update process. This is why
 we've separated these values into separate files.
 
-Static configurations are currently stored in the cluster-name directories in the `git-sync-operator` branch in this repo, but that will soon change. So for now if a change to a static configuration is needed please ask for help in the `#meao-infra` channel on Slack.
+Static configurations are currently stored in the directories named after the cluster and namespace (e.g. [iowa-a/bedrock-dev](https://github.com/mozmeao/www-config/tree/master/iowa-a/bedrock-dev)).
+
 
 ## Quick Start
 
@@ -33,3 +34,14 @@ The configurations are in the `waffle_configs` directory in the repo. They are s
 Deleting a variable is simply deleting the line from the file. The full list of configurations are refreshed every time for those values.
 
 [Bedrock]: https://github.com/mozilla/bedrock
+
+## Testing
+
+Any commit that triggers a deployment to our dev, staging, or prod environments will also trigger a suite of test jobs configured in [.gitlab-ci.yml](https://github.com/mozmeao/www-config/blob/master/.gitlab-ci.yml). That file also specifies a number of jobs to be run if a pipeline provided a BASE_URL, which we can use to test independent of deployment.
+- visit https://gitlab.com/mozmeao/www-config/pipelines/new
+- by default the `master` branch is populated
+- add a `BASE_URL` variable and value (example: https://www-demo1.allizom.org)
+- By default the latest bedrock_test image is used for the tests
+  - this can be overridden by adding a `TEST_IMAGE` variable
+  - example: mozorg/bedrock_test:096fb7dd6a588dee093557ebe57bcc151d893462
+    - see [bedrock_test tags](https://hub.docker.com/r/mozorg/bedrock_test/tags) for a current list
