@@ -3,8 +3,9 @@ stages:
   - test
 
 .base-url:
-  rules:
-    if: $BASE_URL
+  only:
+    variables:
+      - $BASE_URL
 
 .default-test-variables:
   variables:
