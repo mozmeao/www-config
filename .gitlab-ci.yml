@@ -2,10 +2,16 @@ stages:
   - deploy
   - test
 
+.base-url:
+  only:
+    variables:
+      - $BASE_URL
+
 .default-test-variables:
   variables:
     DRIVER: SauceLabs
     MARK_EXPRESSION: not headless and not download
+    TEST_IMAGE: mozorg/bedrock_test
 
 .deploy:
   script:
@@ -85,6 +91,31 @@ stages:
     BROWSER_VERSION: "9.0"
     PLATFORM: Windows 7
     MARK_EXPRESSION: sanity
+
+base-url-test-chrome:
+  extends:
+    - .base-url
+    - .test-chrome
+
+base-url-test-download:
+  extends:
+    - .base-url
+    - .test-download
+
+base-url-test-firefox:
+  extends:
+    - .base-url
+    - .test-firefox
+
+base-url-test-headless:
+  extends:
+    - .base-url
+    - .test-headless
+
+base-url-test-ie:
+  extends:
+    - .base-url
+    - .test-ie
 
 dev-deploy:
   extends:
