@@ -142,6 +142,16 @@ demo-test-headless:
     - .demo
     - .test-headless
 
+demo-test-headless-oregon-a:
+  extends:
+    - .demo
+    - .test-k8s
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: headless
+  tags:
+    - oregon-a
+
 demo-test-ie:
   extends:
     - .demo
