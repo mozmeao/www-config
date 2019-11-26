@@ -35,6 +35,28 @@ stages:
     DEPLOYMENT: iowa-a/bedrock-dev
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
+.prod-frankfurt:
+  only:
+    changes:
+      - "frankfurt/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-prod.gcp.moz.works
+    DEPLOYMENT: frankfurt/bedrock-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+
+.prod-iowa-a:
+  only:
+    changes:
+      - "iowa-a/bedrock-prod/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-prod.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-prod
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
 .stage:
   only:
     changes:
@@ -157,6 +179,51 @@ dev-test-ie:
   extends:
     - .dev
     - .test-ie
+
+prod-frankfurt-deploy:
+  extends:
+    - .prod-frankfurt
+    - .deploy
+
+prod-frankfurt-test-headless:
+  extends:
+    - .prod-frankfurt
+    - .test-headless
+
+prod-iowa-a-deploy:
+  extends:
+    - .prod-iowa-a
+    - .deploy
+
+prod-iowa-a-test-chrome:
+  extends:
+    - .prod-iowa-a
+    - .test-chrome
+
+prod-iowa-a-test-download:
+  extends:
+    - .prod-iowa-a
+    - .test-download
+
+prod-iowa-a-test-firefox:
+  extends:
+    - .prod-iowa-a
+    - .test-firefox
+
+prod-iowa-a-test-headless:
+  extends:
+    - .prod-iowa-a
+    - .test-headless
+
+prod-iowa-a-test-ie:
+  extends:
+    - .prod-iowa-a
+    - .test-ie
+
+prod-iowa-a-test-ie9:
+  extends:
+    - .prod-iowa-a
+    - .test-ie9
 
 stage-deploy:
   extends:
