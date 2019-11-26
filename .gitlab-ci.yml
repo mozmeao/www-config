@@ -41,6 +41,10 @@ stages:
       - "frankfurt/bedrock-prod/*"
     refs:
       - master
+  tags:
+    # override tags to use runner-0 in frankfurt
+    - meao
+    - aws
   variables:
     BASE_URL: https://bedrock-prod.frankfurt.moz.works
     DEPLOYMENT: frankfurt/bedrock-prod
@@ -182,17 +186,13 @@ dev-test-ie:
 
 prod-frankfurt-deploy:
   extends:
-    - .prod-frankfurt
     - .deploy
+    - .prod-frankfurt  # needs to come second to override tags & variables
 
 prod-frankfurt-test-headless:
   extends:
-    - .prod-frankfurt
     - .test-headless
-  tags:
-    # override tags to use runner-0 in frankfurt
-    - meao
-    - aws
+    - .prod-frankfurt
 
 prod-iowa-a-deploy:
   extends:
