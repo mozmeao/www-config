@@ -187,3 +187,8 @@ stage-test-ie:
   extends:
     - .stage
     - .test-ie
+
+stage-test-ie9:
+  extends:
+    - .stage
+    - .test-ie9
