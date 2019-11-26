@@ -42,7 +42,7 @@ stages:
     refs:
       - master
   variables:
-    BASE_URL: https://bedrock-prod.gcp.moz.works
+    BASE_URL: https://bedrock-prod.frankfurt.moz.works
     DEPLOYMENT: frankfurt/bedrock-prod
     KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
 
