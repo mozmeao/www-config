@@ -35,6 +35,17 @@ stages:
     DEPLOYMENT: iowa-a/bedrock-dev
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
+.stage:
+  only:
+    changes:
+      - "iowa-a/bedrock-stage/*"
+    refs:
+      - master
+  variables:
+    BASE_URL: https://bedrock-stage.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-stage
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
 .test-k8s:
   image: mozorg/bedrock_test
   script:
@@ -145,4 +156,34 @@ dev-test-headless:
 dev-test-ie:
   extends:
     - .dev
+    - .test-ie
+
+stage-deploy:
+  extends:
+    - .stage
+    - .deploy
+
+stage-test-chrome:
+  extends:
+    - .stage
+    - .test-chrome
+
+stage-test-download:
+  extends:
+    - .stage
+    - .test-download
+
+stage-test-firefox:
+  extends:
+    - .stage
+    - .test-firefox
+
+stage-test-headless:
+  extends:
+    - .stage
+    - .test-headless
+
+stage-test-ie:
+  extends:
+    - .stage
     - .test-ie
