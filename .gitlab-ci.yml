@@ -189,6 +189,10 @@ prod-frankfurt-test-headless:
   extends:
     - .prod-frankfurt
     - .test-headless
+  tags:
+    # override tags to use runner-0 in frankfurt
+    - meao
+    - aws
 
 prod-iowa-a-deploy:
   extends:
