@@ -40,7 +40,9 @@ Deleting a variable is simply deleting the line from the file. The full list of 
 Any commit that triggers a deployment to our dev, staging, or prod environments will also trigger a suite of test jobs configured in [.gitlab-ci.yml](https://github.com/mozmeao/www-config/blob/master/.gitlab-ci.yml). That file also specifies a number of jobs to be run if a pipeline provided a BASE_URL, which we can use to test independent of deployment.
 - visit https://gitlab.com/mozmeao/www-config/pipelines/new
 - by default the `master` branch is populated
-- add a `BASE_URL` variable and value (example: https://www-demo1.allizom.org)
+- Add a new variable: 
+  - **Input variable key** is `BASE_URL`
+  - **Input variable value** should be equal to the URL you want to run the tests against (example: https://www-demo1.allizom.org)
 - By default the latest bedrock_test image is used for the tests
   - this can be overridden by adding a `TEST_IMAGE` variable
   - example: mozorg/bedrock_test:096fb7dd6a588dee093557ebe57bcc151d893462
