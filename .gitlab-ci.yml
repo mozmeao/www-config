@@ -12,7 +12,7 @@ stages:
     DRIVER: SauceLabs
     MARK_EXPRESSION: not headless and not download
     TEST_IMAGE: mozorg/bedrock_test
-    PYTEST_XDIST_WORKER_COUNT: "4"
+    PYTEST_PROCESSES: "4"
 
 .deploy:
   script:

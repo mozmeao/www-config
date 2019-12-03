@@ -10,4 +10,5 @@ docker run --rm \
     -e "PLATFORM=${PLATFORM}" \
     -e "MARK_EXPRESSION=${MARK_EXPRESSION}" \
     -e "BASE_URL=${BASE_URL}" \
+    -e "PYTEST_PROCESSES=${PYTEST_PROCESSES:=4}" \
     ${TEST_IMAGE:=mozorg/bedrock_test} bin/run-integration-tests.sh
