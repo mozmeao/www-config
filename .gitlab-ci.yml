@@ -30,6 +30,8 @@ stages:
     refs:
       - master
       - gitlab-ci-dev
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
   variables:
     BASE_URL: https://bedrock-dev.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-dev
@@ -41,6 +43,8 @@ stages:
       - "frankfurt/bedrock-prod/*"
     refs:
       - master
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
   tags:
     # override tags to use runner-0 in frankfurt
     - meao
@@ -56,6 +60,8 @@ stages:
       - "iowa-a/bedrock-prod/*"
     refs:
       - master
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
   variables:
     BASE_URL: https://bedrock-prod.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-prod
@@ -67,6 +73,8 @@ stages:
       - "iowa-a/bedrock-stage/*"
     refs:
       - master
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-stage
