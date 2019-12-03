@@ -1,37 +1,5 @@
 #!/bin/bash -ex
 
-
-case $1 in
-    chrome)
-        BROWSER_NAME=chrome
-        BROWSER_VERSION=latest
-        PLATFORM="Windows 10"
-        ;;
-    firefox)
-        BROWSER_NAME=firefox
-        BROWSER_VERSION=latest
-        PLATFORM="Windows 10"
-        ;;
-    ie)
-        BROWSER_NAME="internet explorer"
-        PLATFORM="Windows 10"
-        ;;
-    ie9)
-        BROWSER_NAME="internet explorer"
-        BROWSER_VERSION="9.0"
-        PLATFORM="Windows 7"
-        MARK_EXPRESSION=sanity
-        ;;
-    download)
-        DRIVER=
-        MARK_EXPRESSION=download
-        ;;
-    headless|*)
-        DRIVER=
-        MARK_EXPRESSION=headless
-        ;;
-esac
-
 docker pull mozorg/bedrock_test
 docker run --rm \
     -e "DRIVER=${DRIVER}" \
