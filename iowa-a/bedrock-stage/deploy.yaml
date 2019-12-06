@@ -14,7 +14,7 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 3
+      maxSurge: 5
       maxUnavailable: 0
     type: RollingUpdate
   template:
