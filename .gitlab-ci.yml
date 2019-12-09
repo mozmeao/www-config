@@ -55,6 +55,22 @@ stages:
     DEPLOYMENT: frankfurt/bedrock-prod
     KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
 
+.oregon-b-test:
+  only:
+    changes:
+      - "oregon-b/bedrock-test/*"
+    refs:
+      - master
+      - bedrock-test
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
+  tags:
+    - oregon-b-shell
+  variables:
+    BASE_URL: https://bedrock-test.moz.works
+    DEPLOYMENT: oregon-b/bedrock-test
+    KUBECONFIG: /home/gitlab-runner/.kube/oregon-b.kubeconfig
+
 .prod-iowa-a:
   only:
     changes:
@@ -191,6 +207,36 @@ dev-test-headless:
 dev-test-ie:
   extends:
     - .dev
+    - .test-ie
+
+oregon-b-test-deploy:
+  extends:
+    - .deploy
+    - .oregon-b-test
+
+oregon-b-test-chrome:
+  extends:
+    - .oregon-b-test
+    - .test-chrome
+
+oregon-b-test-download:
+  extends:
+    - .oregon-b-test
+    - .test-download
+
+oregon-b-test-firefox:
+  extends:
+    - .oregon-b-test
+    - .test-firefox
+
+oregon-b-test-headless:
+  extends:
+    - .oregon-b-test
+    - .test-headless
+
+oregon-b-test-ie:
+  extends:
+    - .oregon-b-test
     - .test-ie
 
 prod-frankfurt-deploy:
