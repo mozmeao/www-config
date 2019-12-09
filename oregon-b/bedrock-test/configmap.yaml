@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: bedrock-test-configmap
+    namespace: bedrock-test
+data:
+    NEW_RELIC_APP_NAME: bedrock-test-orgeon-b;bedrock-test
+    # TODO: DEPRECATE DEIS_DOMAIN IN FAVOR OF CLUSTER_NAME
+    DEIS_DOMAIN: gcp.moz.works
+    CLUSTER_NAME: oregon-b
