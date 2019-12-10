@@ -7,7 +7,7 @@ metadata:
   name: bedrock-test-web
   namespace: bedrock-test
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: bedrock-test
@@ -109,7 +109,7 @@ spec:
               key: sentry-dsn
               name: bedrock-test-secrets
         - name: STATIC_URL
-          value: "https://www-dev.allizom.org/media/"
+          value: "https://bedrock-test.moz.works/media/"
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
