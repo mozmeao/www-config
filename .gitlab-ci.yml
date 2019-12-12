@@ -23,6 +23,7 @@ stages:
     - iowa-c # shell runner with iowa-a.kubeconfig via IAM role
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+  retry: 2
 
 .dev:
   only:
