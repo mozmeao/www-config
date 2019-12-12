@@ -114,6 +114,7 @@ stages:
     - .test-shell
   tags:
     - oregon-b-shell
+  retry: 1
 
 .test-chrome:
   extends: .test
