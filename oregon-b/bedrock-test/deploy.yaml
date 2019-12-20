@@ -114,7 +114,7 @@ spec:
           value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
-        image: mozorg/bedrock:run-integration-tests-2ba639267ee88bbdb9da18abb521f211452653bf
+        image: mozorg/bedrock:run-integration-tests-38222c0618bf78964daf3fee7f18b0dbe24af5eb
         imagePullPolicy: IfNotPresent
         name: bedrock-test-web
         ports:
