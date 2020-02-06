@@ -209,7 +209,7 @@ spec:
               name: bedrock-stage-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozorg/bedrock:stage-1e53e7fb2f7e36e98c3220599a2ff04230945075
+        image: mozorg/bedrock:stage-53212f146556181a48d9fdeec49dd2dfd1ab6885
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-clock
         resources:
