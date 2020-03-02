@@ -179,7 +179,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-dev-secrets
-        image: mozorg/bedrock:master-c672efd6c8d0858faec17e020f03b4f5a63089d5
+        image: mozorg/bedrock:master-8f96738ade6f971436fe64ae0391850cb00508fc
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-clock
         resources:
