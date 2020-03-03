@@ -7,6 +7,7 @@ metadata:
   name: bedrock-prod-web
   namespace: bedrock-prod
 spec:
+  progressDeadlineSeconds: 900
   replicas: 50
   selector:
     matchLabels:
@@ -14,8 +15,8 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 5
-      maxUnavailable: 0
+      maxSurge: 10
+      maxUnavailable: "25%"
     type: RollingUpdate
   template:
     metadata:
