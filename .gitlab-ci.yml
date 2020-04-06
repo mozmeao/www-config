@@ -11,7 +11,7 @@ stages:
   variables:
     DRIVER: SauceLabs
     MARK_EXPRESSION: not headless and not download
-    TEST_IMAGE: mozorg/bedrock_test:0a6a72bad5c64894b417db057d68c079cae14011
+    TEST_IMAGE: mozorg/bedrock_test:acc232e038ad2396e3b8dfac7ae6f487edff219d
     PYTEST_PROCESSES: "4"
 
 .deploy:
@@ -99,7 +99,7 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 .test-k8s:
-  image: mozorg/bedrock_test:0a6a72bad5c64894b417db057d68c079cae14011
+  image: mozorg/bedrock_test:acc232e038ad2396e3b8dfac7ae6f487edff219d
   script:
     - cd /app
     - bin/run-integration-tests.sh
