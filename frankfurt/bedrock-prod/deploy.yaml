@@ -195,7 +195,7 @@ spec:
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozorg/bedrock:prod-4cda444f9872f2146bdf1ee1c334f014ca988313
+        image: mozorg/bedrock:prod-b4926e3937ffe13dc1dbde266dd3c3492494b648
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
         ports:
