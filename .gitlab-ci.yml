@@ -48,8 +48,7 @@ stages:
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   tags:
-    # override tags to use runner-0 in frankfurt
-    - meao
+    - mozmeao
     - aws
   variables:
     BASE_URL: https://bedrock-prod.frankfurt.moz.works
@@ -66,7 +65,8 @@ stages:
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   tags:
-    - oregon-b-shell
+    - mozmeao
+    - aws
   variables:
     BASE_URL: https://bedrock-test.moz.works
     DEPLOYMENT: oregon-b/bedrock-test
@@ -113,7 +113,8 @@ stages:
     - .default-test-variables
     - .test-shell
   tags:
-    - oregon-b-shell
+    - mozmeao
+    - aws
   retry: 1
 
 .test-chrome:
