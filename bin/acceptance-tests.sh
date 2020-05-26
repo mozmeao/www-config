@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-docker pull ${TEST_IMAGE:=mozorg/bedrock_test}
+docker pull ${TEST_IMAGE:=mozmeao/bedrock_test}
 docker run --rm \
     -e "DRIVER=${DRIVER}" \
     -e "SAUCELABS_USERNAME=${SAUCELABS_USERNAME}" \

@@ -46,6 +46,6 @@ Any commit that triggers a deployment to our dev, staging, or prod environments 
     - **Input variable value** should be equal to the URL you want to run the tests against (example: https://www-demo1.allizom.org)
   - By default the latest bedrock_test image is used for the tests
     - this can be overridden by adding a `TEST_IMAGE` variable
-    - example: mozorg/bedrock_test:096fb7dd6a588dee093557ebe57bcc151d893462
-      - see [bedrock_test tags](https://hub.docker.com/r/mozorg/bedrock_test/tags) for a current list
+    - example: mozmeao/bedrock_test:096fb7dd6a588dee093557ebe57bcc151d893462
+      - see [bedrock_test tags](https://hub.docker.com/r/mozmeao/bedrock_test/tags) for a current list
       - Custom images can be built by pushing to the `build-test` branch of bedrock as of [mozilla/bedrock#8286](https://github.com/mozilla/bedrock/pull/8286)

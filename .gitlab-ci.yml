@@ -99,7 +99,7 @@ stages:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 .test-k8s:
-  image: mozorg/bedrock_test:a3152a155330fab157441d852bc3bd9a87e521c1
+  image: mozmeao/bedrock_test:a3152a155330fab157441d852bc3bd9a87e521c1
   script:
     - cd /app
     - bin/run-integration-tests.sh
