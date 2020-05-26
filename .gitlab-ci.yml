@@ -11,7 +11,7 @@ stages:
   variables:
     DRIVER: SauceLabs
     MARK_EXPRESSION: not headless and not download
-    TEST_IMAGE: mozorg/bedrock_test:a3152a155330fab157441d852bc3bd9a87e521c1
+    TEST_IMAGE: mozmeao/bedrock_test:8512ac882b7287fbd98f3682610bf5df3193c5db
     PYTEST_PROCESSES: "4"
 
 .deploy:
