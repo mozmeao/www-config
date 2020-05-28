@@ -121,7 +121,7 @@ spec:
           - containerPort: 8000
         livenessProbe:
           failureThreshold: 4
-          initialDelaySeconds: 5
+          initialDelaySeconds: 20
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 5
@@ -131,7 +131,7 @@ spec:
             port: 8000
         readinessProbe:
           failureThreshold: 1
-          initialDelaySeconds: 5
+          initialDelaySeconds: 20
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 5
