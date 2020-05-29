@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: bedrock-dev-data
+  namespace: bedrock-dev
+  labels:
+    k8s-app: bedrock-dev-data
+spec:
+  selector:
+    matchLabels:
+      name: bedrock-dev-data
+  template:
+    metadata:
+      labels:
+        name: bedrock-dev-data
+    spec:
+      containers:
+      - name: bedrock-dev-data
+        image: mozmeao/bedrock:328900f9531651120e1b66df071c7795f714fa72
+        imagePullPolicy: IfNotPresent
+        args:
+          - ./bin/run-file-clock.sh
+        command:
+          - /bin/bash
+          - -c
+        env:
+          - name: AWS_DB_S3_BUCKET
+            value: bedrock-db-dev
+          - name: CLUSTER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: bedrock-dev-configmap
+                key: CLUSTER_NAME
+          - name: DEBUG
+            value: "False"
+          - name: DEV
+            value: "True"
+          - name: LOGLEVEL
+            value: info
+          - name: NEW_RELIC_APP_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: bedrock-dev-configmap
+                key: NEW_RELIC_APP_NAME
+          - name: NEW_RELIC_LICENSE_KEY
+            valueFrom:
+              secretKeyRef:
+                key: new-relic-license-key
+                name: bedrock-dev-secrets
+          - name: PROD
+            value: "True"
+          - name: RUN_SUPERVISOR
+            value: "False"
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secret-key
+                name: bedrock-dev-secrets
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                key: sentry-dsn
+                name: bedrock-dev-secrets
+          - name: STATSD_CLIENT
+            value: django_statsd.clients.normal
+        resources:
+          limits:
+            cpu: 1500m
+            memory: 1000Mi
+          requests:
+            cpu: 750m
+            memory: 600Mi
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        hostPath:
+          path: /var/lib/bedrock/data/dev
