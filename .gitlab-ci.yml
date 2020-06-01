@@ -214,6 +214,11 @@ dev-test-headless:
     - .dev
     - .test-headless
 
+dev-test-edge:
+  extends:
+    - .dev
+    - .test-edge
+
 dev-test-ie:
   extends:
     - .dev
