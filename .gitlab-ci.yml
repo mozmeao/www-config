@@ -146,7 +146,7 @@ stages:
 .test-edge:
   extends: .test
   variables:
-    BROWSER_NAME: edge
+    BROWSER_NAME: MicrosoftEdge
     BROWSER_VERSION: latest
     PLATFORM: Windows 10
 
