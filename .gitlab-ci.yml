@@ -254,7 +254,7 @@ oregon-b-test-ie:
     - .oregon-b-test
     - .test-ie
 
- oregon-b-test-ie9:
+oregon-b-test-ie9:
   extends:
     - .oregon-b-test
     - .test-ie9
