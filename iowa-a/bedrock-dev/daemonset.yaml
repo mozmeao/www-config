@@ -24,6 +24,8 @@ spec:
           - /bin/bash
           - -c
         env:
+          - name: DATA_PATH
+            value: local-data
           - name: AWS_DB_S3_BUCKET
             value: bedrock-db-dev
           - name: CLUSTER_NAME
