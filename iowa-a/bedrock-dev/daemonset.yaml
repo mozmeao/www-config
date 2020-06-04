@@ -74,6 +74,9 @@ spec:
         - name: data
           mountPath: /app/data
       terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
       volumes:
       - name: data
         hostPath:
