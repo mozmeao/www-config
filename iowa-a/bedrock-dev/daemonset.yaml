@@ -82,4 +82,4 @@ spec:
       volumes:
       - name: data
         hostPath:
-          path: /var/lib/bedrock/data/dev
+          path: /var/lib/bedrock-dev/data
