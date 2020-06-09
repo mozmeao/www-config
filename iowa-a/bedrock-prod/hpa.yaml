@@ -8,7 +8,7 @@ metadata:
   namespace: bedrock-prod
 spec:
   maxReplicas: 100
-  minReplicas: 45
+  minReplicas: 40
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
