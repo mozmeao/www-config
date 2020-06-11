@@ -25,6 +25,10 @@ spec:
         type: web
       name: bedrock-dev-web
       namespace: bedrock-dev
+      annotations:
+        prometheus.io/path: "/prometheus/metrics"
+        prometheus.io/port: "8000"
+        prometheus.io/scrape: "true"
     spec:
       containers:
       - args:
