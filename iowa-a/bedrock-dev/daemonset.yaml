@@ -67,14 +67,15 @@ spec:
             value: django_statsd.clients.normal
         resources:
           limits:
-            cpu: 1500m
-            memory: 1000Mi
+            cpu: 350m
+            memory: 250Mi
           requests:
-            cpu: 750m
-            memory: 600Mi
+            cpu: 200m
+            memory: 150Mi
         volumeMounts:
         - name: data
           mountPath: /app/data
+      priorityClassName: high-priority-preempting
       terminationGracePeriodSeconds: 30
       securityContext:
         runAsUser: 0
