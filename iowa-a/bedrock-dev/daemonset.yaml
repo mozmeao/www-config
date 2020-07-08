@@ -32,7 +32,7 @@ spec:
                 name: bedrock-dev-configmap
                 key: CLUSTER_NAME
           - name: DB_DOWNLOAD_IGNORE_GIT
-            value: "True"
+            value: "False"
           - name: DEBUG
             value: "False"
           - name: DEV
