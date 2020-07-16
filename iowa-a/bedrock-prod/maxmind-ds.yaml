@@ -43,6 +43,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /usr/share/GeoIP
+      priorityClassName: high-priority-preempting
       terminationGracePeriodSeconds: 30
       securityContext:
         runAsUser: 0
