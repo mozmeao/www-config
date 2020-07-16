@@ -20,9 +20,9 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: GEOIPUPDATE_EDITION_IDS
-              value: GeoIP2-Country
+              value: "GeoIP2-Country"
             - name: GEOIPUPDATE_FREQUENCY
-              value: 24
+              value: "24"
             - name: GEOIPUPDATE_ACCOUNT_ID
               valueFrom:
                 secretKeyRef:
