@@ -59,10 +59,7 @@ spec:
                 key: secret-key
                 name: bedrock-dev-secrets
           - name: SENTRY_DSN
-            valueFrom:
-              secretKeyRef:
-                key: sentry-dsn
-                name: bedrock-dev-secrets
+            value: "https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122"
           - name: STATSD_CLIENT
             value: django_statsd.clients.normal
         resources:

@@ -104,10 +104,7 @@ spec:
         - name: SECURE_SSL_REDIRECT
           value: "True"
         - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              key: sentry-dsn
-              name: bedrock-test-secrets
+          value: "https://b89cacf912c24702a2fa6e3dc4610ade@sentry.prod.mozaws.net/156"
         - name: STATIC_URL
           value: "https://bedrock-test.moz.works/media/"
         - name: STATSD_CLIENT
