@@ -145,10 +145,7 @@ spec:
         - name: SECURE_SSL_REDIRECT
           value: "True"
         - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              key: sentry-dsn
-              name: bedrock-dev-secrets
+          value: "https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122"
         - name: STATIC_URL
           value: "https://www-dev.allizom.org/media/"
         - name: STATSD_CLIENT
