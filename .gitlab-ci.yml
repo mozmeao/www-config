@@ -247,11 +247,6 @@ dev-test-chrome:
     - .dev
     - .test-chrome
 
-dev-test-download:
-  extends:
-    - .dev
-    - .test-download
-
 dev-test-firefox:
   extends:
     - .dev
