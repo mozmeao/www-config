@@ -249,7 +249,7 @@ dev-test-chrome:
     - .test-chrome
 
 dev-test-firefox:
-  resource_group: dev-tes
+  resource_group: dev-test-firefox
   extends:
     - .dev
     - .test-firefox
