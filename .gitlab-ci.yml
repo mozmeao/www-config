@@ -243,31 +243,37 @@ dev-deploy:
     - .deploy
 
 dev-test-chrome:
+  resource_group: dev-test-chrome
   extends:
     - .dev
     - .test-chrome
 
 dev-test-firefox:
+  resource_group: dev-test-firefox
   extends:
     - .dev
     - .test-firefox
 
 dev-test-firefox-local:
+  resource_group: dev-test-firefox-local
   extends:
     - .dev
     - .test-firefox-local
 
 dev-test-headless:
+  resource_group: dev-test-headless
   extends:
     - .dev
     - .test-headless
 
 dev-test-edge:
+  resource_group: dev-test-edge
   extends:
     - .dev
     - .test-edge
 
 dev-test-ie:
+  resource_group: dev-test-ie
   extends:
     - .dev
     - .test-ie
@@ -278,41 +284,49 @@ oregon-b-test-deploy:
     - .oregon-b-test
 
 oregon-b-test-chrome:
+  resource_group: oregon-b-test-chrome
   extends:
     - .oregon-b-test
     - .test-chrome
 
 oregon-b-test-download:
+  resource_group: oregon-b-test-download
   extends:
     - .oregon-b-test
     - .test-download
 
 oregon-b-test-firefox:
+  resource_group: oregon-b-test-firefox
   extends:
     - .oregon-b-test
     - .test-firefox
 
 oregon-b-test-firefox-local:
+  resource_group: oregon-b-test-firefox-local
   extends:
     - .oregon-b-test
     - .test-firefox-local
 
 oregon-b-test-headless:
+  resource_group: oregon-b-test-headless
   extends:
     - .oregon-b-test
     - .test-headless
 
 oregon-b-test-edge:
+  resource_group: oregon-b-test-edge
   extends:
     - .oregon-b-test
     - .test-edge
 
 oregon-b-test-ie:
+  resource_group: oregon-b-test-ie
   extends:
     - .oregon-b-test
     - .test-ie
 
 oregon-b-test-ie9:
+  resource_group: oregon-b-test-ie9
   extends:
     - .oregon-b-test
     - .test-ie9
@@ -323,6 +337,7 @@ prod-frankfurt-deploy:
     - .prod-frankfurt  # needs to come second to override tags & variables
 
 prod-frankfurt-test-headless:
+  resource_group: prod-frankfurt-test-headless
   extends:
     - .test-headless
     - .prod-frankfurt
@@ -333,36 +348,43 @@ prod-iowa-a-deploy:
     - .deploy
 
 prod-iowa-a-test-chrome:
+  resource_group: prod-iowa-a-test-chrome
   extends:
     - .prod-iowa-a
     - .test-chrome
 
 prod-iowa-a-test-download:
+  resource_group: prod-iowa-a-test-download
   extends:
     - .prod-iowa-a
     - .test-download
 
 prod-iowa-a-test-firefox:
+  resource_group: prod-iowa-a-test-firefox
   extends:
     - .prod-iowa-a
     - .test-firefox
 
 prod-iowa-a-test-firefox-local:
+  resource_group: prod-iowa-a-test-firefox-local
   extends:
     - .prod-iowa-a
     - .test-firefox-local
 
 prod-iowa-a-test-headless:
+  resource_group: prod-iowa-a-test-headless
   extends:
     - .prod-iowa-a
     - .test-headless
 
 prod-iowa-a-test-ie:
+  resource_group: prod-iowa-a-test-ie
   extends:
     - .prod-iowa-a
     - .test-ie
 
 prod-iowa-a-test-ie9:
+  resource_group: prod-iowa-a-test-ie9
   extends:
     - .prod-iowa-a
     - .test-ie9
@@ -373,36 +395,43 @@ stage-deploy:
     - .deploy
 
 stage-test-chrome:
+  resource_group: stage-test-chrome
   extends:
     - .stage
     - .test-chrome
 
 stage-test-download:
+  resource_group: stage-test-download
   extends:
     - .stage
     - .test-download
 
 stage-test-firefox:
+  resource_group: stage-test-firefox
   extends:
     - .stage
     - .test-firefox
 
 stage-test-firefox-local:
+  resource_group: stage-test-firefox-local
   extends:
     - .stage
     - .test-firefox-local
 
 stage-test-headless:
+  resource_group: stage-test-headless
   extends:
     - .stage
     - .test-headless
 
 stage-test-ie:
+  resource_group: stage-test-ie
   extends:
     - .stage
     - .test-ie
 
 stage-test-ie9:
+  resource_group: stage-test-ie9
   extends:
     - .stage
     - .test-ie9
