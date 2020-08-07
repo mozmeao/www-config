@@ -107,6 +107,11 @@ spec:
           value: "on"
         - name: L10N_CRON
           value: "True"
+        - name: LEGAL_DOCS_DMS_URL
+          valueFrom:
+            secretKeyRef:
+              key: legal-docs-dms-url
+              name: bedrock-dev-secrets
         - name: LOGLEVEL
           value: info
         - name: MOFO_SECURITY_ADVISORIES_BRANCH
