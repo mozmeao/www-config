@@ -212,7 +212,7 @@ spec:
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozmeao/bedrock:prod-85629bda22a13fb95b6805a132211df9225043b5
+        image: mozmeao/bedrock:prod-6bfeb38c92e07ca45ef9f1fe2b4605e82f3c4f1e
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-clock
         resources:
