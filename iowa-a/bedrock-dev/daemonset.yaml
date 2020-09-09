@@ -6,6 +6,10 @@ metadata:
   labels:
     k8s-app: bedrock-dev-data
 spec:
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 5
+    type: RollingUpdate
   selector:
     matchLabels:
       name: bedrock-dev-data
