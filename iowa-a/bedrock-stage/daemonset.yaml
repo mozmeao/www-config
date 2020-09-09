@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: bedrock-dev-data
-  namespace: bedrock-dev
+  name: bedrock-stage-data
+  namespace: bedrock-stage
   labels:
-    k8s-app: bedrock-dev-data
+    k8s-app: bedrock-stage-data
 spec:
   updateStrategy:
     rollingUpdate:
@@ -12,14 +12,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      name: bedrock-dev-data
+      name: bedrock-stage-data
   template:
     metadata:
       labels:
-        name: bedrock-dev-data
+        name: bedrock-stage-data
     spec:
       containers:
-      - name: bedrock-dev-data
+      - name: bedrock-stage-data
         image: mozmeao/bedrock:c0b817ac215126c508c4c13451222dd5a8cf61da
         imagePullPolicy: IfNotPresent
         args:
@@ -29,39 +29,39 @@ spec:
           - -c
         env:
           - name: AWS_DB_S3_BUCKET
-            value: bedrock-db-dev
+            value: bedrock-db-stage
           - name: CLUSTER_NAME
             valueFrom:
               configMapKeyRef:
-                name: bedrock-dev-configmap
+                name: bedrock-stage-configmap
                 key: CLUSTER_NAME
           - name: DB_DOWNLOAD_IGNORE_GIT
             value: "False"
           - name: DEBUG
             value: "False"
           - name: DEV
-            value: "True"
+            value: "False"
           - name: LOGLEVEL
             value: info
           - name: NEW_RELIC_APP_NAME
             valueFrom:
               configMapKeyRef:
-                name: bedrock-dev-configmap
+                name: bedrock-stage-configmap
                 key: NEW_RELIC_APP_NAME
           - name: NEW_RELIC_LICENSE_KEY
             valueFrom:
               secretKeyRef:
                 key: new-relic-license-key
-                name: bedrock-dev-secrets
+                name: bedrock-stage-secrets
           - name: PROD
             value: "True"
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
                 key: secret-key
-                name: bedrock-dev-secrets
+                name: bedrock-stage-secrets
           - name: SENTRY_DSN
-            value: "https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122"
+            value: "https://b01c999bc1b0489bad23805c55660a22@sentry.prod.mozaws.net/151"
           - name: STATSD_CLIENT
             value: django_statsd.clients.normal
         resources:
@@ -83,4 +83,4 @@ spec:
       volumes:
       - name: data
         hostPath:
-          path: /var/lib/bedrock-dev/data
+          path: /var/lib/bedrock-stage/data
