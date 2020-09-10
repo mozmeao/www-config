@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - args:
-        - ./bin/run.sh
+        - ./bin/run-prod.sh
         command:
         - /bin/bash
         - -c
@@ -139,8 +139,6 @@ spec:
               name: bedrock-prod-secrets
         - name: PROD
           value: "True"
-        - name: RUN_SUPERVISOR
-          value: "True"
         - name: SECURE_BROWSER_XSS_FILTER
           value: "True"
         - name: SECURE_HSTS_SECONDS
@@ -229,6 +227,10 @@ spec:
           requests:
             cpu: 1000m
             memory: 600Mi
+        volumeMounts:
+          - name: data
+            mountPath: /app/data
+            readOnly: true
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -236,3 +238,8 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      volumes:
+        - name: data
+          hostPath:
+            type: Directory
+            path: /var/lib/bedrock-prod/data
