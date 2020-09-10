@@ -206,6 +206,9 @@ spec:
           - name: data
             mountPath: /app/data
             readOnly: true
+          - name: geoip
+            mountPath: /app/geoip
+            readOnly: true
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -218,3 +221,7 @@ spec:
           hostPath:
             type: Directory
             path: /var/lib/bedrock-dev/data
+        - name: geoip
+          hostPath:
+            type: Directory
+            path: /var/lib/bedrock-all/geoip
