@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - args:
-        - ./bin/run.sh
+        - ./bin/run-prod.sh
         command:
         - /bin/bash
         - -c
@@ -137,8 +137,6 @@ spec:
               key: new-relic-license-key
               name: bedrock-prod-secrets
         - name: PROD
-          value: "True"
-        - name: RUN_SUPERVISOR
           value: "True"
         - name: SECURE_BROWSER_XSS_FILTER
           value: "True"
