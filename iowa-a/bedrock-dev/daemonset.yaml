@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: bedrock-dev-data
-        image: mozmeao/bedrock:7db19cd9478a5b691456799c51d592d04228cc09
+        image: mozmeao/bedrock:db65dd372df88e6fa96f47c2f18e3fbdcbe1fd74
         imagePullPolicy: IfNotPresent
         args:
           - ./bin/run-file-clock.sh
