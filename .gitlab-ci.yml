@@ -2,25 +2,26 @@ stages:
   - deploy
   - test
 
-variables:
-  SKIP_DRIVER: Remote  # set to SauceLabs to instead only run local selenium
-
 .base-url:
   only:
     variables:
       - $BASE_URL
 
-.default-test-variables:
+.default-variables-saucelabs:
   variables:
     DRIVER: SauceLabs
+    BROWSER_VERSION: latest
+    PLATFORM: Windows 10
     MARK_EXPRESSION: not headless and not download
     TEST_IMAGE: mozmeao/bedrock_test:8bc39f22cd300b333d5c65af1e883c9532653754
     PYTEST_PROCESSES: "4"
 
-.default-test-variables-local:
-  extends: .default-test-variables
+.default-variables-remote:
+  extends: .default-variables-saucelabs
   variables:
     DRIVER: Remote
+    PYTEST_PROCESSES: "auto"
+    PLATFORM: Linux
 
 .deploy:
   script:
@@ -112,24 +113,9 @@ variables:
     - cd /app
     - bin/run-integration-tests.sh
 
-.test-shell:
-  script: bin/acceptance-tests.sh
-
 .test:
   stage: test
-  extends:
-    - .default-test-variables
-    - .test-shell
-  tags:
-    - mozmeao
-    - aws
-  retry: 1
-
-.test-local:
-  stage: test
-  extends:
-    - .default-test-variables-local
-    - .test-shell
+  script: bin/acceptance-tests.sh
   tags:
     - mozmeao
     - aws
@@ -138,79 +124,63 @@ variables:
   retry: 1
 
 .test-chrome:
-  extends: .test
+  extends:
+    - .default-variables-remote
+    - .test
   variables:
     BROWSER_NAME: chrome
-    BROWSER_VERSION: latest
-    PLATFORM: Windows 10
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
+    MARK_EXPRESSION: "$$MARK_EXPRESION and not skip_if_not_firefox"
 
 .test-download:
-  extends: .test
+  extends:
+     - .default-variables-remote
+     - .test
   variables:
     DRIVER: ""
     MARK_EXPRESSION: download
 
 .test-firefox:
-  extends: .test
+  extends:
+    - .default-variables-remote
+    - .test
   variables:
     BROWSER_NAME: firefox
-    BROWSER_VERSION: latest
-    PLATFORM: Windows 10
-    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
+    MARK_EXPRESSION: "$$MARK_EXPRESION and not skip_if_firefox"
 
-.test-firefox-local:
-  extends: .test-local
-  variables:
-    BROWSER_NAME: firefox
-    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
 
 .test-headless:
-  extends: .test
+  extends:
+    - .default-variables-remote
+    - .test
   variables:
     DRIVER: ""
     MARK_EXPRESSION: headless
 
 .test-edge:
-  extends: .test
+  extends:
+    - .default-variables-saucelabs
+    - .test
   variables:
     BROWSER_NAME: MicrosoftEdge
-    BROWSER_VERSION: latest
-    PLATFORM: Windows 10
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
+    MARK_EXPRESSION: "$$MARK_EXPRESION and not skip_if_not_firefox"
 
 .test-ie:
-  extends: .test
+  extends:
+    - .default-variables-saucelabs
+    - .test
   variables:
     BROWSER_NAME: internet explorer
-    PLATFORM: Windows 10
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox and not skip_if_internet_explorer"
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
+    MARK_EXPRESSION: "$$MARK_EXPERSSION and not skip_if_not_firefox and not skip_if_internet_explorer"
 
 .test-ie9:
-  extends: .test
+  extends:
+    - .default-variables-saucelabs
+    - .test
   variables:
     BROWSER_NAME: internet explorer
     BROWSER_VERSION: "9.0"
     PLATFORM: Windows 7
     MARK_EXPRESSION: sanity
-  except:
-    variables:
-      - $DRIVER == $SKIP_DRIVER
 
 base-url-test-chrome:
   extends:
@@ -226,11 +196,6 @@ base-url-test-firefox:
   extends:
     - .base-url
     - .test-firefox
-
-base-url-test-firefox-local:
-  extends:
-    - .base-url
-    - .test-firefox-local
 
 base-url-test-headless:
   extends:
@@ -258,12 +223,6 @@ dev-test-firefox:
   extends:
     - .dev
     - .test-firefox
-
-dev-test-firefox-local:
-  resource_group: dev-test-firefox-local
-  extends:
-    - .dev
-    - .test-firefox-local
 
 dev-test-headless:
   resource_group: dev-test-headless
@@ -305,12 +264,6 @@ oregon-b-test-firefox:
   extends:
     - .oregon-b-test
     - .test-firefox
-
-oregon-b-test-firefox-local:
-  resource_group: oregon-b-test-firefox-local
-  extends:
-    - .oregon-b-test
-    - .test-firefox-local
 
 oregon-b-test-headless:
   resource_group: oregon-b-test-headless
@@ -370,11 +323,6 @@ prod-iowa-a-test-firefox:
     - .prod-iowa-a
     - .test-firefox
 
-prod-iowa-a-test-firefox-local:
-  resource_group: prod-iowa-a-test-firefox-local
-  extends:
-    - .prod-iowa-a
-    - .test-firefox-local
 
 prod-iowa-a-test-headless:
   resource_group: prod-iowa-a-test-headless
@@ -416,12 +364,6 @@ stage-test-firefox:
   extends:
     - .stage
     - .test-firefox
-
-stage-test-firefox-local:
-  resource_group: stage-test-firefox-local
-  extends:
-    - .stage
-    - .test-firefox-local
 
 stage-test-headless:
   resource_group: stage-test-headless

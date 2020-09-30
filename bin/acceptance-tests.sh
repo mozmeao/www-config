@@ -1,31 +1,28 @@
 #!/bin/bash -ex
 
-if [ "${DRIVER}" = "Remote" ]; then
-  # Start Selenium hub and NUMBER_OF_NODES (default 5) firefox nodes.
-  # Waits until all nodes are ready and then runs tests
-  SELENIUM_VERSION=${DOCKER_SELENIUM_VERSION:-"3.141.59-20200525"}
-  docker pull selenium/hub:${SELENIUM_VERSION}
-  docker pull selenium/node-firefox:${SELENIUM_VERSION}
-  # start selenium grid hub
-  docker run -d --rm -p 4444:4444 \
-    --name bedrock-selenium-hub-${CI_COMMIT_SHA} \
-    selenium/hub:${SELENIUM_VERSION}
-  DOCKER_LINKS=(${DOCKER_LINKS[@]} --link bedrock-selenium-hub-${CI_COMMIT_SHA}:hub)
-  SELENIUM_HOST="hub"
-  SELENIUM_PORT="4444"
+UNIQUE_ID="${CI_COMMIT_SHA}-${CI_JOB_ID}"
+NUM_CPUS=$(grep -c %processor /proc/cpuinfo)
+# Number of CPUs + 1 to have a hot spare.
+NUM_BROWSER_NODES=$(( NUM_CPUS + 1 ))
 
-  # start selenium grid nodes
-  for NODE_NUMBER in `seq ${NUMBER_OF_NODES:-5}`; do
-    docker run -d --rm --shm-size 2g \
-      --name bedrock-selenium-node-${NODE_NUMBER}-${CI_COMMIT_SHA} \
-      ${DOCKER_LINKS[@]} \
-      selenium/node-firefox:${SELENIUM_VERSION}
+if [ "${DRIVER}" = "Remote" ]; then
+    docker-compose \
+        -p "selenium-hub-${UNIQUE_ID}" \
+        up -d selenium-hub
+
+    docker-compose \
+        -p "selenium-hub-${UNIQUE_ID}" \
+        up -d --scale ${BROWSER_NAME}=${NUM_BROWSER_NODES} ${BROWSER_NAME}
+
+    SELENIUM_HOST="grid"
+    DOCKER_LINKS=(--link selenium-hub-${UNIQUE_ID}_selenium-hub_1:grid --net selenium-hub-${UNIQUE_ID}_default)
+
+    IP=$(docker inspect selenium-hub-${UNIQUE_ID}_selenium-hub_1 | jq -r .[0].NetworkSettings.Networks[].IPAddress)
+    SELENIUM_READY=$(curl -sSL http://${IP}:4444/wd/hub/status | jq .value.ready 2>&1 > /dev/null)
     while ! ${SELENIUM_READY}; do
-      IP=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' bedrock-selenium-node-${NODE_NUMBER}-${CI_COMMIT_SHA}`
-      CMD="docker run --rm --link bedrock-selenium-hub-${CI_COMMIT_SHA}:hub tutum/curl curl http://hub:4444/grid/api/proxy/?id=http://${IP}:5555 | grep 'proxy found'"
-      if eval ${CMD}; then SELENIUM_READY=true; fi
+        SELENIUM_READY=$(curl -sSL http://${IP}:4444/wd/hub/status | jq .value.ready 2>&1 > /dev/null)
+        sleep 1s;
     done
-  done
 fi
 
 docker pull ${TEST_IMAGE:=mozmeao/bedrock_test}
@@ -44,3 +41,4 @@ docker run --rm \
     -e "BASE_URL=${BASE_URL}" \
     -e "PYTEST_PROCESSES=${PYTEST_PROCESSES:=4}" \
     ${TEST_IMAGE} bin/run-integration-tests.sh
+
