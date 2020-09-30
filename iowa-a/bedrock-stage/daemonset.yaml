@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: bedrock-stage-data
-        image: mozmeao/bedrock:91b499576de5fe958daf3b929ae1a10607800dfa
+        image: mozmeao/bedrock:57e01d6048c6157362217224517c7e5121d3b548
         imagePullPolicy: IfNotPresent
         args:
           - ./bin/run-file-clock.sh
