@@ -259,17 +259,6 @@ dev-test-firefox:
     - .dev
     - .test-firefox
 
-dev-test-firefx-experiment:
-  extends:
-    - .test-firefox
-  only:
-    refs:
-      - more-skip-markers
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
-    DEPLOYMENT: iowa-a/bedrock-dev
-    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
-
 dev-test-firefox-local:
   resource_group: dev-test-firefox-local
   extends:
