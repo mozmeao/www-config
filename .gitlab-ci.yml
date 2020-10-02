@@ -143,6 +143,7 @@ variables:
     BROWSER_NAME: chrome
     BROWSER_VERSION: latest
     PLATFORM: Windows 10
+    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
@@ -159,6 +160,7 @@ variables:
     BROWSER_NAME: firefox
     BROWSER_VERSION: latest
     PLATFORM: Windows 10
+    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
@@ -167,6 +169,7 @@ variables:
   extends: .test-local
   variables:
     BROWSER_NAME: firefox
+    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
@@ -183,6 +186,7 @@ variables:
     BROWSER_NAME: MicrosoftEdge
     BROWSER_VERSION: latest
     PLATFORM: Windows 10
+    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
@@ -192,6 +196,7 @@ variables:
   variables:
     BROWSER_NAME: internet explorer
     PLATFORM: Windows 10
+    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox and not skip_if_internet_explorer"
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
@@ -253,6 +258,17 @@ dev-test-firefox:
   extends:
     - .dev
     - .test-firefox
+
+dev-test-firefx-experiment:
+  extends:
+    - .test-firefox
+  only:
+    refs:
+      - more-skip-markers
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 dev-test-firefox-local:
   resource_group: dev-test-firefox-local
