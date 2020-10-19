@@ -115,6 +115,11 @@ deploy-prod-iowa:
     DRIVER: SauceLabs
     PYTEST_PROCESSES: "8"
 
+.browserstack:
+  variables:
+    DRIVER: BrowserStack
+    PYTEST_PROCESSES: "8"
+
 .remote:
   variables:
     DRIVER: Remote
@@ -142,21 +147,25 @@ deploy-prod-iowa:
 
 .ie:
   variables:
-    BROWSER_NAME: internet explorer
+    BROWSER: internet explorer
+    BROWSER_VERSION: "11.0"
+    OS: Windows
+    OS_VERSION: "10"
     MARK_EXPRESSION: "smoke or sanity"
-    PLATFORM: Windows 10
 
 .ie9:
   variables:
-    BROWSER_NAME: internet explorer
+    BROWSER: internet explorer
     BROWSER_VERSION: "9.0"
-    PLATFORM: Windows 7
+    OS: Windows
+    OS_VERSION: "7"
     MARK_EXPRESSION: sanity
 
 .edge:
   variables:
-    BROWSER_NAME: Microsoft Edge
-    PLATFORM: Windows 10
+    BROWSER: Microsoft Edge
+    OS: Windows
+    OS_VERSION: "10"
     MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
 
 test-firefox-saucelabs:
@@ -173,11 +182,33 @@ test-ie-saucelabs:
     - .ie
     - .saucelabs
 
+test-ie-browserstack:
+  extends:
+    - .test
+    - .ie
+    - .browserstack
+  only:
+    refs:
+      - browserstack
+  variables:
+      BASE_URL: https://bedrock-dev.gcp.moz.works
+
 test-ie9-saucelabs:
   extends:
     - .test
     - .ie9
     - .saucelabs
+
+test-ie9-browserstack:
+  extends:
+    - .test
+    - .ie9
+    - .browserstack
+  only:
+    refs:
+      - browserstack
+  variables:
+      BASE_URL: https://bedrock-dev.gcp.moz.works
 
 test-chrome-saucelabs:
   resource_group: giorgos-test-chrome
