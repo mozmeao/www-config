@@ -12,7 +12,7 @@ variables:
 
 .default-test-variables:
   variables:
-    DRIVER: SauceLabs
+    DRIVER: CrossBrowserTesting
     MARK_EXPRESSION: not headless and not download
     TEST_IMAGE: mozmeao/bedrock_test:881f85ceceac17568056d42ba1151e720d9e3ed1
     PYTEST_PROCESSES: "4"
@@ -173,6 +173,28 @@ variables:
   except:
     variables:
       - $DRIVER == $SKIP_DRIVER
+
+dev-test-ie-crossbrowsertesting:
+  extends:
+    - .test-ie
+  only:
+    refs:
+      - crossbrowsertesting
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
+dev-test-ie9-crossbrowsertesting:
+  extends:
+    - .test-ie9
+  only:
+    refs:
+      - crossbrowsertesting
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev
+    KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
 .test-headless:
   extends: .test
