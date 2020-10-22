@@ -65,6 +65,8 @@ spec:
               key: CLUSTER_NAME
         - name: CONTENT_CARDS_BRANCH
           value: master-processed
+        - name: CONTENT_CARDS_URL
+          value: https://www.allizom.org/media/
         - name: CSP_DEFAULT_SRC
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
@@ -160,7 +162,7 @@ spec:
         - name: SENTRY_DSN
           value: "https://b01c999bc1b0489bad23805c55660a22@sentry.prod.mozaws.net/151"
         - name: STATIC_URL
-          value: "https://www.allizom.org/media/"
+          value: "/media/"
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: STD_SMS_COUNTRIES_DESKTOP
