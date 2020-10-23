@@ -98,8 +98,6 @@ deploy-prod-iowa:
     - mozmeao
     - aws
   after_script:
-    - docker cp "bedrock-${CI_JOB_ID}:/app/tests/results" "results-${CI_JOB_ID}"
-    - docker rm "bedrock-${CI_JOB_ID}"
     - bin/cleanup_after_functional_tests.sh
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
