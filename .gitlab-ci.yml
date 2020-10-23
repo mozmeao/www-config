@@ -16,8 +16,7 @@ stages:
     when:
       on_success
     expire_in:
-      15 mins
-
+      1 week
 .iowa:
   tags:
     - iowa-c
