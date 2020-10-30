@@ -18,6 +18,8 @@ spec:
       labels:
         name: bedrock-prod-data
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - name: bedrock-prod-data
         image: mozmeao/bedrock:18629babd9a360e6dabb84f3da24a48a71c0ea73
