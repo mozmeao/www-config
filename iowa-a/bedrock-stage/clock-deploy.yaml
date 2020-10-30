@@ -26,6 +26,8 @@ spec:
       name: bedrock-stage-clock
       namespace: bedrock-stage
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - ./bin/run-db-clock.sh
