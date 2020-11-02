@@ -110,7 +110,7 @@ spec:
         - name: SENTRY_DSN
           value: "https://b89cacf912c24702a2fa6e3dc4610ade@sentry.prod.mozaws.net/156"
         - name: STATIC_URL
-          value: "https://bedrock-test.moz.works/media/"
+          value: "https://bedrock-test.gcp.moz.works/media/"
         - name: STATSD_CLIENT
           value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
