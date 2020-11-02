@@ -49,6 +49,8 @@ spec:
             configMapKeyRef:
               name: bedrock-test-configmap
               key: CLUSTER_NAME
+        - name: CONTENT_CARDS_URL
+          value: https://www-dev.allizom.org/media/
         - name: CSP_DEFAULT_SRC
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
