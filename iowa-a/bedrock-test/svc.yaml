@@ -12,7 +12,7 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 8000
-    nodePort: 31888
+    nodePort: 31334
   selector:
     app: bedrock-test
     type: web
