@@ -26,6 +26,8 @@ spec:
       name: bedrock-test-web
       namespace: bedrock-test
     spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
       containers:
       - args:
         - ./bin/run.sh
