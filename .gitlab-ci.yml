@@ -29,6 +29,21 @@ stages:
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
 
+deploy-test-iowa:
+  only:
+    changes:
+      - "iowa-a/bedrock-test/*"
+    refs:
+      - master
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
+  extends:
+    - .deploy
+    - .iowa
+  variables:
+    BASE_URL: https://bedrock-test.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-test
+
 deploy-dev-iowa:
   only:
     changes:
