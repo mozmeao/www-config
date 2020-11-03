@@ -115,6 +115,8 @@ spec:
           value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
+        - name: WEB_CONCURRENCY
+          value: "8"
         image: mozmeao/bedrock:fae3800d3f9c4944f9a0bb3d7b6a2d66e4ec1016
         imagePullPolicy: IfNotPresent
         name: bedrock-test-web
