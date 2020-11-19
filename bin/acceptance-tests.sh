@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NUM_CPUS=$(grep -c ^processor /proc/cpuinfo)
+# reduce parallelism to try to make test runners more efficient
+#NUM_CPUS=$(grep -c ^processor /proc/cpuinfo)
+NUM_CPUS=1
 # Number of CPUs + 1 to have a hot spare.
 NUM_BROWSER_NODES=$(( NUM_CPUS + 1 ))
 
