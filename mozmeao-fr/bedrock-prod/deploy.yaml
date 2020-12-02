@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -71,11 +71,6 @@ spec:
           value: "False"
         - name: DEBUG
           value: "False"
-        - name: DEIS_DOMAIN
-          valueFrom:
-            configMapKeyRef:
-              name: bedrock-prod-configmap
-              key: DEIS_DOMAIN
         - name: DEV
           value: "False"
         - name: DISABLE_SSL
