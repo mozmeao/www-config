@@ -4,7 +4,6 @@ metadata:
     name: bedrock-prod-configmap
     namespace: bedrock-prod
 data:
-    NEW_RELIC_APP_NAME: bedrock-prod-frankfurt;bedrock-prod
+    NEW_RELIC_APP_NAME: bedrock-prod-mozmeao-fr;bedrock-prod
     # TODO: DEPRECATE DEIS_DOMAIN IN FAVOR OF CLUSTER_NAME
-    DEIS_DOMAIN: frankfurt.moz.works
-    CLUSTER_NAME: frankfurt
+    CLUSTER_NAME: mozmeao-fr

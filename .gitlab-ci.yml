@@ -27,7 +27,7 @@ stages:
   tags:
     - aws
   variables:
-    KUBECONFIG: /home/gitlab-runner/.kube/frankfurt.kubeconfig
+    KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr-1.kubeconfig
 
 deploy-test-iowa:
   only:
@@ -78,7 +78,7 @@ deploy-stage-iowa:
 deploy-prod-frankfurt:
   only:
     changes:
-      - "frankfurt/bedrock-prod/*"
+      - "mozmeao-fr/bedrock-prod/*"
     refs:
       - master
     variables:
@@ -88,7 +88,7 @@ deploy-prod-frankfurt:
     - .frankfurt
   variables:
     BASE_URL: https://bedrock-prod.frankfurt.moz.works
-    DEPLOYMENT: frankfurt/bedrock-prod
+    DEPLOYMENT: mozmeao-fr/bedrock-prod
 
 deploy-prod-iowa:
   only:
