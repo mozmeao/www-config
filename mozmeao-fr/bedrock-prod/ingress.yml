@@ -49,8 +49,16 @@ spec:
               serviceName: bedrock-prod-ingress
               servicePort: 8000
             path: /
+    - host: "bedrock-prod.moz.works"
+      http:
+        paths:
+          - backend:
+              serviceName: bedrock-prod-ingress
+              servicePort: 8000
+            path: /
   # This section is only required if TLS is to be enabled for the Ingress
   tls:
       - hosts:
           - "bedrock.prod.fr.moz.works"
+          - "bedrock-prod.moz.works"
         secretName: bedrock-tls
