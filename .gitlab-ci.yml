@@ -85,7 +85,6 @@ deploy-prod-frankfurt:
       - "mozmeao-fr/bedrock-prod/*"
     refs:
       - master
-      - nginxingress
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   extends:
