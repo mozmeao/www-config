@@ -5,11 +5,14 @@ stages:
 .deploy:
   stage: deploy
   script:
+    - if [ -f "${DEPLOYMENT}/${INGRESSFILENAME}" ]; then ./${DEPLOYMENT}/${INGRESSFILENAME} ; fi
     - kubectl apply -f ${DEPLOYMENT}
     - bin/rollout-status.sh ${DEPLOYMENT}
     # Used by next steps in test stage.
     - echo "BASE_URL=${BASE_URL}" > build.env
   retry: 2
+  variables:
+    INGRESSFILENAME: ingress-controller.sh
   artifacts:
     reports:
       dotenv: build.env
@@ -22,6 +25,7 @@ stages:
     - iowa-c
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
+
 
 .frankfurt:
   tags:
@@ -81,6 +85,7 @@ deploy-prod-frankfurt:
       - "mozmeao-fr/bedrock-prod/*"
     refs:
       - master
+      - nginxingress
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   extends:
@@ -89,6 +94,7 @@ deploy-prod-frankfurt:
   variables:
     BASE_URL: https://bedrock-prod.frankfurt.moz.works
     DEPLOYMENT: mozmeao-fr/bedrock-prod
+    NS: bedrock-prod
 
 deploy-prod-iowa:
   only:
