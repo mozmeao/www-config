@@ -117,7 +117,7 @@ spec:
           value: "False"
         - name: WEB_CONCURRENCY
           value: "8"
-        image: mozmeao/bedrock:a3b1ea4a8891526cd24f6ee627d31a9afd957cdd
+        image: mozmeao/bedrock:a265558ec13c40b81707a6af5930af145cc76ad1
         imagePullPolicy: IfNotPresent
         name: bedrock-test-web
         ports:
