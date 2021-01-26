@@ -127,7 +127,7 @@ deploy-prod-iowa:
       - "results-${CI_JOB_ID}"
   variables:
     MARK_EXPRESSION: not headless and not download
-    TEST_IMAGE: mozmeao/bedrock_test:3f15a16fb1fbef123c8df7f3aa876719ba53270b
+    TEST_IMAGE: mozmeao/bedrock_test:3d6e63dbf8dcdef09c5207e3a4c323341dbff132
 
 
 .saucelabs:
