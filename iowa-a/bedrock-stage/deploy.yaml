@@ -243,6 +243,8 @@ spec:
           - name: geoip
             mountPath: /app/geoip
             readOnly: true
+          - name: prommetrics
+            mountPath: /tmp/prometheus_metrics
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
@@ -259,3 +261,5 @@ spec:
           hostPath:
             type: Directory
             path: /var/lib/bedrock-all/geoip
+        - name: prommetrics
+          emptyDir: {}
