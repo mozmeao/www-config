@@ -2,7 +2,7 @@ apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
   name: bedrock-prod-web-vpa
-  namespace: bedrock-dev
+  namespace: bedrock-prod
 spec:
   targetRef:
     apiVersion: "extensions/v1beta1"
