@@ -1,0 +1,38 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-prod-web-vpa
+  namespace: bedrock-prod
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       bedrock-prod-web
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-prod-data-vpa
+  namespace: bedrock-prod
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       DaemonSet
+    name:       bedrock-prod-data
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-prod-geoip-vpa
+  namespace: bedrock-prod
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       DaemonSet
+    name:       bedrock-geoip
+  updatePolicy:
+    updateMode: "Off"

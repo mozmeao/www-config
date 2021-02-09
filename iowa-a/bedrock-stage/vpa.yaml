@@ -1,0 +1,38 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-stage-web-vpa
+  namespace: bedrock-stage
+spec:
+  targetRef:
+    apiVersion: "extensions/v1beta1"
+    kind:       Deployment
+    name:       bedrock-stage-web
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-stage-clock-vpa
+  namespace: bedrock-stage
+spec:
+  targetRef:
+    apiVersion: "extensions/v1beta1"
+    kind:       Deployment
+    name:       bedrock-stage-clock
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: bedrock-stage-data-vpa
+  namespace: bedrock-stage
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       DaemonSet
+    name:       bedrock-stage-data
+  updatePolicy:
+    updateMode: "Off"
