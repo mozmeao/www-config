@@ -5,7 +5,7 @@ metadata:
   namespace: bedrock-prod
 spec:
   targetRef:
-    apiVersion: "extensions/v1beta1"
+    apiVersion: "apps/v1"
     kind:       Deployment
     name:       bedrock-prod-web
   updatePolicy:
@@ -18,7 +18,7 @@ metadata:
   namespace: bedrock-prod
 spec:
   targetRef:
-    apiVersion: "extensions/v1beta1"
+    apiVersion: "apps/v1"
     kind:       Deployment
     name:       bedrock-prod-clock
   updatePolicy:
