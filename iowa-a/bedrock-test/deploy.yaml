@@ -144,11 +144,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 500m
-            memory: 500Mi
+	    cpu: 1000m
+            memory: 1500Mi
           requests:
-            cpu: 250m
-            memory: 250Mi
+            cpu: 750m
+            memory: 1250Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
