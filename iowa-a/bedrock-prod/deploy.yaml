@@ -119,6 +119,8 @@ spec:
               name: bedrock-prod-secrets
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
+        - name: GUNICORN_WORKER_CLASS
+          value: gunicorn.workers.ggevent.GeventWorker
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -195,8 +197,6 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-prod-secrets
-        - name: WEB_CONCURRENCY
-          value: "6"
         image: mozmeao/bedrock:deaff7b865ee568747e3a230e55d73c4a1e34ba0
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
@@ -217,18 +217,18 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
-          timeoutSeconds: 5
+          timeoutSeconds: 3
           httpGet:
             path: /readiness/
             scheme: HTTP
             port: 8000
         resources:
           limits:
-            cpu: 1250m
-            memory: 800Mi
+            cpu: 3000m
+            memory: 1500Mi
           requests:
-            cpu: 1000m
-            memory: 600Mi
+            cpu: 2000m
+            memory: 1250Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
