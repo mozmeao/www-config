@@ -112,7 +112,7 @@ spec:
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
         - name: GUNICORN_WORKER_CLASS
-          value: sync
+          value: gunicorn.workers.ggevent.GeventWorker
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
