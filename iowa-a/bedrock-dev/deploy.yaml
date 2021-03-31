@@ -154,6 +154,10 @@ spec:
           value: django_statsd.clients.normal
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
+        - name: FXA_ENDPOINT
+          value: "https://stable.dev.lcip.org/"
+        - name: VPN_ENDPOINT
+          value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
         - name: TWITTER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
