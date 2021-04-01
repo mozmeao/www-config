@@ -224,10 +224,10 @@ spec:
         resources:
           limits:
             cpu: 1500m
-            memory: 2000Mi
+            memory: 2500Mi
           requests:
             cpu: 1400m
-            memory: 1750Mi
+            memory: 2000Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
