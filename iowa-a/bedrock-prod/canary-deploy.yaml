@@ -120,7 +120,7 @@ spec:
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
         - name: GUNICORN_WORKER_CLASS
-          value: gevent
+          value: sync
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -195,7 +195,7 @@ spec:
               key: twitter-consumer-secret
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
-          value: "6"
+          value: "20"
         image: mozmeao/bedrock:554c3f1ae914b455bd36601c946d85daabc350a8
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
@@ -223,11 +223,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 1250m
-            memory: 800Mi
+            cpu: 1500m
+            memory: 2500Mi
           requests:
-            cpu: 1000m
-            memory: 600Mi
+            cpu: 1400m
+            memory: 2000Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
