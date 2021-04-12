@@ -127,7 +127,7 @@ spec:
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
         - name: GUNICORN_WORKER_CLASS
-          value: gevent
+          value: gthread
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -230,11 +230,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 3000m
-            memory: 1500Mi
+            cpu: 1250m
+            memory: 2000Mi
           requests:
-            cpu: 2000m
-            memory: 1000Mi
+            cpu: 1000m
+            memory: 1750Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
