@@ -59,7 +59,7 @@ spec:
               key: basket-api-key
               name: bedrock-dev-secrets
         - name: BASKET_URL
-          value: https://basket.allizom.org
+          value: https://basket-dev.allizom.org
         - name: CLUSTER_NAME
           valueFrom:
             configMapKeyRef:
@@ -178,7 +178,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-dev-secrets
-        image: mozmeao/bedrock:c7e64705c3ae54ba2ae18d7ff44109f2f1ce65e9
+        image: mozmeao/bedrock:e73775f21bd8f88a6c35f6c9c5fa011878ac856d
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-web
         ports:
