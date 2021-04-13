@@ -55,7 +55,7 @@ spec:
               key: basket-api-key
               name: bedrock-dev-secrets
         - name: BASKET_URL
-          value: https://basket.allizom.org
+          value: https://basket-dev.allizom.org
         - name: CLUSTER_NAME
           valueFrom:
             configMapKeyRef:
