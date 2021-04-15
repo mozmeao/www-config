@@ -25,10 +25,6 @@ spec:
         type: web
       name: bedrock-stage-web-canary
       namespace: bedrock-stage
-      annotations:
-        prometheus.io/path: "/prometheus/metrics"
-        prometheus.io/port: "8000"
-        prometheus.io/scrape: "true"
     spec:
       imagePullSecrets:
         - name: dockerhub-registry

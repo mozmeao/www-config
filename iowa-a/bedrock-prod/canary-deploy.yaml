@@ -26,10 +26,6 @@ spec:
         type: web
       name: bedrock-prod-web-canary
       namespace: bedrock-prod
-      annotations:
-        prometheus.io/path: "/prometheus/metrics"
-        prometheus.io/port: "8000"
-        prometheus.io/scrape: "true"
     spec:
       imagePullSecrets:
         - name: dockerhub-registry
