@@ -122,8 +122,6 @@ spec:
               name: bedrock-stage-secrets
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
-        - name: GUNICORN_WORKER_CLASS
-          value: gthread
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
