@@ -199,7 +199,7 @@ spec:
               name: bedrock-stage-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozmeao/bedrock:f3b81c8596d770ac692c50c27befb486c09e0149
+        image: mozmeao/bedrock:debugImage
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-web
         ports:
@@ -226,11 +226,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 1250m
-            memory: 2000Mi
+            cpu: 1500m
+            memory: 1000Mi
           requests:
             cpu: 1000m
-            memory: 1750Mi
+            memory: 600Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
