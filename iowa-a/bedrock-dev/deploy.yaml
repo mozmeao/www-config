@@ -199,11 +199,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 3000m
-            memory: 1500Mi
+            cpu: 1250m
+            memory: 800Mi
           requests:
-            cpu: 2000m
-            memory: 1000Mi
+            cpu: 1000m
+            memory: 600Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
