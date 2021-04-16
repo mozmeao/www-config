@@ -72,8 +72,6 @@ spec:
           value: "True"
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
-        - name: GUNICORN_WORKER_CLASS
-          value: gevent
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -118,7 +116,7 @@ spec:
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
         - name: WEB_CONCURRENCY
-          value: "8"
+          value: "6"
         image: mozmeao/bedrock:a7809394130cb6d7f17a025f13e14ad430c228b7
         imagePullPolicy: IfNotPresent
         name: bedrock-test-web
