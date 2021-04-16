@@ -15,8 +15,8 @@ spec:
       type: web
   strategy:
     rollingUpdate:
-      maxSurge: 10
-      maxUnavailable: "25%"
+      maxSurge: 5
+      maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
@@ -115,8 +115,6 @@ spec:
               name: bedrock-prod-secrets
         - name: GTM_CONTAINER_ID
           value: GTM-MW3R8V
-        - name: GUNICORN_WORKER_CLASS
-          value: gthread
         - name: HTTPS
           value: "on"
         - name: L10N_CRON
@@ -191,8 +189,8 @@ spec:
               key: twitter-consumer-secret
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
-          value: "10"
-        image: mozmeao/bedrock:f3b81c8596d770ac692c50c27befb486c09e0149
+          value: "6"
+        image: mozmeao/bedrock:debugImage
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
         ports:
@@ -219,11 +217,11 @@ spec:
             port: 8000
         resources:
           limits:
-            cpu: 1250m
-            memory: 2000Mi
+            cpu: 1500m
+            memory: 1000Mi
           requests:
             cpu: 1000m
-            memory: 1750Mi
+            memory: 600Mi
         volumeMounts:
           - name: data
             mountPath: /app/data
