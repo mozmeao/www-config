@@ -22,7 +22,7 @@ spec:
     kind:       Deployment
     name:       bedrock-prod-clock
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"
 ---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
@@ -35,7 +35,7 @@ spec:
     kind:       DaemonSet
     name:       bedrock-prod-data
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"
 ---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
@@ -48,4 +48,4 @@ spec:
     kind:       DaemonSet
     name:       bedrock-geoip
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"
