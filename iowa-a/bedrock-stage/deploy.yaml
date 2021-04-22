@@ -200,7 +200,7 @@ spec:
               name: bedrock-stage-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozmeao/bedrock:5216629fdb9a115495a9ac8fdae37d9729aca952
+        image: mozmeao/bedrock:e6da436be7480263be54a72673159a489b23ee7e
         imagePullPolicy: IfNotPresent
         name: bedrock-stage-web
         ports:
