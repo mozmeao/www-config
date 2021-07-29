@@ -4,7 +4,7 @@ services:
     image: selenium/hub:3
 
   chrome:
-    image: selenium/node-chrome:3
+    image: selenium/node-chrome:3.141.59-20210713
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
