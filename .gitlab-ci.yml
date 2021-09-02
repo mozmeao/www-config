@@ -91,7 +91,7 @@ deploy-prod-frankfurt:
     - .deploy
     - .frankfurt
   variables:
-    BASE_URL: https://bedrock-prod.frankfurt.moz.works
+    BASE_URL: https://bedrock.prod.fr.moz.works
     DEPLOYMENT: mozmeao-fr/bedrock-prod
     NS: bedrock-prod
 
