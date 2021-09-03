@@ -61,6 +61,16 @@ spec:
             configMapKeyRef:
               name: bedrock-dev-configmap
               key: CLUSTER_NAME
+        - name: CONTENTFUL_SPACE_ID
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-id
+              name: bedrock-dev-secrets
+        - name: CONTENTFUL_SPACE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-key
+              name: bedrock-dev-secrets
         - name: CSP_DEFAULT_SRC
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
