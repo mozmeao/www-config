@@ -56,6 +56,16 @@ spec:
               name: bedrock-dev-secrets
         - name: BASKET_URL
           value: https://basket-dev.allizom.org
+        - name: CONTENTFUL_SPACE_ID
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-id
+              name: bedrock-dev-secrets
+        - name: CONTENTFUL_SPACE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-key
+              name: bedrock-dev-secrets
         - name: CLUSTER_NAME
           valueFrom:
             configMapKeyRef:
