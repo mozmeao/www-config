@@ -63,6 +63,16 @@ spec:
               key: CLUSTER_NAME
         - name: CONTENT_CARDS_BRANCH
           value: master-processed
+        - name: CONTENTFUL_SPACE_ID
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-id
+              name: bedrock-stage-secrets
+        - name: CONTENTFUL_SPACE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: contentful-space-key
+              name: bedrock-stage-secrets
         - name: CSP_DEFAULT_SRC
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
