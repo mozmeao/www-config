@@ -25,7 +25,10 @@ So you want to flip a waffle switch in production? Great! Do this:
 5. Push the change to a branch on your fork.
 6. Submit a pull-request against the `mozmeao/www-config` repo.
 7. Ask for a review in the `#www` IRC channel or in the PR itself.
-8. Once the PR is reviewed and merged it will automatically roll out to our production instances in 5 to 10 minutes.
+8. Once the PR is reviewed and merged it will automatically roll out to our production instances at https://www.allizom.org/ on  in 5 to 10 minutes.
+9. If your changes are viewed on the production, add the switch to `waffle_configs/bedrock-stage.env`.
+10. Follow steps 4-7.
+11. Your changes will be automatically rolled out on https://www.mozilla.org.
 
 ## Editing the Configs
 
