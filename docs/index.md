@@ -20,15 +20,14 @@ So you want to flip a waffle switch in production? Great! Do this:
 
 1. Clone the `mozmeao/www-config` repo.
 2. Fork the repo into your Github account.
-3. Edit the `waffle_configs/bedrock-prod.env` file to add the name and value you need. You'd add a line like `SWITCH_WE_DO_PHRASING=on` to set that key and value in the settings database for prod. Or you can find the line that already has the variable you need and change the value if it already exists.
-4. Commit the change.
-5. Push the change to a branch on your fork.
-6. Submit a pull-request against the `mozmeao/www-config` repo.
-7. Ask for a review in the `#www` IRC channel or in the PR itself.
-8. Once the PR is reviewed and merged, it will automatically roll out to our production instances at https://www.allizom.org/ in 5 to 10 minutes.
-9. If your changes are viewed on the production, add the switch to `waffle_configs/bedrock-stage.env`.
-10. Follow steps 4-7.
-11. Your changes will be automatically rolled out on https://www.mozilla.org.
+3. Edit the `waffle_configs/bedrock-stage.env` file to add the name and value you need. You'd add a line like `SWITCH_WE_DO_PHRASING=on` to set that key and value in the settings database for prod. Or you can find the line that already has the variable you need and change the value if it already exists.
+4.  (**Optional**) If you'd like to test the switch on the staging environment prior to pushing to production, merge the ticket and visit the environment at https://www.allizom.org/.
+5. Edit the `waffle_configs/bedrock-prod.env` file to add the switch you added to the previous file.
+6. Commit the change.
+7. Push the change to a branch on your fork.
+8. Submit a pull-request against the `mozmeao/www-config` repo.
+9. Ask for a review in the `#www` IRC channel or in the PR itself.
+10. Once the PR is reviewed and merged, it will automatically roll out to our production instances at in 5 to 10 minutes.
 
 ## Editing the Configs
 
