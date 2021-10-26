@@ -2,6 +2,8 @@ version: "3"
 services:
   selenium-hub:
     image: selenium/hub:3
+    ports:
+      - "4444:4444"
 
   chrome:
     image: selenium/node-chrome:3.141.59-20210713
@@ -26,3 +28,4 @@ services:
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
+

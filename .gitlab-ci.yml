@@ -255,3 +255,17 @@ test-download-remote:
       - gitlab-ci-dev
     variables:
       - $CI_PIPELINE_SOURCE == "push"
+
+# cloudfront test
+fake-test-deploy:
+  only:
+    refs:
+      - master
+      - cloudfront-mv-v2
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
+  script:
+    - echo "BASE_URL=${BASE_URL}" > build.env
+  variables:
+    BASE_URL: https://www.mozorg.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev

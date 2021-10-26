@@ -28,7 +28,11 @@ if [ "${DRIVER}" = "Remote" ]; then
 
 
     echo -n "Waiting for Selenium Grid to get ready..."
-    IP=$(docker inspect selenium-hub-${CI_JOB_ID}_selenium-hub_1 | jq -r .[0].NetworkSettings.Networks[].IPAddress)
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      IP=$(docker inspect selenium-hub-${CI_JOB_ID}_selenium-hub_1 | jq -r .[0].NetworkSettings.Networks[].IPAddress)
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+      IP=localhost
+    fi
     set +e
     SELENIUM_READY=$((curl -fs  http://${IP}:4444/wd/hub/status  | jq -es 'if . == [] then null else .[] | .value.ready end' > /dev/null) || echo "false")
     while ! ${SELENIUM_READY}; do
@@ -45,8 +49,8 @@ docker run \
     --name "bedrock-${CI_JOB_ID}" \
     ${DOCKER_LINKS[@]} \
     -e "DRIVER=${DRIVER}" \
-    -e "SAUCELABS_USERNAME=${SAUCELABS_USERNAME}" \
-    -e "SAUCELABS_API_KEY=${SAUCELABS_API_KEY}" \
+    -e "SAUCELABS_USERNAME=${SAUCELABS_USERNAME:-}" \
+    -e "SAUCELABS_API_KEY=${SAUCELABS_API_KEY:-}" \
     -e "SELENIUM_HOST=${SELENIUM_HOST:-}" \
     -e "SELENIUM_PORT=${SELENIUM_PORT:-}" \
     -e "BROWSER_NAME=${BROWSER_NAME:-}" \
