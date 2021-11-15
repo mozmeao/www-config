@@ -36,16 +36,4 @@ spec:
     name:       bedrock-prod-data
   updatePolicy:
     updateMode: "Off"
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: bedrock-geoip-vpa
-  namespace: bedrock-prod
-spec:
-  targetRef:
-    apiVersion: "apps/v1"
-    kind:       DaemonSet
-    name:       bedrock-geoip
-  updatePolicy:
-    updateMode: "Off"
+
