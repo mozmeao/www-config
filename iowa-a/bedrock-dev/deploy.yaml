@@ -159,7 +159,7 @@ spec:
         - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
           value: "False"
         - name: FXA_ENDPOINT
-          value: "https://stable.dev.lcip.org/"
+          value: "https://accounts.stage.mozaws.net/"
         - name: VPN_ENDPOINT
           value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
         - name: TWITTER_ACCESS_TOKEN
