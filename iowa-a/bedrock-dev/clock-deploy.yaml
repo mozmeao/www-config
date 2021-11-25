@@ -90,6 +90,11 @@ spec:
               key: CLUSTER_NAME
         - name: CSP_REPORT_ENABLE
           value: "True"
+        - name: DB_UPDATE_SCRIPT_DMS_URL
+          valueFrom:
+            secretKeyRef:
+              key: dead-mans-snitch-db-updates-url
+              name: bedrock-dev-secrets
         - name: DEBUG
           value: "False"
         - name: DEIS_DOMAIN

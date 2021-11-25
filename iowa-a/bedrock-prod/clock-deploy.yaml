@@ -80,6 +80,11 @@ spec:
             secretKeyRef:
               key: dead-mans-snitch-url
               name: bedrock-prod-secrets
+        - name: DB_UPDATE_SCRIPT_DMS_URL
+          valueFrom:
+            secretKeyRef:
+              key: dead-mans-snitch-db-updates-url
+              name: bedrock-prod-secrets
         - name: DEBUG
           value: "False"
         - name: DEIS_DOMAIN
