@@ -77,6 +77,11 @@ spec:
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
           value: "False"
+        - name: DB_UPDATE_SCRIPT_DMS_URL
+          valueFrom:
+            secretKeyRef:
+              key: dead-mans-snitch-db-updates-url
+              name: bedrock-stage-secrets
         - name: DEBUG
           value: "False"
         - name: DEIS_DOMAIN
