@@ -22,7 +22,7 @@ spec:
         - name: dockerhub-registry
       containers:
       - name: bedrock-stage-data
-        image: mozmeao/bedrock:447768c7c5b34a29f26769d22825a35d05abe015
+        image: mozmeao/bedrock:70af6876d09f5be375475362e4e5a9bacd388e5c
         imagePullPolicy: IfNotPresent
         args:
           - ./bin/run-file-clock.sh
