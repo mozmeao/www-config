@@ -1,0 +1,9 @@
+.deploy:
+  stage: deploy
+  script:
+    - if [ -f "${DEPLOYMENT}/${INGRESSFILENAME}" ]; then ./${DEPLOYMENT}/${INGRESSFILENAME} ; fi
+    - kubectl apply -f ${DEPLOYMENT}
+    - bin/rollout-status.sh ${DEPLOYMENT}
+  retry: 2
+  variables:
+    INGRESSFILENAME: ingress-controller.sh

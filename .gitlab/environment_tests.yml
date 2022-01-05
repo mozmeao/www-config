@@ -1,0 +1,4 @@
+environment_test:
+  script:
+    - echo "here"
+    - echo $ENVIRONMENT_URL

@@ -2,38 +2,64 @@ stages:
   - deploy
   - test
 
-.deploy:
-  stage: deploy
-  script:
-    - if [ -f "${DEPLOYMENT}/${INGRESSFILENAME}" ]; then ./${DEPLOYMENT}/${INGRESSFILENAME} ; fi
-    - kubectl apply -f ${DEPLOYMENT}
-    - bin/rollout-status.sh ${DEPLOYMENT}
-    # Used by next steps in test stage.
-    - echo "BASE_URL=${BASE_URL}" > build.env
-  retry: 2
-  variables:
-    INGRESSFILENAME: ingress-controller.sh
-  artifacts:
-    reports:
-      dotenv: build.env
-    when:
-      on_success
-    expire_in:
-      1 week
+include:
+  - .gitlab/gitlab_jobs.yml
+
+# start cluster access #
 .iowa:
   tags:
     - iowa-c
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/iowa-a.kubeconfig
 
-
 .frankfurt:
   tags:
     - aws
   variables:
     KUBECONFIG: /home/gitlab-runner/.kube/mozmeao-fr-1.kubeconfig
+# end cluster access #
 
-deploy-test-iowa:
+# start dev #
+.dev:
+  only:
+    changes:
+      - "iowa-a/bedrock-dev/*"
+    refs:
+      - master
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"
+  variables:
+    ENVIRONMENT_URL: https://www-dev.allizom.org
+
+.dev-iowa:
+  extends:
+    - .dev
+  variables:
+    BASE_URL: https://bedrock-dev.gcp.moz.works
+    DEPLOYMENT: iowa-a/bedrock-dev
+
+deploy-dev-iowa:
+  extends:
+    - .deploy
+    - .iowa
+    - .dev-iowa
+
+dev-iowa-tests:
+  extends:
+    - .dev-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+dev-tests:
+  extends:
+    - .dev
+  trigger:
+    include: .gitlab/environment_tests.yml
+
+# end dev #
+
+# start test #
+.test:
   only:
     changes:
       - "iowa-a/bedrock-test/*"
@@ -41,30 +67,37 @@ deploy-test-iowa:
       - master
     variables:
       - $CI_PIPELINE_SOURCE == "push"
+  variables:
+    ENVIRONMENT_URL: https://bedrock-test.gcp.moz.works # test doesn't have seperate cdn
+
+.test-iowa:
   extends:
-    - .deploy
-    - .iowa
+    - .test
   variables:
     BASE_URL: https://bedrock-test.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-test
 
-deploy-dev-iowa:
-  only:
-    changes:
-      - "iowa-a/bedrock-dev/*"
-    refs:
-      - master
-      - gitlab-ci-dev
-    variables:
-      - $CI_PIPELINE_SOURCE == "push"
+deploy-test-iowa:
   extends:
     - .deploy
     - .iowa
-  variables:
-    BASE_URL: https://bedrock-dev.gcp.moz.works
-    DEPLOYMENT: iowa-a/bedrock-dev
+    - .test-iowa
 
-deploy-stage-iowa:
+test-iowa-tests:
+  extends:
+    - .test-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+test-tests:
+  extends:
+    - .test
+  trigger:
+    include: .gitlab/environment_tests.yml
+# end test #
+
+# start stage #
+.stage:
   only:
     changes:
       - "iowa-a/bedrock-stage/*"
@@ -72,186 +105,95 @@ deploy-stage-iowa:
       - master
     variables:
       - $CI_PIPELINE_SOURCE == "push"
+  variables:
+    ENVIRONMENT_URL: https://www.allizom.org
+
+.stage-iowa:
   extends:
-    - .deploy
-    - .iowa
+    - .stage
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-stage
 
-deploy-prod-frankfurt:
-  only:
-    changes:
-      - "mozmeao-fr/bedrock-prod/*"
-    refs:
-      - master
-    variables:
-      - $CI_PIPELINE_SOURCE == "push"
+deploy-stage-iowa:
   extends:
     - .deploy
-    - .frankfurt
-  variables:
-    BASE_URL: https://bedrock.prod.fr.moz.works
-    DEPLOYMENT: mozmeao-fr/bedrock-prod
-    NS: bedrock-prod
+    - .iowa
+    - .stage-iowa
 
-deploy-prod-iowa:
+stage-iowa-tests:
+  extends:
+    - .stage-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+stage-tests:
+  extends:
+    - .stage
+  trigger:
+    include: .gitlab/environment_tests.yml
+
+# start prod #
+.prod:
   only:
-    changes:
+    changes: # including all paths, will match as an or
+      - "mozmeao-fr/bedrock-prod/*"
       - "iowa-a/bedrock-prod/*"
     refs:
       - master
     variables:
       - $CI_PIPELINE_SOURCE == "push"
+  variables:
+    NS: bedrock-prod
+    ENVIRONMENT_URL: https://www.mozilla.org
+
+.prod-iowa:
   extends:
-    - .deploy
-    - .iowa
+    - .prod
+  only:
+    changes:
+      - "iowa-a/bedrock-prod/*"
   variables:
     BASE_URL: https://bedrock-prod.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-prod
 
-## TEST
-.test:
-  stage: test
-  script: bin/acceptance-tests.sh
-  tags:
-    - mozmeao
-    - aws
-  after_script:
-    - bin/cleanup_after_functional_tests.sh
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    when: on_failure
-    expire_in: 1 week
-    paths:
-      - "results-${CI_JOB_ID}"
-  variables:
-    MARK_EXPRESSION: not headless and not download
-    TEST_IMAGE: mozmeao/bedrock_test:4175943789d1d5123f2a005c033a94b6373e01c9
-
-
-.saucelabs:
-  variables:
-    DRIVER: SauceLabs
-    PYTEST_PROCESSES: "8"
-
-.remote:
-  variables:
-    DRIVER: Remote
-    PYTEST_PROCESSES: "auto"
-
-.chrome:
-  variables:
-    BROWSER_NAME: chrome
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
-
-.firefox:
-  variables:
-    BROWSER_NAME: firefox
-    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
-
-.download:
-  variables:
-    DRIVER: ""
-    MARK_EXPRESSION: download
-
-.headless:
-  variables:
-    DRIVER: ""
-    MARK_EXPRESSION: headless
-
-.ie:
-  variables:
-    BROWSER_NAME: internet explorer
-    MARK_EXPRESSION: "smoke or sanity"
-    PLATFORM: Windows 10
-
-.ie9:
-  variables:
-    BROWSER_NAME: internet explorer
-    BROWSER_VERSION: "9.0"
-    PLATFORM: Windows 7
-    MARK_EXPRESSION: sanity
-
-.edge:
-  variables:
-    BROWSER_NAME: Microsoft Edge
-    PLATFORM: Windows 10
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
-
-test-firefox-saucelabs:
+.prod-frankfurt:
   extends:
-    - .test
-    - .firefox
-    - .saucelabs
-  when:
-    manual
-
-test-ie-saucelabs:
-  extends:
-    - .test
-    - .ie
-    - .saucelabs
-
-test-ie9-saucelabs:
-  extends:
-    - .test
-    - .ie9
-    - .saucelabs
-
-test-chrome-saucelabs:
-  resource_group: giorgos-test-chrome
-  extends:
-    - .test
-    - .chrome
-    - .saucelabs
-  when:
-    manual
-
-test-download-saucelabs:
-  extends:
-    - .test
-    - .download
-    - .saucelabs
-  when:
-    manual
-
-test-edge-saucelabs:
-  extends:
-    - .test
-    - .edge
-    - .saucelabs
-  when:
-    manual
-
-test-firefox-remote:
-  extends:
-    - .test
-    - .firefox
-    - .remote
-
-test-headless:
-  extends:
-    - .test
-    - .headless
-
-test-chrome-remote:
-  resource_group: giorgos-test-chrome
-  extends:
-    - .test
-    - .chrome
-    - .remote
-
-test-download-remote:
-  extends:
-    - .test
-    - .download
-    - .remote
-  except:
+    - .prod
+  only:
     changes:
-      - "iowa-a/bedrock-dev/*"
-    refs:
-      - master
-      - gitlab-ci-dev
-    variables:
-      - $CI_PIPELINE_SOURCE == "push"
+      - "mozmeao-fr/bedrock-prod/*"
+  variables:
+    BASE_URL: https://bedrock.prod.fr.moz.works
+    DEPLOYMENT: mozmeao-fr/bedrock-prod
+
+deploy-prod-iowa:
+  extends:
+    - .deploy
+    - .iowa
+    - .prod-iowa
+
+deploy-prod-frankfurt:
+  extends:
+    - .deploy
+    - .frankfurt
+    - .prod-frankfurt
+
+prod-iowa-tests:
+  extends:
+    - .prod-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+prod-frankfurt-tests:
+  extends:
+    - .prod-frankfurt
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+prod-tests:
+  extends:
+    - .prod
+  trigger:
+    include: .gitlab/environment_tests.yml
+# end prod #
