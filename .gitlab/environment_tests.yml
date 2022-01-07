@@ -1,4 +1,20 @@
-environment_test:
-  script:
-    - echo "here"
-    - echo $ENVIRONMENT_URL
+include:
+  - .gitlab/gitlab_jobs.yml
+
+.environment:
+  before_script:
+    - export BASE_URL=$ENVIRONMENT_URL
+
+.ie9:
+  variables:
+    BROWSER_NAME: internet explorer
+    BROWSER_VERSION: "9.0"
+    PLATFORM: Windows 7
+    MARK_EXPRESSION: sanity
+
+test-ie9-saucelabs:
+  extends:
+    - .test
+    - .environment
+    - .ie9
+    - .saucelabs
