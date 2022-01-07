@@ -5,16 +5,18 @@ include:
   before_script:
     - export BASE_URL=$ENVIRONMENT_URL
 
-.ie9:
-  variables:
-    BROWSER_NAME: internet explorer
-    BROWSER_VERSION: "9.0"
-    PLATFORM: Windows 7
-    MARK_EXPRESSION: sanity
-
-test-ie9-saucelabs:
+test-ie9-saucelabs-sanity:
   extends:
     - .test
     - .environment
     - .ie9
+    - .saucelabs
+
+test-ie-saucelabs-sanity:
+  variables:
+    MARK_EXPRESSION: "sanity"
+  extends:
+    - .test
+    - .environment
+    - .ie
     - .saucelabs
