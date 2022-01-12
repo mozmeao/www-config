@@ -7,7 +7,7 @@ metadata:
   name: bedrock-dev-web
   namespace: bedrock-dev
 spec:
-  replicas: 6
+  replicas: 5
   selector:
     matchLabels:
       app: bedrock-dev

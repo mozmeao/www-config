@@ -5,23 +5,23 @@ include:
   before_script:
     - export BASE_URL=$ENVIRONMENT_URL
 
-test-ie9-saucelabs-sanity:
+test-ie9-sanity:
   extends:
     - .test
     - .environment
     - .ie9
-    - .saucelabs
+    - .remote
 
-test-ie-saucelabs-sanity:
+test-ie-sanity:
   variables:
     MARK_EXPRESSION: "sanity"
   extends:
     - .test
     - .environment
     - .ie
-    - .saucelabs
+    - .remote
 
-test-chrome-saucelabs-sanity:
+test-chrome-sanity:
   variables:
     MARK_EXPRESSION: "sanity"
   extends:
@@ -30,7 +30,7 @@ test-chrome-saucelabs-sanity:
     - .chrome
     - .remote
 
-test-firefox-saucelabs-sanity:
+test-firefox-sanity:
   variables:
     MARK_EXPRESSION: "sanity"
   extends:
