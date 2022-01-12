@@ -10,7 +10,7 @@ test-ie9-sanity:
     - .test
     - .environment
     - .ie9
-    - .remote
+    - .saucelabs
 
 test-ie-sanity:
   variables:
@@ -19,7 +19,7 @@ test-ie-sanity:
     - .test
     - .environment
     - .ie
-    - .remote
+    - .saucelabs
 
 test-chrome-sanity:
   variables:
