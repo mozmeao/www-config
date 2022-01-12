@@ -19,7 +19,6 @@ test-headless:
     - .headless
 
 test-chrome-remote:
-  resource_group: giorgos-test-chrome
   extends:
     - .test
     - .chrome

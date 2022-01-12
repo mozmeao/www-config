@@ -23,8 +23,8 @@
     paths:
       - "results-${CI_JOB_ID}"
   variables:
-    MARK_EXPRESSION: not headless and not download
-    TEST_IMAGE: mozmeao/bedrock_test:91e4628067ceab1eae5d2eb9598b79ec95d4bc2d
+    MARK_EXPRESSION: not headless and not download and not cdn
+    TEST_IMAGE: mozmeao/bedrock_test:0b19d5173fcb362c4f5fa91e73f2ce94a025d1d5
 
 .saucelabs:
   variables:
@@ -59,7 +59,7 @@
 .ie:
   variables:
     BROWSER_NAME: internet explorer
-    MARK_EXPRESSION: "smoke or sanity"
+    MARK_EXPRESSION: "smoke"
     PLATFORM: Windows 10
 
 

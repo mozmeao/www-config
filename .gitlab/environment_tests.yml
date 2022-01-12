@@ -20,3 +20,21 @@ test-ie-saucelabs-sanity:
     - .environment
     - .ie
     - .saucelabs
+
+test-chrome-saucelabs-sanity:
+  variables:
+    MARK_EXPRESSION: "sanity"
+  extends:
+    - .test
+    - .environment
+    - .chrome
+    - .remote
+
+test-firefox-saucelabs-sanity:
+  variables:
+    MARK_EXPRESSION: "sanity"
+  extends:
+    - .test
+    - .environment
+    - .firefox
+    - .remote
