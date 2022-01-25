@@ -1,40 +1,14 @@
 include:
   - .gitlab/gitlab_jobs.yml
 
-.environment:
+.environment_override:
   before_script:
     - export BASE_URL=$ENVIRONMENT_URL
 
-test-ie9-sanity:
-  extends:
-    - .test
-    - .environment
-    - .ie9
-    - .saucelabs
-
-test-ie-sanity:
+test-cdn:
   variables:
-    MARK_EXPRESSION: "sanity"
+    MARK_EXPRESSION: "cdn"
   extends:
     - .test
-    - .environment
-    - .ie
-    - .saucelabs
-
-test-chrome-sanity:
-  variables:
-    MARK_EXPRESSION: "sanity"
-  extends:
-    - .test
-    - .environment
-    - .chrome
-    - .remote
-
-test-firefox-sanity:
-  variables:
-    MARK_EXPRESSION: "sanity"
-  extends:
-    - .test
-    - .environment
-    - .firefox
-    - .remote
+    - .environment_override
+    - .headless

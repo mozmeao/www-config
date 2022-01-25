@@ -59,13 +59,5 @@
 .ie:
   variables:
     BROWSER_NAME: internet explorer
-    MARK_EXPRESSION: "smoke"
+    MARK_EXPRESSION: "smoke or sanity"
     PLATFORM: Windows 10
-
-
-.ie9:
-  variables:
-    BROWSER_NAME: internet explorer
-    BROWSER_VERSION: "9.0"
-    PLATFORM: Windows 7
-    MARK_EXPRESSION: sanity
