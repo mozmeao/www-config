@@ -51,12 +51,6 @@ dev-iowa-tests:
   trigger:
     include: .gitlab/deployment_tests.yml
 
-dev-tests:
-  extends:
-    - .dev
-  trigger:
-    include: .gitlab/environment_tests.yml
-
 # end dev #
 
 # start test #
@@ -90,11 +84,6 @@ test-iowa-tests:
   trigger:
     include: .gitlab/deployment_tests.yml
 
-test-tests:
-  extends:
-    - .test-env
-  trigger:
-    include: .gitlab/environment_tests.yml
 # end test #
 
 # start stage #
@@ -127,12 +116,6 @@ stage-iowa-tests:
     - .stage-iowa
   trigger:
     include: .gitlab/deployment_tests.yml
-
-stage-tests:
-  extends:
-    - .stage
-  trigger:
-    include: .gitlab/environment_tests.yml
 
 # start prod #
 .prod:
@@ -191,10 +174,39 @@ prod-frankfurt-tests:
     - .prod-frankfurt
   trigger:
     include: .gitlab/deployment_tests.yml
+# end prod #
+
+
+# scheduled jobs
+.schedule:
+  only:
+    - schedules
+
+dev-tests:
+  extends:
+    - .dev
+    - .schedule
+  trigger:
+    include: .gitlab/environment_tests.yml
+
+stage-tests:
+  extends:
+    - .stage
+    - .schedule
+  trigger:
+    include: .gitlab/environment_tests.yml
+
+test-tests:
+  extends:
+    - .test-env
+    - .schedule
+  trigger:
+    include: .gitlab/environment_tests.yml
 
 prod-tests:
   extends:
     - .prod
+    - .schedule
   trigger:
     include: .gitlab/environment_tests.yml
-# end prod #
+# end scheduled jobs
