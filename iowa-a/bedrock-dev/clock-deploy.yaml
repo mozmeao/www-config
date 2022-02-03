@@ -151,7 +151,7 @@ spec:
         - name: LOGLEVEL
           value: info
         - name: MOFO_SECURITY_ADVISORIES_BRANCH
-          value: testing
+          value: master
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
         - name: NEWRELIC_PYTHON_INI_FILE
