@@ -39,12 +39,12 @@
 .chrome:
   variables:
     BROWSER_NAME: chrome
-    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
+    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox and not cdn"
 
 .firefox:
   variables:
     BROWSER_NAME: firefox
-    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
+    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox and not cdn"
 
 .download:
   variables:
