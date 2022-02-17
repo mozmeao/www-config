@@ -55,6 +55,8 @@ spec:
           value: "*.allizom.org"
         - name: CSP_REPORT_ENABLE
           value: "True"
+        - name: DB_DOWNLOAD_IGNORE_GIT
+          value: "True"
         - name: DEBUG
           value: "False"
         - name: DEIS_DOMAIN
@@ -79,7 +81,7 @@ spec:
         - name: LOGLEVEL
           value: info
         - name: MOFO_SECURITY_ADVISORIES_BRANCH
-          value: testing
+          value: master
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
         - name: NEW_RELIC_APP_NAME
@@ -117,7 +119,7 @@ spec:
           value: "False"
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozmeao/bedrock:2f20b3b9f3855fdd402d0a88c3e2e5e84dc96246
+        image: mozmeao/bedrock:478faab18d86855d1d22be29c57381b04bfe49cd
         imagePullPolicy: IfNotPresent
         name: bedrock-test-web
         ports:

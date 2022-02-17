@@ -151,7 +151,7 @@ spec:
         - name: LOGLEVEL
           value: info
         - name: MOFO_SECURITY_ADVISORIES_BRANCH
-          value: testing
+          value: master
         - name: MOFO_SECURITY_ADVISORIES_PATH
           value: /tmp/mofo_security_advisories
         - name: NEWRELIC_PYTHON_INI_FILE
@@ -217,7 +217,7 @@ spec:
             secretKeyRef:
               key: twitter-consumer-secret
               name: bedrock-dev-secrets
-        image: mozmeao/bedrock:ab2fc8408c52adaa730cfa508293e75a3aa188c5
+        image: mozmeao/bedrock:1748a8091c2d0da31bc7951be4b5204f22be40a8
         imagePullPolicy: IfNotPresent
         name: bedrock-dev-clock
         resources:
