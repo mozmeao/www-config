@@ -1,0 +1,63 @@
+.deploy:
+  stage: deploy
+  script:
+    - if [ -f "${DEPLOYMENT}/${INGRESSFILENAME}" ]; then ./${DEPLOYMENT}/${INGRESSFILENAME} ; fi
+    - kubectl apply -f ${DEPLOYMENT}
+    - bin/rollout-status.sh ${DEPLOYMENT}
+  retry: 2
+  variables:
+    INGRESSFILENAME: ingress-controller.sh
+
+.test:
+  stage: test
+  script: bin/acceptance-tests.sh
+  tags:
+    - mozmeao
+    - aws
+  after_script:
+    - bin/cleanup_after_functional_tests.sh
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    when: on_failure
+    expire_in: 1 week
+    paths:
+      - "results-${CI_JOB_ID}"
+  variables:
+    MARK_EXPRESSION: not headless and not download and not cdn
+    TEST_IMAGE: mozmeao/bedrock_test:0b19d5173fcb362c4f5fa91e73f2ce94a025d1d5
+
+.saucelabs:
+  variables:
+    DRIVER: SauceLabs
+    PYTEST_PROCESSES: "8"
+
+.remote:
+  variables:
+    DRIVER: Remote
+    PYTEST_PROCESSES: "auto"
+
+.chrome:
+  variables:
+    BROWSER_NAME: chrome
+    MARK_EXPRESSION: "not headless and not download and not skip_if_not_firefox"
+
+.firefox:
+  variables:
+    BROWSER_NAME: firefox
+    MARK_EXPRESSION: "not headless and not download and not skip_if_firefox"
+
+.download:
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: download
+
+.headless:
+  variables:
+    DRIVER: ""
+    MARK_EXPRESSION: headless
+
+.ie:
+  variables:
+    BROWSER_NAME: internet explorer
+    MARK_EXPRESSION: "smoke or sanity"
+    PLATFORM: Windows 10

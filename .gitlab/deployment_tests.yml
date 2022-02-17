@@ -1,0 +1,41 @@
+include:
+  - .gitlab/gitlab_jobs.yml
+
+test-ie-saucelabs:
+  extends:
+    - .test
+    - .ie
+    - .saucelabs
+
+test-firefox-remote:
+  extends:
+    - .test
+    - .firefox
+    - .remote
+
+test-headless:
+  extends:
+    - .test
+    - .headless
+
+test-chrome-remote:
+  extends:
+    - .test
+    - .chrome
+    - .remote
+
+test-download-remote:
+  extends:
+    - .test
+    - .download
+    - .remote
+  variables:
+    BROWSER_NAME: "firefox"
+  except:
+    changes:
+      - "iowa-a/bedrock-dev/*"
+    refs:
+      - master
+      - gitlab-ci-dev
+    variables:
+      - $CI_PIPELINE_SOURCE == "push"

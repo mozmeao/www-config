@@ -1,0 +1,14 @@
+include:
+  - .gitlab/gitlab_jobs.yml
+
+.environment_override:
+  before_script:
+    - export BASE_URL=$ENVIRONMENT_URL
+
+test-cdn:
+  variables:
+    MARK_EXPRESSION: "cdn"
+  extends:
+    - .test
+    - .environment_override
+    - .headless
