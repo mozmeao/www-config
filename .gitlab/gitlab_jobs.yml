@@ -24,7 +24,7 @@
       - "results-${CI_JOB_ID}"
   variables:
     MARK_EXPRESSION: not headless and not download and not cdn
-    TEST_IMAGE: mozmeao/bedrock_test:c655e5bc4065b78d3b14e6f5b9672481273dbbe9
+    TEST_IMAGE: mozmeao/bedrock_test:e25f1c1c4600b7109819d6ab76d2cb4e538d593d
 
 .saucelabs:
   variables:
