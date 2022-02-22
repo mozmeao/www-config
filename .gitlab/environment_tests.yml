@@ -6,6 +6,8 @@ include:
     - export BASE_URL=$ENVIRONMENT_URL
 
 test-cdn:
+  # to run only one cdn test at a time
+  resource_group: cdn-tests
   variables:
     MARK_EXPRESSION: "cdn"
   extends:
