@@ -196,12 +196,13 @@ stage-tests:
   trigger:
     include: .gitlab/environment_tests.yml
 
-test-tests:
-  extends:
-    - .test-env
-    - .schedule
-  trigger:
-    include: .gitlab/environment_tests.yml
+# test env doesn't have a cdn, so let's skip for now
+#test-tests:
+#  extends:
+#    - .test-env
+#    - .schedule
+#  trigger:
+#    include: .gitlab/environment_tests.yml
 
 prod-tests:
   extends:
