@@ -210,4 +210,6 @@ prod-tests:
     - .schedule
   trigger:
     include: .gitlab/environment_tests.yml
+  variables:
+    MARK_EXPRESSION: "cdn and cdnprod"
 # end scheduled jobs

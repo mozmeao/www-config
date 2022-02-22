@@ -9,7 +9,7 @@ test-cdn:
   # to run only one cdn test at a time
   resource_group: cdn-tests
   variables:
-    MARK_EXPRESSION: "cdn"
+    MARK_EXPRESSION: "cdn and not cdnprod"
   extends:
     - .test
     - .environment_override
