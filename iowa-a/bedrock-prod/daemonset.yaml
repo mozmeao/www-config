@@ -21,63 +21,63 @@ spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
-      - name: bedrock-prod-data
-        image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
-        imagePullPolicy: IfNotPresent
-        args:
-          - ./bin/run-file-clock.sh
-        command:
-          - /bin/bash
-          - -c
-        env:
-          - name: AWS_DB_S3_BUCKET
-            value: bedrock-db-prod
-          - name: CLUSTER_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-prod-configmap
-                key: CLUSTER_NAME
-          - name: DB_DOWNLOAD_IGNORE_GIT
-            value: "False"
-          - name: DEBUG
-            value: "False"
-          - name: DEV
-            value: "False"
-          - name: LOGLEVEL
-            value: info
-          - name: NEW_RELIC_APP_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-prod-configmap
-                key: NEW_RELIC_APP_NAME
-          - name: NEW_RELIC_LICENSE_KEY
-            valueFrom:
-              secretKeyRef:
-                key: new-relic-license-key
-                name: bedrock-prod-secrets
-          - name: PROD
-            value: "True"
-          - name: SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secret-key
-                name: bedrock-prod-secrets
-          - name: SENTRY_DSN
-            value: "https://dd94e99168c6431899c1daa5a812d8b6@sentry.prod.mozaws.net/152"
-          - name: SENTRY_FRONTEND_DSN
-            value: "https://b59c6af43c5040298ca14d42bed127ab@sentry.prod.mozaws.net/603"
-          - name: STATSD_CLIENT
-            value: django_statsd.clients.normal
-        resources:
-          limits:
-            cpu: 350m
-            memory: 250Mi
-          requests:
-            cpu: 200m
-            memory: 150Mi
-        volumeMounts:
-        - name: data
-          mountPath: /app/data
+        - name: bedrock-prod-data
+          image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
+          imagePullPolicy: IfNotPresent
+          args:
+            - ./bin/run-file-clock.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: AWS_DB_S3_BUCKET
+              value: bedrock-db-prod
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-prod-configmap
+                  key: CLUSTER_NAME
+            - name: DB_DOWNLOAD_IGNORE_GIT
+              value: "False"
+            - name: DEBUG
+              value: "False"
+            - name: DEV
+              value: "False"
+            - name: LOGLEVEL
+              value: info
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-prod-configmap
+                  key: NEW_RELIC_APP_NAME
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-prod-secrets
+            - name: PROD
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-prod-secrets
+            - name: SENTRY_DSN
+              value: "https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535"
+            - name: SENTRY_FRONTEND_DSN
+              value: "https://c3ab8514873549d5b3785ebc7fb83c80@o1069899.ingest.sentry.io/6260331"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+          resources:
+            limits:
+              cpu: 350m
+              memory: 250Mi
+            requests:
+              cpu: 200m
+              memory: 150Mi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
       priorityClassName: high-priority-preempting
       terminationGracePeriodSeconds: 30
       securityContext:
@@ -85,6 +85,6 @@ spec:
         runAsGroup: 0
         fsGroup: 0
       volumes:
-      - name: data
-        hostPath:
-          path: /var/lib/bedrock-prod/data
+        - name: data
+          hostPath:
+            path: /var/lib/bedrock-prod/data
