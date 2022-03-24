@@ -21,61 +21,61 @@ spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
-      - name: bedrock-dev-data
-        image: mozmeao/bedrock:a83473eae52c65da7fd2b7fecc585a0ba34c45b1
-        imagePullPolicy: IfNotPresent
-        args:
-          - ./bin/run-file-clock.sh
-        command:
-          - /bin/bash
-          - -c
-        env:
-          - name: AWS_DB_S3_BUCKET
-            value: bedrock-db-dev
-          - name: CLUSTER_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-dev-configmap
-                key: CLUSTER_NAME
-          - name: DB_DOWNLOAD_IGNORE_GIT
-            value: "False"
-          - name: DEBUG
-            value: "False"
-          - name: DEV
-            value: "True"
-          - name: LOGLEVEL
-            value: info
-          - name: NEW_RELIC_APP_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-dev-configmap
-                key: NEW_RELIC_APP_NAME
-          - name: NEW_RELIC_LICENSE_KEY
-            valueFrom:
-              secretKeyRef:
-                key: new-relic-license-key
-                name: bedrock-dev-secrets
-          - name: PROD
-            value: "True"
-          - name: SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secret-key
-                name: bedrock-dev-secrets
-          - name: SENTRY_DSN
-            value: "https://c7764face5354517befaee2e56b63cfb@sentry.prod.mozaws.net/122"
-          - name: STATSD_CLIENT
-            value: django_statsd.clients.normal
-        resources:
-          limits:
-            cpu: 350m
-            memory: 250Mi
-          requests:
-            cpu: 200m
-            memory: 150Mi
-        volumeMounts:
-        - name: data
-          mountPath: /app/data
+        - name: bedrock-dev-data
+          image: mozmeao/bedrock:a83473eae52c65da7fd2b7fecc585a0ba34c45b1
+          imagePullPolicy: IfNotPresent
+          args:
+            - ./bin/run-file-clock.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: AWS_DB_S3_BUCKET
+              value: bedrock-db-dev
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-dev-configmap
+                  key: CLUSTER_NAME
+            - name: DB_DOWNLOAD_IGNORE_GIT
+              value: "False"
+            - name: DEBUG
+              value: "False"
+            - name: DEV
+              value: "True"
+            - name: LOGLEVEL
+              value: info
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-dev-configmap
+                  key: NEW_RELIC_APP_NAME
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-dev-secrets
+            - name: PROD
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-dev-secrets
+            - name: SENTRY_DSN
+              value: "https://c1f94ae1b8c54ed0adcf223328157caf@o1069899.ingest.sentry.io/6260211"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+          resources:
+            limits:
+              cpu: 350m
+              memory: 250Mi
+            requests:
+              cpu: 200m
+              memory: 150Mi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
       priorityClassName: high-priority-preempting
       terminationGracePeriodSeconds: 30
       securityContext:
@@ -83,6 +83,6 @@ spec:
         runAsGroup: 0
         fsGroup: 0
       volumes:
-      - name: data
-        hostPath:
-          path: /var/lib/bedrock-dev/data
+        - name: data
+          hostPath:
+            path: /var/lib/bedrock-dev/data

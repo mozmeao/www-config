@@ -21,61 +21,61 @@ spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
-      - name: bedrock-stage-data
-        image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
-        imagePullPolicy: IfNotPresent
-        args:
-          - ./bin/run-file-clock.sh
-        command:
-          - /bin/bash
-          - -c
-        env:
-          - name: AWS_DB_S3_BUCKET
-            value: bedrock-db-stage
-          - name: CLUSTER_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-stage-configmap
-                key: CLUSTER_NAME
-          - name: DB_DOWNLOAD_IGNORE_GIT
-            value: "False"
-          - name: DEBUG
-            value: "False"
-          - name: DEV
-            value: "False"
-          - name: LOGLEVEL
-            value: info
-          - name: NEW_RELIC_APP_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: bedrock-stage-configmap
-                key: NEW_RELIC_APP_NAME
-          - name: NEW_RELIC_LICENSE_KEY
-            valueFrom:
-              secretKeyRef:
-                key: new-relic-license-key
-                name: bedrock-stage-secrets
-          - name: PROD
-            value: "True"
-          - name: SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secret-key
-                name: bedrock-stage-secrets
-          - name: SENTRY_DSN
-            value: "https://b01c999bc1b0489bad23805c55660a22@sentry.prod.mozaws.net/151"
-          - name: STATSD_CLIENT
-            value: django_statsd.clients.normal
-        resources:
-          limits:
-            cpu: 350m
-            memory: 250Mi
-          requests:
-            cpu: 200m
-            memory: 150Mi
-        volumeMounts:
-        - name: data
-          mountPath: /app/data
+        - name: bedrock-stage-data
+          image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
+          imagePullPolicy: IfNotPresent
+          args:
+            - ./bin/run-file-clock.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: AWS_DB_S3_BUCKET
+              value: bedrock-db-stage
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-stage-configmap
+                  key: CLUSTER_NAME
+            - name: DB_DOWNLOAD_IGNORE_GIT
+              value: "False"
+            - name: DEBUG
+              value: "False"
+            - name: DEV
+              value: "False"
+            - name: LOGLEVEL
+              value: info
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-stage-configmap
+                  key: NEW_RELIC_APP_NAME
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-stage-secrets
+            - name: PROD
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-stage-secrets
+            - name: SENTRY_DSN
+              value: "https://e138dd5bd9404acf8edefb4824b0e762@o1069899.ingest.sentry.io/6260233"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+          resources:
+            limits:
+              cpu: 350m
+              memory: 250Mi
+            requests:
+              cpu: 200m
+              memory: 150Mi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
       priorityClassName: high-priority-preempting
       terminationGracePeriodSeconds: 30
       securityContext:
@@ -83,6 +83,6 @@ spec:
         runAsGroup: 0
         fsGroup: 0
       volumes:
-      - name: data
-        hostPath:
-          path: /var/lib/bedrock-stage/data
+        - name: data
+          hostPath:
+            path: /var/lib/bedrock-stage/data

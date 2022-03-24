@@ -29,229 +29,229 @@ spec:
       imagePullSecrets:
         - name: dockerhub-registry
       containers:
-      - args:
-        - ./bin/run-db-clock.sh
-        command:
-        - /bin/bash
-        - -c
-        env:
-        - name: ALLOWED_HOSTS
-          value: "*"
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              key: aws-access-key-id
-              name: bedrock-stage-secrets
-        - name: AWS_DB_S3_BUCKET
-          value: bedrock-db-stage
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              key: aws-secret-access-key
-              name: bedrock-stage-secrets
-        - name: BASKET_API_KEY
-          valueFrom:
-            secretKeyRef:
-              key: basket-api-key
-              name: bedrock-stage-secrets
-        - name: BASKET_URL
-          value: https://basket.allizom.org
-        - name: CLUSTER_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: bedrock-stage-configmap
-              key: CLUSTER_NAME
-        - name: CONTENT_CARDS_BRANCH
-          value: master-processed
-        - name: CONTENTFUL_NOTIFICATION_QUEUE_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              key: contentful-notification-access-key-id
-              name: bedrock-stage-secrets
-        - name: CONTENTFUL_NOTIFICATION_QUEUE_REGION
-          value: us-west-2
-        - name: CONTENTFUL_NOTIFICATION_QUEUE_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              key: contentful-notification-secret-access-key
-              name: bedrock-stage-secrets
-        - name: CONTENTFUL_NOTIFICATION_QUEUE_URL
-          valueFrom:
-            secretKeyRef:
-              key: contentful-notification-queue-url
-              name: bedrock-stage-secrets
-        - name: CONTENTFUL_SPACE_ID
-          valueFrom:
-            secretKeyRef:
-              key: contentful-space-id
-              name: bedrock-stage-secrets
-        - name: CONTENTFUL_SPACE_KEY
-          valueFrom:
-            secretKeyRef:
-              key: contentful-space-key
-              name: bedrock-stage-secrets
-        - name: CSP_DEFAULT_SRC
-          value: "*.allizom.org"
-        - name: CSP_REPORT_ENABLE
-          value: "False"
-        - name: DB_UPDATE_SCRIPT_DMS_URL
-          valueFrom:
-            secretKeyRef:
-              key: dead-mans-snitch-db-updates-url
-              name: bedrock-stage-secrets
-        - name: DEBUG
-          value: "False"
-        - name: DEIS_DOMAIN
-          valueFrom:
-            configMapKeyRef:
-              name: bedrock-stage-configmap
-              key: DEIS_DOMAIN
-        - name: DEV
-          value: "False"
-        - name: DISABLE_SSL
-          value: "False"
-        - name: EMAIL_HOST
-          valueFrom:
-            secretKeyRef:
-              key: email-host
-              name: bedrock-stage-secrets
-        - name: EMAIL_HOST_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: email-host-password
-              name: bedrock-stage-secrets
-        - name: EMAIL_HOST_USER
-          valueFrom:
-            secretKeyRef:
-              key: email-host-user
-              name: bedrock-stage-secrets
-        - name: EMAIL_PORT
-          valueFrom:
-            secretKeyRef:
-              key: email-port
-              name: bedrock-stage-secrets
-        - name: EMAIL_USE_TLS
-          valueFrom:
-            secretKeyRef:
-              key: email-use-tls
-              name: bedrock-stage-secrets
-        - name: ENABLE_CSP_MIDDLEWARE
-          value: "True"
-        - name: ENABLE_HOSTNAME_MIDDLEWARE
-          value: "True"
-        - name: FXA_ENDPOINT
-          value: "https://accounts.stage.mozaws.net/"
-        - name: FXA_OAUTH_API_ENDPOINT
-          value: "https://oauth.stage.mozaws.net/v1"
-        - name: FXA_OAUTH_SERVER_ENV
-          value: "stage"
-        - name: FXA_OAUTH_CLIENT_ID
-          value: "beb553d3ac7ad963"
-        - name: FXA_OAUTH_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: fxa-oauth-client-secret
-              name: bedrock-stage-secrets
-        - name: GTM_CONTAINER_ID
-          value: GTM-MW3R8V
-        - name: HTTPS
-          value: "on"
-        - name: L10N_CRON
-          value: "True"
-        - name: LOGLEVEL
-          value: info
-        - name: MOFO_SECURITY_ADVISORIES_PATH
-          value: /tmp/mofo_security_advisories
-        - name: NEW_RELIC_APP_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: bedrock-stage-configmap
-              key: NEW_RELIC_APP_NAME
-        - name: NEW_RELIC_LICENSE_KEY
-          valueFrom:
-            secretKeyRef:
-              key: new-relic-license-key
-              name: bedrock-stage-secrets
-        - name: POCKET_ACCESS_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: pocket-access-token
-              name: bedrock-stage-secrets
-        - name: POCKET_CONSUMER_KEY
-          valueFrom:
-            secretKeyRef:
-              key: pocket-consumer-key
-              name: bedrock-stage-secrets
-        - name: PROD
-          value: "True"
-        - name: RUN_SUPERVISOR
-          value: "True"
-        - name: SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              key: secret-key
-              name: bedrock-stage-secrets
-        - name: SECURE_BROWSER_XSS_FILTER
-          value: "True"
-        - name: SECURE_HSTS_SECONDS
-          value: "31536000"
-        - name: SECURE_SSL_REDIRECT
-          value: "True"
-        - name: SENTRY_DSN
-          value: "https://b01c999bc1b0489bad23805c55660a22@sentry.prod.mozaws.net/151"
-        - name: STATIC_URL
-          value: "https://www.allizom.org/media/"
-        - name: STATSD_CLIENT
-          value: django_statsd.clients.normal
-        - name: STD_SMS_COUNTRIES_DESKTOP
-          value: US,DE,FR
-        - name: STD_SMS_COUNTRIES_WHATSNEW50
-          value: US,DE,FR
-        - name: STD_SMS_COUNTRIES_WHATSNEW61
-          value: US,DE
-        - name: STUB_ATTRIBUTION_HMAC_KEY
-          valueFrom:
-            secretKeyRef:
-              key: stub-attribution-hmac-key
-              name: bedrock-stage-secrets
-        - name: STUB_ATTRIBUTION_RATE
-          value: '1'
-        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: "False"
-        - name: TWITTER_ACCESS_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: twitter-access-token
-              name: bedrock-stage-secrets
-        - name: TWITTER_ACCESS_TOKEN_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: twitter-access-token-secret
-              name: bedrock-stage-secrets
-        - name: TWITTER_CONSUMER_KEY
-          valueFrom:
-            secretKeyRef:
-              key: twitter-consumer-key
-              name: bedrock-stage-secrets
-        - name: TWITTER_CONSUMER_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: twitter-consumer-secret
-              name: bedrock-stage-secrets
-        - name: WEB_CONCURRENCY
-          value: "6"
-        image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
-        imagePullPolicy: IfNotPresent
-        name: bedrock-stage-clock
-        resources:
-          limits:
-            cpu: 500m
-            memory: 300Mi
-          requests:
-            cpu: 250m
-            memory: 120Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - args:
+            - ./bin/run-db-clock.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: aws-access-key-id
+                  name: bedrock-stage-secrets
+            - name: AWS_DB_S3_BUCKET
+              value: bedrock-db-stage
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: aws-secret-access-key
+                  name: bedrock-stage-secrets
+            - name: BASKET_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: basket-api-key
+                  name: bedrock-stage-secrets
+            - name: BASKET_URL
+              value: https://basket.allizom.org
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-stage-configmap
+                  key: CLUSTER_NAME
+            - name: CONTENT_CARDS_BRANCH
+              value: master-processed
+            - name: CONTENTFUL_NOTIFICATION_QUEUE_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-notification-access-key-id
+                  name: bedrock-stage-secrets
+            - name: CONTENTFUL_NOTIFICATION_QUEUE_REGION
+              value: us-west-2
+            - name: CONTENTFUL_NOTIFICATION_QUEUE_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-notification-secret-access-key
+                  name: bedrock-stage-secrets
+            - name: CONTENTFUL_NOTIFICATION_QUEUE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-notification-queue-url
+                  name: bedrock-stage-secrets
+            - name: CONTENTFUL_SPACE_ID
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-space-id
+                  name: bedrock-stage-secrets
+            - name: CONTENTFUL_SPACE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-space-key
+                  name: bedrock-stage-secrets
+            - name: CSP_DEFAULT_SRC
+              value: "*.allizom.org"
+            - name: CSP_REPORT_ENABLE
+              value: "False"
+            - name: DB_UPDATE_SCRIPT_DMS_URL
+              valueFrom:
+                secretKeyRef:
+                  key: dead-mans-snitch-db-updates-url
+                  name: bedrock-stage-secrets
+            - name: DEBUG
+              value: "False"
+            - name: DEIS_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-stage-configmap
+                  key: DEIS_DOMAIN
+            - name: DEV
+              value: "False"
+            - name: DISABLE_SSL
+              value: "False"
+            - name: EMAIL_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: email-host
+                  name: bedrock-stage-secrets
+            - name: EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: email-host-password
+                  name: bedrock-stage-secrets
+            - name: EMAIL_HOST_USER
+              valueFrom:
+                secretKeyRef:
+                  key: email-host-user
+                  name: bedrock-stage-secrets
+            - name: EMAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: email-port
+                  name: bedrock-stage-secrets
+            - name: EMAIL_USE_TLS
+              valueFrom:
+                secretKeyRef:
+                  key: email-use-tls
+                  name: bedrock-stage-secrets
+            - name: ENABLE_CSP_MIDDLEWARE
+              value: "True"
+            - name: ENABLE_HOSTNAME_MIDDLEWARE
+              value: "True"
+            - name: FXA_ENDPOINT
+              value: "https://accounts.stage.mozaws.net/"
+            - name: FXA_OAUTH_API_ENDPOINT
+              value: "https://oauth.stage.mozaws.net/v1"
+            - name: FXA_OAUTH_SERVER_ENV
+              value: "stage"
+            - name: FXA_OAUTH_CLIENT_ID
+              value: "beb553d3ac7ad963"
+            - name: FXA_OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: fxa-oauth-client-secret
+                  name: bedrock-stage-secrets
+            - name: GTM_CONTAINER_ID
+              value: GTM-MW3R8V
+            - name: HTTPS
+              value: "on"
+            - name: L10N_CRON
+              value: "True"
+            - name: LOGLEVEL
+              value: info
+            - name: MOFO_SECURITY_ADVISORIES_PATH
+              value: /tmp/mofo_security_advisories
+            - name: NEW_RELIC_APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-stage-configmap
+                  key: NEW_RELIC_APP_NAME
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-stage-secrets
+            - name: POCKET_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: pocket-access-token
+                  name: bedrock-stage-secrets
+            - name: POCKET_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: pocket-consumer-key
+                  name: bedrock-stage-secrets
+            - name: PROD
+              value: "True"
+            - name: RUN_SUPERVISOR
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-stage-secrets
+            - name: SECURE_BROWSER_XSS_FILTER
+              value: "True"
+            - name: SECURE_HSTS_SECONDS
+              value: "31536000"
+            - name: SECURE_SSL_REDIRECT
+              value: "True"
+            - name: SENTRY_DSN
+              value: "https://e138dd5bd9404acf8edefb4824b0e762@o1069899.ingest.sentry.io/6260233"
+            - name: STATIC_URL
+              value: "https://www.allizom.org/media/"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+            - name: STD_SMS_COUNTRIES_DESKTOP
+              value: US,DE,FR
+            - name: STD_SMS_COUNTRIES_WHATSNEW50
+              value: US,DE,FR
+            - name: STD_SMS_COUNTRIES_WHATSNEW61
+              value: US,DE
+            - name: STUB_ATTRIBUTION_HMAC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: stub-attribution-hmac-key
+                  name: bedrock-stage-secrets
+            - name: STUB_ATTRIBUTION_RATE
+              value: "1"
+            - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+              value: "False"
+            - name: TWITTER_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-access-token
+                  name: bedrock-stage-secrets
+            - name: TWITTER_ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-access-token-secret
+                  name: bedrock-stage-secrets
+            - name: TWITTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-consumer-key
+                  name: bedrock-stage-secrets
+            - name: TWITTER_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-consumer-secret
+                  name: bedrock-stage-secrets
+            - name: WEB_CONCURRENCY
+              value: "6"
+          image: mozmeao/bedrock:2d4949f9b31d8f8444833ba595fa7f0ef6f9cd3d
+          imagePullPolicy: IfNotPresent
+          name: bedrock-stage-clock
+          resources:
+            limits:
+              cpu: 500m
+              memory: 300Mi
+            requests:
+              cpu: 250m
+              memory: 120Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
