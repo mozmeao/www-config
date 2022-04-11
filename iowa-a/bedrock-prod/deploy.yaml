@@ -151,9 +151,9 @@ spec:
               key: secret-key
               name: bedrock-prod-secrets
         - name: SENTRY_DSN
-          value: "https://dd94e99168c6431899c1daa5a812d8b6@sentry.prod.mozaws.net/152"
+          value: "https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535"
         - name: SENTRY_FRONTEND_DSN
-          value: "https://b59c6af43c5040298ca14d42bed127ab@sentry.prod.mozaws.net/603"
+          value: "https://c3ab8514873549d5b3785ebc7fb83c80@o1069899.ingest.sentry.io/6260331"
         - name: STATIC_URL
           value: "https://www.mozilla.org/media/"
         - name: STATSD_CLIENT
