@@ -115,6 +115,8 @@ spec:
               value: "True"
             - name: ENABLE_HOSTNAME_MIDDLEWARE
               value: "True"
+            - name: FXA_ENDPOINT
+              value: "https://accounts.stage.mozaws.net/"
             - name: GTM_CONTAINER_ID
               value: GTM-MW3R8V
             - name: HTTPS
@@ -158,10 +160,21 @@ spec:
               value: django_statsd.clients.normal
             - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
               value: "False"
-            - name: FXA_ENDPOINT
-              value: "https://accounts.stage.mozaws.net/"
-            - name: VPN_ENDPOINT
-              value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
+            - name: TWILIO_ACCOUNT_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-account-sid
+                  name: bedrock-dev-secrets
+            - name: TWILIO_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-auth-token
+                  name: bedrock-dev-secrets
+            - name: TWILIO_MESSAGING_SERVICE_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-messaging-service-sid
+                  name: bedrock-dev-secrets
             - name: TWITTER_ACCESS_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -182,6 +195,8 @@ spec:
                 secretKeyRef:
                   key: twitter-consumer-secret
                   name: bedrock-dev-secrets
+            - name: VPN_ENDPOINT
+              value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
           image: mozmeao/bedrock:a196429cf3bf82e95d69f82cea31cffa2173b213
           imagePullPolicy: IfNotPresent
           name: bedrock-dev-web
