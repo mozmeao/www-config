@@ -178,6 +178,21 @@ spec:
               value: "False"
             - name: SWITCH_TRACKING_PIXEL
               value: "on"
+            - name: TWILIO_ACCOUNT_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-account-sid
+                  name: bedrock-stage-secrets
+            - name: TWILIO_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-auth-token
+                  name: bedrock-stage-secrets
+            - name: TWILIO_MESSAGING_SERVICE_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-messaging-service-sid
+                  name: bedrock-stage-secrets
             - name: TWITTER_ACCESS_TOKEN
               valueFrom:
                 secretKeyRef:
