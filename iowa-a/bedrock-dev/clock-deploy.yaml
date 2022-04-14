@@ -142,7 +142,7 @@ spec:
             - name: L10N_CRON
               value: "True"
             - name: LEGAL_DOCS_BRANCH
-              value: "master"
+              value: "main"
             - name: LEGAL_DOCS_DMS_URL
               valueFrom:
                 secretKeyRef:
