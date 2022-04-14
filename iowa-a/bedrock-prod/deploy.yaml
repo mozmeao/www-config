@@ -137,19 +137,17 @@ spec:
               name: bedrock-prod-secrets
         - name: PROD
           value: "True"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-prod-secrets
         - name: SECURE_BROWSER_XSS_FILTER
           value: "True"
         - name: SECURE_HSTS_SECONDS
           value: "31536000"
         - name: SECURE_SSL_REDIRECT
           value: "True"
-        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
-          value: "False"
-        - name: SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              key: secret-key
-              name: bedrock-prod-secrets
         - name: SENTRY_DSN
           value: "https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535"
         - name: SENTRY_FRONTEND_DSN
@@ -171,8 +169,25 @@ spec:
               name: bedrock-prod-secrets
         - name: STUB_ATTRIBUTION_RATE
           value: '1'
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
         - name: SWITCH_TRACKING_PIXEL
           value: 'on'
+        - name: TWILIO_ACCOUNT_SID
+          valueFrom:
+            secretKeyRef:
+              key: twilio-account-sid
+              name: bedrock-prod-secrets
+        - name: TWILIO_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twilio-auth-token
+              name: bedrock-prod-secrets
+        - name: TWILIO_MESSAGING_SERVICE_SID
+          valueFrom:
+            secretKeyRef:
+              key: twilio-messaging-service-sid
+              name: bedrock-prod-secrets
         - name: TWITTER_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
