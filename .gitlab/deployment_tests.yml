@@ -35,7 +35,7 @@ test-download-remote:
     changes:
       - "iowa-a/bedrock-dev/*"
     refs:
-      - master
+      - main
       - gitlab-ci-dev
     variables:
       - $CI_PIPELINE_SOURCE == "push"

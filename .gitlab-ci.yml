@@ -25,7 +25,7 @@ include:
     changes:
       - "iowa-a/bedrock-dev/*"
     refs:
-      - master
+      - main
       - SE-2920-testing-refactor
     variables:
       - $CI_PIPELINE_SOURCE == "push"
@@ -59,7 +59,7 @@ dev-iowa-tests:
     changes:
       - "iowa-a/bedrock-test/*"
     refs:
-      - master
+      - main
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   variables:
@@ -92,7 +92,7 @@ test-iowa-tests:
     changes:
       - "iowa-a/bedrock-stage/*"
     refs:
-      - master
+      - main
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   variables:
@@ -124,7 +124,7 @@ stage-iowa-tests:
       - "mozmeao-fr/bedrock-prod/*"
       - "iowa-a/bedrock-prod/*"
     refs:
-      - master
+      - main
     variables:
       - $CI_PIPELINE_SOURCE == "push"
   variables:
