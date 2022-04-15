@@ -11,7 +11,7 @@ these is waffle switches and funnelcake configuration. These can be loaded from 
 settings, but we can distribute said settings to our running instances via the database update process. This is why
 we've separated these values into separate files.
 
-Static configurations are currently stored in the directories named after the cluster and namespace (e.g. [iowa-a/bedrock-dev](https://github.com/mozmeao/www-config/tree/master/iowa-a/bedrock-dev)).
+Static configurations are currently stored in the directories named after the cluster and namespace (e.g. [iowa-a/bedrock-dev](https://github.com/mozmeao/www-config/tree/main/iowa-a/bedrock-dev)).
 
 
 ## Quick Start
@@ -39,10 +39,10 @@ Deleting a variable is simply deleting the line from the file. The full list of 
 
 ## Testing
 
-Any commit that triggers a deployment to our dev, staging, or prod environments will also trigger a suite of test jobs configured in [.gitlab-ci.yml](https://github.com/mozmeao/www-config/blob/master/.gitlab-ci.yml). That file also specifies a number of jobs to be run if a pipeline provided a BASE_URL, which we can use to test independent of deployment.
+Any commit that triggers a deployment to our dev, staging, or prod environments will also trigger a suite of test jobs configured in [.gitlab-ci.yml](https://github.com/mozmeao/www-config/blob/main/.gitlab-ci.yml). That file also specifies a number of jobs to be run if a pipeline provided a BASE_URL, which we can use to test independent of deployment.
 
   - visit [https://gitlab.com/mozmeao/www-config/pipelines/new](https://gitlab.com/mozmeao/www-config/pipelines/new)
-  - by default the `master` branch is populated
+  - by default the `main` branch is populated
   - Add a new variable:
     - **Input variable key** is `BASE_URL`
     - **Input variable value** should be equal to the URL you want to run the tests against (example: https://www-demo1.allizom.org)
