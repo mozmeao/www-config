@@ -248,6 +248,8 @@ spec:
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
           value: "6"
+        - name: WWW_CONFIG_BRANCH
+          value: "main"
         image: mozmeao/bedrock:9cfd018729c7b43a91113ebcc4754aeda09313a0
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-clock

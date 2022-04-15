@@ -217,6 +217,8 @@ spec:
                 secretKeyRef:
                   key: twitter-consumer-secret
                   name: bedrock-dev-secrets
+            - name: WWW_CONFIG_BRANCH
+              value: "main"
           image: mozmeao/bedrock:67fd925b4d621dde0e48e27738c4b9c397ac5169
           imagePullPolicy: IfNotPresent
           name: bedrock-dev-clock
