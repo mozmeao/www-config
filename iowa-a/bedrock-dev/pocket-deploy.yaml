@@ -1,0 +1,238 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrock-pocket-dev
+    type: web
+  name: bedrock-pocket-dev-web
+  namespace: bedrock-dev
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: bedrock-pocket-dev
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: /
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bedrock-pocket-dev
+        type: web
+      name: bedrock-pocket-dev-web
+      namespace: bedrock-dev
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
+      containers:
+        - args:
+            - ./bin/run-prod.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: aws-access-key-id
+                  name: bedrock-dev-secrets
+            - name: AWS_DB_S3_BUCKET
+              value: bedrock-db-dev
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: aws-secret-access-key
+                  name: bedrock-dev-secrets
+            - name: BASKET_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: basket-api-key
+                  name: bedrock-dev-secrets
+            - name: BASKET_URL
+              value: https://basket-dev.allizom.org
+            - name: CLUSTER_NAME
+              value: "iowa-a"
+            - name: CONTENTFUL_SPACE_ID
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-space-id
+                  name: bedrock-dev-secrets
+            - name: CONTENTFUL_SPACE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: contentful-space-key
+                  name: bedrock-dev-secrets
+            - name: CSP_DEFAULT_SRC
+              value: "*.allizom.org"
+            - name: CSP_REPORT_ENABLE
+              value: "True"
+            - name: DEBUG
+              value: "False"
+            - name: DEV
+              value: "True"
+            - name: DISABLE_SSL
+              value: "False"
+            - name: EMAIL_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: email-host
+                  name: bedrock-dev-secrets
+            - name: EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: email-host-password
+                  name: bedrock-dev-secrets
+            - name: EMAIL_HOST_USER
+              valueFrom:
+                secretKeyRef:
+                  key: email-host-user
+                  name: bedrock-dev-secrets
+            - name: EMAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: email-port
+                  name: bedrock-dev-secrets
+            - name: EMAIL_USE_TLS
+              valueFrom:
+                secretKeyRef:
+                  key: email-use-tls
+                  name: bedrock-dev-secrets
+            - name: ENABLE_CSP_MIDDLEWARE
+              value: "True"
+            - name: ENABLE_HOSTNAME_MIDDLEWARE
+              value: "True"
+            - name: FXA_ENDPOINT
+              value: "https://accounts.stage.mozaws.net/"
+            - name: GTM_CONTAINER_ID
+              value: GTM-MW3R8V
+            - name: HTTPS
+              value: "on"
+            - name: L10N_CRON
+              value: "True"
+            - name: LOGLEVEL
+              value: info
+            - name: MOFO_SECURITY_ADVISORIES_BRANCH
+              value: master
+            - name: MOFO_SECURITY_ADVISORIES_PATH
+              value: /tmp/mofo_security_advisories
+            - name: NEW_RELIC_APP_NAME
+              value: "bedrock-pocket-dev-iowa-a;bedrock-pocket-dev"
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-dev-secrets
+            - name: PROD
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-dev-secrets
+            - name: SECURE_BROWSER_XSS_FILTER
+              value: "True"
+            - name: SECURE_HSTS_SECONDS
+              value: "31536000"
+            - name: SECURE_SSL_REDIRECT
+              value: "True"
+            - name: SENTRY_DSN
+              value: "https://c1f94ae1b8c54ed0adcf223328157caf@o1069899.ingest.sentry.io/6260211"
+            - name: SITE_MODE
+              value: "Pocket"
+            - name: STATIC_URL
+              value: "https://www-dev.allizom.org/media/"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+            - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+              value: "False"
+            - name: TWILIO_ACCOUNT_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-account-sid
+                  name: bedrock-dev-secrets
+            - name: TWILIO_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-auth-token
+                  name: bedrock-dev-secrets
+            - name: TWILIO_MESSAGING_SERVICE_SID
+              valueFrom:
+                secretKeyRef:
+                  key: twilio-messaging-service-sid
+                  name: bedrock-dev-secrets
+            - name: TWITTER_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-access-token
+                  name: bedrock-dev-secrets
+            - name: TWITTER_ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-access-token-secret
+                  name: bedrock-dev-secrets
+            - name: TWITTER_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-consumer-key
+                  name: bedrock-dev-secrets
+            - name: TWITTER_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: twitter-consumer-secret
+                  name: bedrock-dev-secrets
+            - name: VPN_ENDPOINT
+              value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
+          image: mozmeao/bedrock:b701edf9ce76ad2558e88aee3b13ae092dde8e07
+          imagePullPolicy: IfNotPresent
+          name: bedrock-pocket-dev-web
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            failureThreshold: 4
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /healthz/
+              scheme: HTTP
+              port: 8000
+          readinessProbe:
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /readiness/
+              scheme: HTTP
+              port: 8000
+          resources:
+            limits:
+              cpu: 1250m
+              memory: 800Mi
+            requests:
+              cpu: 1000m
+              memory: 600Mi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+              readOnly: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: data
+          hostPath:
+            type: Directory
+            path: /var/lib/bedrock-dev/data

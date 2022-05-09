@@ -18,3 +18,24 @@ spec:
     type: web
   sessionAffinity: None
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bedrock-pocket-dev
+  name: bedrock-pocket-dev-nodeport
+  namespace: bedrock-dev
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+    nodePort: 31208
+  selector:
+    app: bedrock-pocket-dev
+    type: web
+  sessionAffinity: None
+  type: NodePort
