@@ -15,7 +15,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 3
-      maxUnavailable: /
+      maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
@@ -188,7 +188,7 @@ spec:
                   name: bedrock-dev-secrets
             - name: VPN_ENDPOINT
               value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
-          image: mozmeao/bedrock:b701edf9ce76ad2558e88aee3b13ae092dde8e07
+          image: mozmeao/bedrock:a9e4a4803d9d25148b5aacaaa9f435986241f935
           imagePullPolicy: IfNotPresent
           name: bedrock-pocket-dev-web
           ports:
