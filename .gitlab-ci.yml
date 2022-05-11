@@ -37,6 +37,7 @@ include:
     - .dev
   variables:
     BASE_URL: https://bedrock-dev.gcp.moz.works
+    BASE_POCKET_URL: https://bedrock-pocket-dev.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-dev
 
 deploy-dev-iowa:
@@ -70,6 +71,7 @@ dev-iowa-tests:
     - .test-env
   variables:
     BASE_URL: https://bedrock-test.gcp.moz.works
+    BASE_POCKET_URL: https://bedrock-pocket-test.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-test
 
 deploy-test-iowa:
@@ -103,6 +105,7 @@ test-iowa-tests:
     - .stage
   variables:
     BASE_URL: https://bedrock-stage.gcp.moz.works
+    BASE_POCKET_URL: https://bedrock-pocket-stage.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-stage
 
 deploy-stage-iowa:
@@ -139,6 +142,7 @@ stage-iowa-tests:
       - "iowa-a/bedrock-prod/*"
   variables:
     BASE_URL: https://bedrock-prod.gcp.moz.works
+    BASE_POCKET_URL: https://bedrock-pocket-prod.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-prod
 
 .prod-frankfurt:
