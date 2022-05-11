@@ -18,3 +18,24 @@ spec:
     type: web
   sessionAffinity: None
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bedrock-pocket-stage
+  name: bedrock-pocket-stage-nodeport
+  namespace: bedrock-stage
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+    nodePort: 31329
+  selector:
+    app: bedrock-pocket-stage
+    type: web
+  sessionAffinity: None
+  type: NodePort

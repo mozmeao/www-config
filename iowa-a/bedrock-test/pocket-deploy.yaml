@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrock-pocket-test
+    type: web
+  name: bedrock-pocket-test-web
+  namespace: bedrock-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bedrock-pocket-test
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bedrock-pocket-test
+        type: web
+      name: bedrock-pocket-test-web
+      namespace: bedrock-test
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
+      containers:
+        - args:
+            - ./bin/run.sh
+          command:
+            - /bin/bash
+            - -c
+          env:
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: BASKET_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: basket-api-key
+                  name: bedrock-test-secrets
+            - name: BASKET_URL
+              value: https://basket.allizom.org
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-test-configmap
+                  key: CLUSTER_NAME
+            - name: CONTENT_CARDS_URL
+              value: https://www-dev.allizom.org/media/
+            - name: CSP_DEFAULT_SRC
+              value: "*.allizom.org"
+            - name: CSP_REPORT_ENABLE
+              value: "True"
+            - name: DB_DOWNLOAD_IGNORE_GIT
+              value: "True"
+            - name: DEBUG
+              value: "False"
+            - name: DEIS_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: bedrock-test-configmap
+                  key: DEIS_DOMAIN
+            - name: DEV
+              value: "True"
+            - name: DISABLE_SSL
+              value: "False"
+            - name: ENABLE_CSP_MIDDLEWARE
+              value: "True"
+            - name: ENABLE_HOSTNAME_MIDDLEWARE
+              value: "True"
+            - name: GTM_CONTAINER_ID
+              value: GTM-MW3R8V
+            - name: HTTPS
+              value: "on"
+            - name: L10N_CRON
+              value: "True"
+            - name: LOGLEVEL
+              value: info
+            - name: MOFO_SECURITY_ADVISORIES_BRANCH
+              value: master
+            - name: MOFO_SECURITY_ADVISORIES_PATH
+              value: /tmp/mofo_security_advisories
+            - name: NEW_RELIC_APP_NAME
+              value: "bedrock-pocket-test-iowa-a;bedrock-pocket-test"
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: new-relic-license-key
+                  name: bedrock-test-secrets
+            - name: PROD
+              value: "True"
+            - name: RUN_SUPERVISOR
+              value: "True"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: bedrock-test-secrets
+            - name: SECURE_BROWSER_XSS_FILTER
+              value: "True"
+            - name: SECURE_HSTS_SECONDS
+              value: "31536000"
+            - name: SECURE_SSL_REDIRECT
+              value: "True"
+            - name: SENTRY_DSN
+              value: "https://53c9d571aff3450395061d4ddeda4ee7@o1069899.ingest.sentry.io/6260324"
+            - name: SITE_MODE
+              value: "Pocket"
+            - name: STATIC_URL
+              value: "https://bedrock-test.gcp.moz.works/media/"
+            - name: STATSD_CLIENT
+              value: django_statsd.clients.normal
+            - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+              value: "False"
+            - name: WEB_CONCURRENCY
+              value: "6"
+          image: mozmeao/bedrock:d9d47bac031c5515da0a11e05f08eb2368818d58
+          imagePullPolicy: IfNotPresent
+          name: bedrock-pocket-test-web
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            failureThreshold: 4
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /healthz/
+              scheme: HTTP
+              port: 8000
+          readinessProbe:
+            failureThreshold: 1
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /readiness/
+              scheme: HTTP
+              port: 8000
+          resources:
+            limits:
+              cpu: 3000m
+              memory: 1750Mi
+            requests:
+              cpu: 2000m
+              memory: 1500Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
