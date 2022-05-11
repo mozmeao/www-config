@@ -18,3 +18,24 @@ spec:
       resource:
         name: cpu
         targetAverageUtilization: 51
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: bedrock-pocket-stage
+    type: web
+  name: bedrock-pocket-stage-web
+  namespace: bedrock-stage
+spec:
+  maxReplicas: 7
+  minReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: bedrock-pocket-stage-web
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 51

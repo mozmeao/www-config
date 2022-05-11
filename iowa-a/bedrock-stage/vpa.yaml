@@ -14,6 +14,19 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
+  name: bedrock-pocket-stage-web-vpa
+  namespace: bedrock-stage
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       bedrock-pocket-stage-web
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
   name: bedrock-stage-clock-vpa
   namespace: bedrock-stage
 spec:
