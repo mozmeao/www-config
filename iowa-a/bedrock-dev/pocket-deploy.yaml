@@ -69,7 +69,7 @@ spec:
                   key: contentful-space-key
                   name: bedrock-dev-secrets
             - name: CSP_DEFAULT_SRC
-              value: "*.allizom.org"
+              value: "dev.tekcopteg.com"
             - name: CSP_REPORT_ENABLE
               value: "True"
             - name: DEBUG
@@ -146,7 +146,7 @@ spec:
             - name: SITE_MODE
               value: "Pocket"
             - name: STATIC_URL
-              value: "https://www-dev.allizom.org/media/"
+              value: "https://dev.tekcopteg.com/media/"
             - name: STATSD_CLIENT
               value: django_statsd.clients.normal
             - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE

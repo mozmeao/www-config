@@ -64,7 +64,7 @@ spec:
             - name: CONTENT_CARDS_BRANCH
               value: master-processed
             - name: CSP_DEFAULT_SRC
-              value: "*.allizom.org"
+              value: "tekcopteg.com"
             - name: CSP_REPORT_ENABLE
               value: "False"
             - name: DEBUG
@@ -157,7 +157,7 @@ spec:
             - name: SITE_MODE
               value: "Pocket"
             - name: STATIC_URL
-              value: "https://www.allizom.org/media/"
+              value: "https://tekcopteg.com/media/"
             - name: STATSD_CLIENT
               value: django_statsd.clients.normal
             - name: STD_SMS_COUNTRIES_DESKTOP

@@ -52,7 +52,7 @@ spec:
             - name: CONTENT_CARDS_URL
               value: https://www-dev.allizom.org/media/
             - name: CSP_DEFAULT_SRC
-              value: "*.allizom.org"
+              value: "*.tekcopteg.com"
             - name: CSP_REPORT_ENABLE
               value: "True"
             - name: DB_DOWNLOAD_IGNORE_GIT
