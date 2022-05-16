@@ -250,7 +250,7 @@ spec:
           value: "6"
         - name: WWW_CONFIG_BRANCH
           value: "main"
-        image: mozmeao/bedrock:15f3dab49087b81b16a827dc63398c9b2aa5119d
+        image: mozmeao/bedrock:80b3a74af3781cf0d694f56660997427fbc03321
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-clock
         resources:
