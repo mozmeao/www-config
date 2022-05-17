@@ -18,3 +18,24 @@ spec:
       resource:
         name: cpu
         targetAverageUtilization: 50
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: bedrock-pocket-prod
+    type: web
+  name: bedrock-pocket-prod-web
+  namespace: bedrock-prod
+spec:
+  maxReplicas: 100
+  minReplicas: 20
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: bedrock-pocket-prod-web
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
