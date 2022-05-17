@@ -1,0 +1,259 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrock-pocket-prod
+    type: web
+  name: bedrock-pocket-prod-web
+  namespace: bedrock-prod
+spec:
+  progressDeadlineSeconds: 900
+  replicas: 45
+  selector:
+    matchLabels:
+      app: bedrock-pocket-prod
+      type: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 10
+      maxUnavailable: "25%"
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bedrock-pocket-prod
+        type: web
+      name: bedrock-pocket-prod-web
+      namespace: bedrock-prod
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-registry
+      containers:
+      - args:
+        - ./bin/run-prod.sh
+        command:
+        - /bin/bash
+        - -c
+        env:
+        - name: ALLOWED_HOSTS
+          value: "*"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: aws-access-key-id
+              name: bedrock-prod-secrets
+        - name: AWS_DB_S3_BUCKET
+          value: bedrock-db-prod
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: aws-secret-access-key
+              name: bedrock-prod-secrets
+        - name: BASKET_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: basket-api-key
+              name: bedrock-prod-secrets
+        - name: BASKET_URL
+          value: https://basket.mozilla.org
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-prod-configmap
+              key: CLUSTER_NAME
+        - name: CONTENT_CARDS_BRANCH
+          value: prod-processed
+        - name: CSP_REPORT_ENABLE
+          value: "False"
+        - name: DEBUG
+          value: "False"
+        - name: DEIS_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: bedrock-prod-configmap
+              key: DEIS_DOMAIN
+        - name: DEV
+          value: "False"
+        - name: DISABLE_SSL
+          value: "False"
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: email-host
+              name: bedrock-prod-secrets
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: email-host-password
+              name: bedrock-prod-secrets
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: email-host-user
+              name: bedrock-prod-secrets
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: email-port
+              name: bedrock-prod-secrets
+        - name: EMAIL_USE_TLS
+          valueFrom:
+            secretKeyRef:
+              key: email-use-tls
+              name: bedrock-prod-secrets
+        - name: ENABLE_CSP_MIDDLEWARE
+          value: "True"
+        - name: ENABLE_HOSTNAME_MIDDLEWARE
+          value: "True"
+        - name: FXA_OAUTH_CLIENT_ID
+          value: "40dd9c0253db092c"
+        - name: FXA_OAUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: fxa-oauth-client-secret
+              name: bedrock-prod-secrets
+        - name: GTM_CONTAINER_ID
+          value: GTM-MW3R8V
+        - name: HTTPS
+          value: "on"
+        - name: L10N_CRON
+          value: "True"
+        - name: LOGLEVEL
+          value: info
+        - name: MOFO_SECURITY_ADVISORIES_PATH
+          value: /tmp/mofo_security_advisories
+        - name: NEWRELIC_PYTHON_INI_FILE
+          value: newrelic.ini
+        - name: NEW_RELIC_APP_NAME
+          value: bedrock-pocket-prod-iowa-a;bedrock-pocket-prod
+        - name: NEW_RELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              key: new-relic-license-key
+              name: bedrock-prod-secrets
+        - name: PROD
+          value: "True"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: bedrock-prod-secrets
+        - name: SECURE_BROWSER_XSS_FILTER
+          value: "True"
+        - name: SECURE_HSTS_SECONDS
+          value: "31536000"
+        - name: SECURE_SSL_REDIRECT
+          value: "True"
+        - name: SENTRY_DSN
+          value: "https://45ad5d426da7480081831c053ca02cac@o1069899.ingest.sentry.io/6249535"
+        - name: SENTRY_FRONTEND_DSN
+          value: "https://c3ab8514873549d5b3785ebc7fb83c80@o1069899.ingest.sentry.io/6260331"
+        - name: SITE_MODE
+          value: "Pocket"
+        - name: STATIC_URL
+          value: "https://www.mozilla.org/media/"
+        - name: STATSD_CLIENT
+          value: django_statsd.clients.normal
+        - name: STD_SMS_COUNTRIES_DESKTOP
+          value: US,DE,FR
+        - name: STD_SMS_COUNTRIES_WHATSNEW50
+          value: US,DE,FR
+        - name: STD_SMS_COUNTRIES_WHATSNEW61
+          value: US,DE
+        - name: STUB_ATTRIBUTION_HMAC_KEY
+          valueFrom:
+            secretKeyRef:
+              key: stub-attribution-hmac-key
+              name: bedrock-prod-secrets
+        - name: STUB_ATTRIBUTION_RATE
+          value: '1'
+        - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
+          value: "False"
+        - name: SWITCH_TRACKING_PIXEL
+          value: 'on'
+        - name: TWILIO_ACCOUNT_SID
+          valueFrom:
+            secretKeyRef:
+              key: twilio-account-sid
+              name: bedrock-prod-secrets
+        - name: TWILIO_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twilio-auth-token
+              name: bedrock-prod-secrets
+        - name: TWILIO_MESSAGING_SERVICE_SID
+          valueFrom:
+            secretKeyRef:
+              key: twilio-messaging-service-sid
+              name: bedrock-prod-secrets
+        - name: TWITTER_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token
+              name: bedrock-prod-secrets
+        - name: TWITTER_ACCESS_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-access-token-secret
+              name: bedrock-prod-secrets
+        - name: TWITTER_CONSUMER_KEY
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-key
+              name: bedrock-prod-secrets
+        - name: TWITTER_CONSUMER_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: twitter-consumer-secret
+              name: bedrock-prod-secrets
+        - name: WEB_CONCURRENCY
+          value: "6"
+        image: mozmeao/bedrock:80b3a74af3781cf0d694f56660997427fbc03321
+        imagePullPolicy: IfNotPresent
+        name: bedrock-pocket-prod-web
+        ports:
+          - containerPort: 8000
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /healthz/
+            scheme: HTTP
+            port: 8000
+        readinessProbe:
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+          httpGet:
+            path: /readiness/
+            scheme: HTTP
+            port: 8000
+        resources:
+          limits:
+            cpu: 1250m
+            memory: 800Mi
+          requests:
+            cpu: 1000m
+            memory: 600Mi
+        volumeMounts:
+          - name: data
+            mountPath: /app/data
+            readOnly: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: data
+          hostPath:
+            type: Directory
+            path: /var/lib/bedrock-prod/data
