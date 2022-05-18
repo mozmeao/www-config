@@ -20,3 +20,26 @@ spec:
   selector:
     app: bedrock-prod
     type: web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bedrock-pocket-prod-lb
+  labels:
+    app: bedrock-pocket-prod
+  namespace: bedrock-prod
+  annotations:
+     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-central-1:236517346949:certificate/79885752-992b-48a4-8170-22475cac599e"
+     external-dns.alpha.kubernetes.io/hostname: "bedrock-pocket-prod.frankfurt.moz.works"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 443
+    name: https
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: bedrock-pocket-prod
+    type: web

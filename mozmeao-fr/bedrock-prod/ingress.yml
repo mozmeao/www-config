@@ -32,6 +32,19 @@ spec:
     app: bedrock-prod
     type: web
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bedrock-pocket-prod-ingress
+  namespace: bedrock-prod
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: bedrock-pocket-prod
+    type: web
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -78,3 +91,42 @@ spec:
           - "www.mozorg.moz.works"
           - "www.mozilla.org"
         secretName: bedrock-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt
+  name: bedrock-pocket-prod
+  namespace: bedrock-prod
+spec:
+  rules:
+    - host: "bedrock-pocket.prod.fr.moz.works"
+      http:
+        paths:
+          - backend:
+              serviceName: bedrock-pocket-prod-ingress
+              servicePort: 8000
+            path: /
+    - host: "bedrock-pocket-prod.moz.works"
+      http:
+        paths:
+          - backend:
+              serviceName: bedrock-pocket-prod-ingress
+              servicePort: 8000
+            path: /
+    - host: "pocket.moz.works"
+      http:
+        paths:
+          - backend:
+              serviceName: bedrock-pocket-prod-ingress
+              servicePort: 8000
+            path: /
+  # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+      - hosts:
+          - "bedrock-pocket.prod.fr.moz.works"
+          - "bedrock-pocket-prod.moz.works"
+          - "pocket.moz.works"
+        secretName: bedrock-pocket-tls
