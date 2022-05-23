@@ -71,7 +71,7 @@ dev-iowa-tests:
     - .test-env
   variables:
     BASE_URL: https://bedrock-test.gcp.moz.works
-    BASE_POCKET_URL: https://bedrock-pocket-test.gcp.moz.works
+    BASE_POCKET_URL: https://test.tekcopteg.com
     DEPLOYMENT: iowa-a/bedrock-test
 
 deploy-test-iowa:
