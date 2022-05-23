@@ -111,7 +111,7 @@ spec:
             - name: SITE_MODE
               value: "Pocket"
             - name: STATIC_URL
-              value: "https://bedrock-pocket-test.gcp.moz.works/media/"
+              value: "https://test.tekcopteg.com/media/"
             - name: STATSD_CLIENT
               value: django_statsd.clients.normal
             - name: SWITCH_NEWSLETTER_MAINTENANCE_MODE
