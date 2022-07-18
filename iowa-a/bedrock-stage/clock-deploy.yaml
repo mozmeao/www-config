@@ -242,7 +242,7 @@ spec:
               value: "6"
             - name: WWW_CONFIG_BRANCH
               value: "main"
-          image: mozmeao/bedrock:d9eb2b15b62afa810baca4e15e0903075c94c58b
+          image: mozmeao/bedrock:81f697cb808ea7317b680bfac16d1aae09dc514c
           imagePullPolicy: IfNotPresent
           name: bedrock-stage-clock
           resources:
