@@ -9,7 +9,7 @@ jobs:
          uses: actions/checkout@v3
          with:
           fetch-depth: 0
-       - uses: yesolutions/mirror-action@master
+       - uses: yesolutions/mirror-action@v0.6.0
          with:
             REMOTE: 'https://gitlab.com/mozmeao/www-config.git'
             GIT_USERNAME: ${{ secrets.GITLAB_USERNAME }}
