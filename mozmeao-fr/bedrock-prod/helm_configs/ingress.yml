@@ -15,3 +15,21 @@ controller:
     maxReplicas: 20
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
+---
+controller:
+  useIngressClassOnly: true
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: "bedrock-pocket.prod.fr.moz.works"
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      service.beta.kubernetes.io/aws-load-balancer-connection-draining-enabled: "true"
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "Environment=prod,Service=bedrock,Region=fr,Name=bedrock-pocket-prod"
+  scope:
+    enabled: true
+  autoscaling:
+    enabled: true
+    minReplicas: 4
+    maxReplicas: 20
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80

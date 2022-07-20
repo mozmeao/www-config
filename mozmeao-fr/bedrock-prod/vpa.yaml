@@ -14,6 +14,19 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
+  name: bedrock-pocket-prod-web-vpa
+  namespace: bedrock-prod
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       bedrock-pocket-prod-web
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
   name: bedrock-prod-data-vpa
   namespace: bedrock-prod
 spec:
