@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
@@ -32,7 +32,7 @@ spec:
     app: bedrock-prod
     type: web
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -45,31 +45,43 @@ spec:
     - host: "bedrock.prod.fr.moz.works"
       http:
         paths:
-          - backend:
-              serviceName: bedrock-prod-ingress
-              servicePort: 8000
-            path: /
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: bedrock-prod-ingress
+                port:
+                  number: 8000
     - host: "bedrock-prod.moz.works"
       http:
         paths:
-          - backend:
-              serviceName: bedrock-prod-ingress
-              servicePort: 8000
-            path: /
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: bedrock-prod-ingress
+                port:
+                  number: 8000
     - host: "www.mozilla.org"
       http:
         paths:
-          - backend:
-              serviceName: bedrock-prod-ingress
-              servicePort: 8000
-            path: /
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: bedrock-prod-ingress
+                port:
+                  number: 8000
     - host: "www.mozorg.moz.works"
       http:
         paths:
-          - backend:
-              serviceName: bedrock-prod-ingress
-              servicePort: 8000
-            path: /
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: bedrock-prod-ingress
+                port:
+                  number: 8000
   # This section is only required if TLS is to be enabled for the Ingress
   tls:
       - hosts:
