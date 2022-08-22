@@ -219,7 +219,7 @@ spec:
                   name: bedrock-dev-secrets
             - name: WWW_CONFIG_BRANCH
               value: "main"
-          image: mozmeao/bedrock:e92702ed004e5d9176c2baedbca8a8398742856f
+          image: mozmeao/bedrock:c9abe7a5f9db827b0744bf786b9bcf0d175d8100
           imagePullPolicy: IfNotPresent
           name: bedrock-dev-clock
           resources:
