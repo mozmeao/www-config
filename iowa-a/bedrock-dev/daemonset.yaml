@@ -22,7 +22,7 @@ spec:
         - name: dockerhub-registry
       containers:
         - name: bedrock-dev-data
-          image: mozmeao/bedrock:b0c90a219eaa8b7b41f6e2c2cbc0c5ecd6160f82
+          image: mozmeao/bedrock:476a4f9b725dd7466c19f74f5d625b06a9a400a4
           imagePullPolicy: IfNotPresent
           args:
             - ./bin/run-file-clock.sh
