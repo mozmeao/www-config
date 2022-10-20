@@ -72,8 +72,6 @@ spec:
               value: "True"
             - name: ENABLE_HOSTNAME_MIDDLEWARE
               value: "True"
-            - name: GTM_CONTAINER_ID
-              value: GTM-MW3R8V
             - name: HTTPS
               value: "on"
             - name: L10N_CRON

@@ -109,8 +109,6 @@ spec:
               value: "True"
             - name: FXA_ENDPOINT
               value: "https://accounts.stage.mozaws.net/"
-            - name: GTM_CONTAINER_ID
-              value: GTM-MW3R8V
             - name: HTTPS
               value: "on"
             - name: L10N_CRON
