@@ -90,6 +90,8 @@ spec:
                 secretKeyRef:
                   key: contentful-space-key
                   name: bedrock-stage-secrets
+            - name: CONTENTFUL_ENVIRONMENT
+              value: "pre-production"
             - name: CSP_DEFAULT_SRC
               value: "*.allizom.org"
             - name: CSP_REPORT_ENABLE
