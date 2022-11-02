@@ -83,6 +83,8 @@ spec:
                 secretKeyRef:
                   key: contentful-space-key
                   name: bedrock-dev-secrets
+            - name: CONTENTFUL_ENVIRONMENT
+              value: "pre-production"
             - name: CLUSTER_NAME
               valueFrom:
                 configMapKeyRef:
