@@ -57,9 +57,15 @@ deploy-dev-iowa:
 dev-iowa-tests:
   extends:
     - .dev-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+dev-gcp-migration-tests:
+  extends:
     - .dev-gcp-migration
   trigger:
     include: .gitlab/deployment_tests.yml
+
 
 # end dev #
 
