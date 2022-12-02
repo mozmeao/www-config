@@ -40,6 +40,14 @@ include:
     BASE_POCKET_URL: https://bedrock-pocket-dev.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-dev
 
+
+.dev-gcp-migration:
+  extends:
+    - .dev
+  variables:
+    BASE_URL: https://dev.bedrock.nonprod.webservices.mozgcp.net
+    BASE_POCKET_URL: https://bedrock-pocket-dev.gcp.moz.works
+
 deploy-dev-iowa:
   extends:
     - .deploy
@@ -51,6 +59,13 @@ dev-iowa-tests:
     - .dev-iowa
   trigger:
     include: .gitlab/deployment_tests.yml
+
+dev-gcp-migration-tests:
+  extends:
+    - .dev-gcp-migration
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
 
 # end dev #
 
