@@ -35,6 +35,8 @@ spec:
             - /bin/bash
             - -c
           env:
+            - name: GCP_MIGRATION
+              value: test
             - name: ALLOWED_HOSTS
               value: "*"
             - name: AWS_ACCESS_KEY_ID
