@@ -46,7 +46,7 @@ include:
     - .dev
   variables:
     BASE_URL: https://dev.bedrock.nonprod.webservices.mozgcp.net
-    BASE_POCKET_URL: https://bedrock-pocket-dev.gcp.moz.works
+    BASE_POCKET_URL: https://dev.pocket.bedrock.nonprod.webservices.mozgcp.net
 
 deploy-dev-iowa:
   extends:
