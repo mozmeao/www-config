@@ -123,6 +123,14 @@ test-iowa-tests:
     BASE_POCKET_URL: https://bedrock-pocket-stage.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-stage
 
+.stage-gcp-migration:
+  extends:
+    - .stage
+  variables:
+    BASE_URL: https://stage.bedrock.nonprod.webservices.mozgcp.net
+    BASE_POCKET_URL: https://stage.pocket.bedrock.nonprod.webservices.mozgcp.net
+    DEPLOYMENT: iowa-a/bedrock-stage
+
 deploy-stage-iowa:
   extends:
     - .deploy
@@ -132,6 +140,12 @@ deploy-stage-iowa:
 stage-iowa-tests:
   extends:
     - .stage-iowa
+  trigger:
+    include: .gitlab/deployment_tests.yml
+
+stage-gcp-migration-tests:
+  extends:
+    - .stage-gcp-migration
   trigger:
     include: .gitlab/deployment_tests.yml
 
