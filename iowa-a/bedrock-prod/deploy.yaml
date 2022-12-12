@@ -210,7 +210,7 @@ spec:
               name: bedrock-prod-secrets
         - name: WEB_CONCURRENCY
           value: "6"
-        image: mozmeao/bedrock:75ed7b2d390c229900fd5273fbd872f670b87e6d
+        image: mozmeao/bedrock:6b8be03ab53cc2c487681a192191c8344a63d203
         imagePullPolicy: IfNotPresent
         name: bedrock-prod-web
         ports:
