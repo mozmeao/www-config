@@ -40,7 +40,6 @@ include:
     BASE_POCKET_URL: https://bedrock-pocket-dev.gcp.moz.works
     DEPLOYMENT: iowa-a/bedrock-dev
 
-
 .dev-gcp-migration:
   extends:
     - .dev
@@ -54,18 +53,17 @@ deploy-dev-iowa:
     - .iowa
     - .dev-iowa
 
-dev-iowa-tests:
-  extends:
-    - .dev-iowa
-  trigger:
-    include: .gitlab/deployment_tests.yml
+# dev-iowa-tests:
+#   extends:
+#     - .dev-iowa
+#   trigger:
+#     include: .gitlab/deployment_tests.yml
 
 dev-gcp-migration-tests:
   extends:
     - .dev-gcp-migration
   trigger:
     include: .gitlab/deployment_tests.yml
-
 
 # end dev #
 
@@ -137,11 +135,11 @@ deploy-stage-iowa:
     - .iowa
     - .stage-iowa
 
-stage-iowa-tests:
-  extends:
-    - .stage-iowa
-  trigger:
-    include: .gitlab/deployment_tests.yml
+# stage-iowa-tests:
+#   extends:
+#     - .stage-iowa
+#   trigger:
+#     include: .gitlab/deployment_tests.yml
 
 stage-gcp-migration-tests:
   extends:
@@ -208,7 +206,6 @@ prod-frankfurt-tests:
   trigger:
     include: .gitlab/deployment_tests.yml
 # end prod #
-
 
 # scheduled jobs
 .schedule:
