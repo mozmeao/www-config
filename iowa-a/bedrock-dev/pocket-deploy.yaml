@@ -190,7 +190,7 @@ spec:
                   name: bedrock-dev-secrets
             - name: VPN_ENDPOINT
               value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
-          image: mozmeao/bedrock:40bd299eee51b7c217a226c046caa16349f59a08
+          image: mozmeao/bedrock:bd4a367b9a94bbe0fffe628611cf4a1638799d4c
           imagePullPolicy: IfNotPresent
           name: bedrock-pocket-dev-web
           ports:
