@@ -75,7 +75,7 @@ spec:
             - name: GOOGLE_ANALYTICS_ID
               value: "UA-370613-9"
             - name: GTM_CONTAINER_ID
-              value: "G-NFR9Y40GD3"
+              value: "GTM-P4LPJ42"
             - name: HTTPS
               value: "on"
             - name: L10N_CRON
