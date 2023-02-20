@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   mirror:
+    if: github.repository == 'mozmeao/www-config'
     runs-on: ubuntu-latest
     steps:
        - name: mirror in gitlab
