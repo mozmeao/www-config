@@ -56,7 +56,7 @@ docker run \
     -e "BASE_URL=${BASE_URL:-}" \
     -e "BASE_POCKET_URL=${BASE_POCKET_URL:-}" \
     -e "PYTEST_PROCESSES=${PYTEST_PROCESSES:=4}" \
-    -e "BOUNCER_URL=${BOUNCER_URL:='https://download.mozilla.org/'}" \
+    -e "BOUNCER_URL=${BOUNCER_URL:-}" \
     -e "SCREEN_WIDTH=1600" \
     -e "SCREEN_HEIGHT=1200" \
     ${TEST_IMAGE} bin/run-integration-tests.sh
