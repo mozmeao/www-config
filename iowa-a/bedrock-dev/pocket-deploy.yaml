@@ -190,8 +190,6 @@ spec:
                 secretKeyRef:
                   key: twitter-consumer-secret
                   name: bedrock-dev-secrets
-            - name: VPN_ENDPOINT
-              value: "https://stage-vpn.guardian.nonprod.cloudops.mozgcp.net/"
           image: mozmeao/bedrock:35ca5bf5d287c1ca2b515a063c0d9298ffcb9c4c
           imagePullPolicy: IfNotPresent
           name: bedrock-pocket-dev-web
