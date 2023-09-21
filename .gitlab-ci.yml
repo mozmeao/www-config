@@ -31,7 +31,7 @@ include:
       - $CI_PIPELINE_SOURCE == "push"
   variables:
     ENVIRONMENT_URL: https://www-dev.allizom.org
-    BOUNCER_URL: https://bouncer-bouncer.stage.mozaws.net/
+    BOUNCER_URL: https://dev.bouncer.nonprod.webservices.mozgcp.net/
 
 .dev-iowa:
   extends:
