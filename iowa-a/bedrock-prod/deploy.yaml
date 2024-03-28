@@ -8,7 +8,7 @@ metadata:
   namespace: bedrock-prod
 spec:
   progressDeadlineSeconds: 900
-  replicas: 45
+  replicas: 0
   selector:
     matchLabels:
       app: bedrock-prod

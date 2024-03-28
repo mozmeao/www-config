@@ -7,7 +7,7 @@ metadata:
   name: bedrock-stage-web
   namespace: bedrock-stage
 spec:
-  replicas: 5
+  replicas: 0
   selector:
     matchLabels:
       app: bedrock-stage
