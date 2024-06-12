@@ -1,2 +1,1 @@
-mkdocs==1.2.3
-jinja2==3.0.3  # Downpin else mkdocs breaks
+mkdocs==1.6.0
