@@ -1,5 +1,10 @@
 site_name: Bedrock Configurator
 
+theme:
+  name: mkdocs
+  color_mode: auto
+  user_color_mode_toggle: true
+
 markdown_extensions:
   - abbr
 
